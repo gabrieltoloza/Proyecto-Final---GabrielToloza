@@ -1,0 +1,569 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;    
+}
+p {
+    font-family: 'Righteous', cursive;
+}
+
+
+.nav-item a {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-right: 15px;
+    transition: all 0.4s;
+    font-family: 'Righteous', cursive;
+}
+
+.nav-item a:hover {
+    color: rgb(171, 97, 240);
+}
+
+.navbar-brand {
+    height: 100%;
+    width: 100px;
+}
+
+
+.search {
+    height: 45px;
+    outline: none;
+    border: 2px solid rgb(171, 97, 240);
+    background-color: transparent;
+    border-radius: 20px 0px 0px 20px;
+    border-right: none;
+    transition: all 0.4s;
+}
+.search:hover {
+    border: 2px solid rgb(93, 5, 175);
+    border-right: none;
+}
+
+.btn1 {
+    height: 45px;
+    outline: none;
+    border: none;
+    background-color: rgb(171, 97, 240);
+    color: white;
+    border-radius: 0px 20px 20px 0px;
+    transition: all 0.4s;
+}
+
+.btn1:hover {
+    background-color: rgb(93, 5, 175);
+}
+
+.bi-cart-plus {
+    font-size: 30px;
+    color: black;
+    cursor: pointer;
+    padding-top: 5px;
+    transition: all 0.4s;
+}
+
+.bi-cart-plus:hover {
+    color: rgb(93, 5, 175);
+}
+
+.navbar-toggler {
+    font-size: 29px;
+    color: black;
+    border: solid 2px;
+}
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+
+
+
+
+/* =======seccion main========= */
+
+
+
+
+
+.main {
+    background: url(./logoPrincipal.jpg) no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    color: rgb(245, 243, 243);
+}
+
+.main h1 {
+    font-size: 5rem;
+    font-family: 'Righteous', cursive;
+}
+
+.main p:nth-child(1){
+    font-size: 18px;
+    font-weight: 500;
+    padding-top: 80px;
+}
+
+.main p:nth-of-type(2){
+    font-size: 18px;
+    color: white;
+}
+
+.mbtn1 {
+    height: 50px;
+    width: 25%;
+    outline: none;
+    border: none;
+    color: white;
+    background: rgb(171, 97, 240);
+    border-radius: 50px;
+    transition: all 0.4s;
+}
+.mbtn1:hover {
+    background-color: rgb(93, 5, 175);
+}
+
+.mbtn2 {
+    height: 50px;
+    width: 25%;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 50px;
+    transition: all 0.4s;
+}
+.mbtn2:hover {
+    background-color: rgb(171, 97, 240);
+    border: none;
+    color: white;
+}
+
+
+
+
+
+
+
+/*? ====Configuracion en dispositivos mobiles==== */
+
+@media (max-width: 600px) {
+    .main {
+        background-position: center;
+    }
+    .main h1 {
+        font-size: 3rem;
+    }
+    .main p:nth-child(1){
+        padding-top: 0;
+    }
+    
+}
+
+.line {
+    height: 6px;
+    width: 30%;
+    background: white;
+    display: inline-block;
+    border-radius: 30px;
+}
+
+
+
+
+
+
+/* ====separacion==== */
+
+.separacion {
+    height: 100px;
+    width: 100%;
+    background-color: rgb(93, 5, 175);
+}
+
+
+
+
+
+
+
+
+/* ====seccion about==== */
+
+
+
+
+.about {
+    background: url(./segundoFondoAceite.jpg)no-repeat;
+    background-size: cover;
+    height: 90vh;
+    width: 100%;
+    color: black;
+}
+
+.about h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: 'Righteous', cursive;
+}
+
+.about p:nth-child(1){
+    font-size: 18px;
+    font-weight: 500;
+    padding-top: 80px;
+}
+
+.about p:nth-of-type(2){
+    font-size: 18px;
+    
+}
+
+
+
+
+
+
+/*? ====Configuracion en dispositivos mobiles==== */
+
+@media (max-width: 600px) {
+    .about {
+        background-position: center;
+    }
+}
+
+
+
+
+
+
+/* ====seccion Welcome=== */
+
+
+
+.welcome {
+    background: rgb(93, 5, 175);
+}
+
+.line2 {
+    height: 6px;
+    width: 30%;
+    background-color: white;
+    display: inline-block;
+}
+
+.welcome h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.welcome .card {
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.welcome i {
+    font-size: 45px;
+    color: rgb(93, 5, 175);
+}
+
+.welcome h2 {
+    font-weight: lighter;
+    padding: 10px 0px;
+}
+
+
+
+
+/* ====seccion "Productos"==== */
+
+
+.product h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: 'Righteous', cursive;
+}
+
+.product p:nth-child(1){
+    font-size: 18px;
+    font-weight: 500;
+    padding-top: 80px;
+}
+
+.product p:nth-of-type(2){
+    font-size: 18px;
+    
+}
+
+.star {
+    text-align: end;
+    color: rgb(93, 5, 175);
+}
+
+.product .card {
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.product .card-body {
+    border: 1px dashed rgb(190, 185, 185);
+}
+
+.head1 {
+    font-weight: 400;
+    margin: 0;
+}
+
+.per1 {
+    color: rgb(168, 162, 162);
+}
+
+.btnc {
+    height: 50px;
+    width: 50%;
+    outline: none;
+    border: none;
+    color: white;
+    background: rgb(93, 5, 175);
+    border-radius: 50px;
+    margin: 0 auto;
+    display: block;
+    transition: all 0.4s;
+}
+
+.btnc:hover {
+    outline: none;
+    border: 1px solid rgb(93, 5, 175);
+    color: rgb(93, 5, 175);
+    background: transparent;
+    border-radius: 50px;
+}
+
+.mbtn3 {
+    height: 50px;
+    width: 25%;
+    outline: none;
+    border: none;
+    color: white;
+    background: rgb(125, 21, 223);
+    border-radius: 50px;
+    transition: all 0.4s;
+}
+.mbtn3:hover {
+    background-color: rgb(68, 4, 128);
+    transform: scale(1.2)
+}
+
+
+
+
+
+/* ====descuento Reprocann==== */
+
+
+
+
+.discount {
+    background-color: rgb(93, 5, 175);
+    color: #fff;
+}
+
+.dbtn {
+    height: 50px;
+    width: 75%;
+    outline: none;
+    border: none;
+    color: black;
+    background-color: white;
+    border-radius: 50px;
+    margin: 0 auto;
+    display: block;
+    font-weight: lighter;
+    transition: all 0.4s;
+
+}
+.dbtn:hover {
+    background-color: rgb(228, 228, 288);
+}
+
+
+
+
+/* ====seccion Envios==== */
+
+.store h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: 'Righteous', cursive;
+}
+
+.store p:nth-child(1){
+    font-size: 18px;
+    font-weight: 500;
+    padding-top: 80px;
+}
+
+.store p:nth-of-type(2){
+    font-size: 18px;
+    
+}
+
+.store i {
+    font-size: 45px;
+    transition: all 0.4s;
+}
+
+
+
+.store .card {
+    border-radius: 0;
+    border: none;
+    transition: all 0.4s;
+    cursor: pointer;
+}
+
+.store .card:hover {
+    background-color: rgb(93, 5, 175);
+    color: white;
+}
+
+.store .card:hover .per1 {
+    color: white;
+}
+
+
+
+
+
+
+/* ====seller==== */
+
+.seller h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+
+.seller i{
+    color: rgb(93, 5, 175);
+}
+
+.seller .card {
+    border-radius: 0;
+    border: none;
+}
+
+.news-img {
+    height: 300px;
+    object-fit: cover;
+}
+
+
+
+
+/* ====contact==== */
+
+.contact {
+    background: url(./fondoContacto.jpg)no-repeat;
+    background-size: cover;
+    width: 100%;
+}
+
+.contact h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+}
+
+.contact p {
+    color: white;
+}
+
+.circle {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 18px;
+}
+
+
+.contact input {
+    height: 40px;
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: white;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 35px;
+}
+
+.contact textarea {
+    height: 100px;
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: white;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+
+.cbtn {
+    height: 50px;
+    width: 65%;
+    outline: none;
+    border: none;
+    color: black;
+    background: white;
+    border-radius: 50px;
+    font-weight: lighter;
+    transition: all 0.3s;
+}
+
+.cbtn:hover {
+    background: rgb(185, 185, 185);
+}
+
+
+
+
+
+/* ====footer==== */
+
+.footer {
+    background: rgb(93, 5, 175);
+}
+
+.s1 {
+    height: 40px;
+    width: 40px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    padding-top: 8px;
+    margin-left: 10px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.s1:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: rgb(93, 5, 175);
+}
+
+.footer p {
+    color: white;
+}

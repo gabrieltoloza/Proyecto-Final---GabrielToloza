@@ -1,3 +1,8 @@
+// importando clase de Productos
+import { Productos } from "./Productos.js"
+
+
+const local = JSON.parse(localStorage.getItem('stock'))
 
 // stock de productos
 const stock = [
@@ -51,6 +56,30 @@ const stock = [
     }
 ]
 
+
+const cargarProducto = () => {
+    let marca;
+    while (!marca) {
+        marca = prompt("Ingrese la marca del producto")
+    }
+    
+    let detalles;
+    while (!detalles) {
+        detalles = prompt("Ingrese detalles del producto")
+    }
+    
+    let precio;
+    while (!precio || isNaN(precio)) {
+        precio = parseFloat(prompt("Ingrese el precio del producto"))
+    }
+
+    const producto = new Productos(marca, detalles, precio)
+    console.log(producto);
+    local.push(producto)
+    localStorage.setItem('stock', JSON.stringify(local))
+}
+
+
 // Funcion para listar el stock de productos
 const listarStock = (arr) => {
     let i = []
@@ -95,30 +124,52 @@ const datosFactura = () => {
 }
 
 // Menu de entrada a la app
-let primerEntrada = parseInt(prompt("Bienvenido! \n Ingrese 1 para listar los pedidos \n Ingrese 2 para tomar su pedido \n Ingrese 3 para salir"))
+let primerEntrada = parseInt(prompt("Bienvenido! \n Ingrese 1 para listar los pedidos \n Ingrese 2 para tomar su pedido \n Ingrese 3 para ingresar un nuevo producto \n Ingrese 4 para salir"))
 
-while(primerEntrada !== 3){
+while(primerEntrada !== 4){
     switch(primerEntrada){
         // Primero caso lista el stock de productos
         case 1:
-            listarStock(stock)
+            // Comprobamos si esta el stock en "localStorage", sino usamos el array "stock"
+            if (localStorage.getItem('stock')) {
+                listarStock(JSON.parse(localStorage.getItem('stock')))
+            }else{
+                listarStock(stock)
+            }
             break
         
         // Segundo caso procede a la interaccion para la compra del producto
         case 2:
             let tomarPedido = prompt("¿Que producto necesita?")
+            console.log(typeof tomarPedido, tomarPedido);
             if (tomarPedido === null){ // Si el producto es nulo (le da al boton cancelar) vuelve a ejecutar el while
                 break
             }
             let pedido = []
-            console.log(pedido);
             let productoEncontrado = false // variable para manejar el error de entrada del usuario
-            for(let i of stock){
-                if (i.marca === tomarPedido.toLowerCase()){
+
+            // Comprobamos si esta la variable de localStorage para filtrar el pedido sino, nos agarramos del array "stock"
+            if (local) {
+                const resultado = local.find(producto => producto.marca === tomarPedido.toLowerCase())
+                console.log(resultado);
+                if (resultado) {
                     productoEncontrado = true
-                    pedido.push(i)
+                    pedido.push(resultado)
+                }
+            }else {
+                const resultado = stock.find(producto => producto.marca === tomarPedido.toLowerCase())
+                console.log(resultado);
+                if (resultado) {
+                    productoEncontrado = true
+                    pedido.push(resultado)
                 }
             }
+            
+            
+
+            
+            
+
             // si el producto no esta en el stock, rompe el ciclo y vuelve a ejecutar el while mostrando la alerta
             if(productoEncontrado === false){
                 alert("Producto no encontrado. Por favor seleccione un producto de la lista")
@@ -126,13 +177,15 @@ while(primerEntrada !== 3){
             }
             // variable para validar proceso de compra
             let validarCompra = false
+
             // informacion del producto
-            for (let i of pedido){
-                let confirmar = confirm(`Producto: ${i.marca} \n Detalles: ${i.detalles} \n Precio: ${i.precio} \n \n Confirma su producto?`)
-                if(confirmar === true){
+            pedido.forEach(i => {
+                let confirmar = confirm(`Producto: ${i.marca} \n Detalles: ${i.detalles} \n Precio: ${i.precio} \n \n ¿Confirma su producto?`)
+                if (confirmar === true) {
                     validarCompra = true
                 }
-            }
+            })
+
             if (validarCompra === false){
                 break
             }
@@ -162,14 +215,18 @@ while(primerEntrada !== 3){
                     alert("Se ha confirmado la compra con exito, su factura llegara a casilla de correo y el producto a la direccion proporcionada. Muchas gracias")
                 }
                 break
-            } 
+            }
+        case 3:
+            cargarProducto()
+            break
+
         default:
             // Controlando los errores de entrada
             alert("Opcion inválida")
             break
     }
     // volviendo a ejecutar el bucle
-    primerEntrada = parseInt(prompt("Bienvenido! \n Ingrese 1 para listar los pedidos \n Ingrese 2 para tomar su pedido \n Ingrese 3 para salir"))
+    primerEntrada = parseInt(prompt("Bienvenido! \n Ingrese 1 para listar los pedidos \n Ingrese 2 para tomar su pedido \n Ingrese 3 para ingresar un nuevo producto \n Ingrese 4 para salir"))
 
 }
 // finalizacion del bucle
