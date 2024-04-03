@@ -1,3 +1,13 @@
+/*
+    El trabajo esta por la mitad por temas de trabajo y de salud ( tengo dengue), 
+
+    Abrir el archivo index.html, navegar hasta la seccion de productos, las funciones de orden superior,
+    clases y objetos, dom y eventos estan aplicados al listado de productos en stock, y tambien al filtrado
+    segun categoria del producto, por el momento quedo ahi.  
+*/ 
+
+
+
 
 const stock = [
 
@@ -200,4 +210,4 @@ function agregarCarrito() {
             console.log(productoCarrito);
         })
     })
-}
+} 
