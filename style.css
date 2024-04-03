@@ -68,6 +68,19 @@ p {
     color: rgb(93, 5, 175);
 }
 
+.numerito {
+    color: rgb(171, 97, 240);
+    border-radius: .25rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.active {
+    color: rgb(93, 5, 175);
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
 .navbar-toggler {
     font-size: 29px;
     color: black;
@@ -250,7 +263,8 @@ p {
 .line2 {
     height: 6px;
     width: 30%;
-    background-color: white;
+    background-color: rgb(171, 97, 240);
+    border-radius: 30px;
     display: inline-block;
 }
 
@@ -287,6 +301,11 @@ p {
     font-family: 'Righteous', cursive;
 }
 
+.product h4 {
+    
+    font-family: 'Righteous', cursive;
+}
+
 .product p:nth-child(1){
     font-size: 18px;
     font-weight: 500;
@@ -296,6 +315,21 @@ p {
 .product p:nth-of-type(2){
     font-size: 18px;
     
+}
+
+.product form {
+    font-weight: bold;
+    font-family: 'Righteous', cursive;
+}
+
+.input-search:focus {
+    outline: none;
+    box-shadow: none;
+    transform: none;
+}
+
+.div-search button {
+    height: 36px;
 }
 
 .star {
@@ -566,4 +600,119 @@ p {
 
 .footer p {
     color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ====modal==== */
+
+
+
+
+.carrito-vacio,
+.carrito-comprado {
+    color: rgb(93, 5, 175);
+}
+
+
+.carrito-productos {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.carrito-producto {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(248, 243, 243);
+    color: rgb(93, 5, 175);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    align-items: center;
+}
+
+
+.carrito-producto-img {
+    width: 4rem;
+    border-radius: 1rem;
+}
+
+
+.carrito-producto small {
+    font-size: 0.75rem;
+}
+
+.carrito-producto-eliminar {
+    border: 0;
+    background-color: transparent;
+    color: red;
+    cursor: pointer;
+}   
+
+
+.carrito-acciones {
+    display: flex;
+    justify-content: space-between;
+    max-height: 55px;
+}
+
+.carrito-acciones-vaciar {
+    border: 0;
+    background-color: rgb(248, 243, 243);
+    padding: 1rem;
+    border-radius: 1rem;
+    color: rgb(93, 5, 175);
+    text-transform: uppercase;
+    margin-left: 1.5rem;
+    cursor: pointer;
+}
+
+
+.carrito-acciones-comprar {
+    border: 0;
+    background-color: rgb(93, 5, 175);
+    padding: 1rem;
+    color: rgb(248, 243, 243);
+    text-transform: uppercase;
+    cursor: pointer;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+
+.carrito-acciones-izquierda {
+    display: flex;
+}
+
+.carrito-acciones-derecha {
+    display: flex;
+}
+
+.carrito-acciones-total {
+    display: flex;
+    background-color: rgb(248, 243, 243);
+    padding: 1rem;
+    color: rgb(93, 5, 175);
+    text-transform: uppercase;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+
+
+
+
+/* ====Clases para efectos de JS==== */
+
+
+.d-none {
+    display: none;
 }

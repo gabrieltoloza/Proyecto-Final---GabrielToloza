@@ -7,6 +7,8 @@
 
     <!-- ! DESCOMENTAR UNA VEZ TERMINADA LA INTERFAZ !  -->
     <!-- <script type="module" defer src="./main.js"></script> -->
+    <script defer src="./Productos.js"></script>
+    <script defer src="./ListandoStock.js"></script>
     <!-- ! DESCOMENTAR UNA VEZ TERMINADA LA INTERFAZ !  -->
 
     <!-- Enlace CSS Bootstrap -->
@@ -23,7 +25,7 @@
 </head>
 <body>
     
-    <nav class="bgnavbar navbar navbar-expand-lg pb-3">
+    <nav class="navbar navbar-expand-lg mt-0 mb-0">
         <div class="container">
           <a class="navbar-brand" href="#"><img src="./Logo.png" class="img-fluid" alt=""></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +45,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="#">Tienda</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Reprocann</a>
@@ -52,7 +54,8 @@
             <form class="d-flex" role="search">
               <input class="px-2 search" type="search" placeholder="Search" aria-label="Search">
               <button class="btn1 me-2 px-3" type="submit">Search</button>
-              <span><i class="bi bi-cart-plus"></i></span>
+              <span><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-cart-plus"></i></a></span>
+              <span class="p-2 numerito active">1</span>
             </form>
           </div>
         </div>
@@ -97,7 +100,7 @@
                 <div class="col-lg-5 py-5 offset-lg-7 col-md-6 col-sm-12 col-12">
                     <p class="p-0">Medicina alternativa</p>
                     <h1>Educate con los mejores tratamientos naturales</h1>
-                    <div class="line my-4"></div>
+                    <div class="line2 my-4"></div>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipiscing
                          elit diam litora neque a nisi potenti, conubia arcu
@@ -118,7 +121,7 @@
                 <div class="col-lg-6 m-auto">
                     <p class="m-0">Tienda virtual</p>
                     <h1>Bienvenido a VerdePampa</h1>
-                    <div class="line2 my-4"></div>
+                    <div class="line my-4"></div>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipiscing elit 
                         diam litora neque a nisi potenti, conubia arcu congue 
@@ -174,7 +177,7 @@
                 <div class="col-lg-6 m-auto">
                     <p class="m-0">Tienda virtual</p>
                     <h1>Productos destacados</h1>
-                    <div class="line my-4"></div>
+                    <div class="line2 my-4"></div>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipiscing elit 
                         diam litora neque a nisi potenti, conubia arcu congue 
@@ -183,112 +186,27 @@
                     </p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="card p-2">
-                        <div class="card-body">
-                            <div class="star">
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star"></i></span>
-                                <span><i class="bi bi-star"></i></span>
-                            </div>
-                            <img src="./Productos/aceite6.webp" class="img-fluid pb-3" alt="aceite cbd">                  
-                            <h4 class="head1">Pharma CBD Serum</h4>
-                            <p class="per1">CBD 5% Cannabidiol</p>
-                            <h4 class="head1">$84.00</h4>
-                            <button class="btnc my-4">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card p-2">
-                        <div class="card-body">
-                            <div class="star">
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                            </div>
-                            <img src="./Productos/aceite2.webp" class="img-fluid pb-3" alt="aceite cbd">                  
-                            <h4 class="head1">BIOACTIVA Aceite</h4>
-                            <p class="per1">CBD 15% Via oral</p>
-                            <h4 class="head1">$115.00</h4>
-                            <button class="btnc my-4">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card p-2">
-                        <div class="card-body">
-                            <div class="star">
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                            </div>
-                            <img src="./Productos/aceite3.webp" class="img-fluid pb-3" alt="aceite cbd">                  
-                            <h4 class="head1">BIOACTIVA Aceite</h4>
-                            <p class="per1">CBD 15% Via oral</p>
-                            <h4 class="head1">$115.00</h4>
-                            <button class="btnc my-4">Agregar al carrito</button>
-                        </div>
-                    </div>
+            
+            <div class="container mb-2 div-search" style="max-width: 600px;">
+                <form class="d-flex form-search">
+                    <label for="form-input-name" class="form-label me-2 text-center pt-2 mx-1">Producto: </label>
+                    <input name="nombre" id="form-input-name" class="form-control mb-3 input-search" type="search" placeholder="Ingresar producto...">
+                    <button class="mbtn1 mx-2 px-3" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="row py-5 text-center">
+                <div class="col-lg-6 m-auto">
+                    <h1 class="categoria">
+                        <!--?  Inyeccion de categoria con JS -->
+                        Todos los productos
+                    </h1>
                 </div>
             </div>
+            <div class="row contenedor-productos">
 
-            <div class="row py-3">
-                <div class="col-lg-4">
-                    <div class="card p-2">
-                        <div class="card-body">
-                            <div class="star">
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star"></i></span>
-                                <span><i class="bi bi-star"></i></span>
-                            </div>
-                            <img src="./Productos/aceite6.webp" class="img-fluid pb-3" alt="aceite cbd">                  
-                            <h4 class="head1">Pharma CBD Serum</h4>
-                            <p class="per1">CBD 5% Cannabidiol</p>
-                            <h4 class="head1">$84.00</h4>
-                            <button class="btnc my-4">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card p-2">
-                        <div class="card-body">
-                            <div class="star">
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                            </div>
-                            <img src="./Productos/aceite2.webp" class="img-fluid pb-3" alt="aceite cbd">                  
-                            <h4 class="head1">BIOACTIVA Aceite</h4>
-                            <p class="per1">CBD 15% Via oral</p>
-                            <h4 class="head1">$115.00</h4>
-                            <button class="btnc my-4">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card p-2">
-                        <div class="card-body">
-                            <div class="star">
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                            </div>
-                            <img src="./Productos/aceite3.webp" class="img-fluid pb-3" alt="aceite cbd">                  
-                            <h4 class="head1">BIOACTIVA Aceite</h4>
-                            <p class="per1">CBD 15% Via oral</p>
-                            <h4 class="head1">$115.00</h4>
-                            <button class="btnc my-4">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
+                <!--? Aqui va la inyeccion de productos con JS  -->
+
+                
             </div>
             <div class="row text-center py-5">
                 <div class="col-lg-6 m-auto">
@@ -300,6 +218,29 @@
 
 
 
+      <!-- * RESPALDO DEL CONTENEDOR DE ARTICULOS -->
+                <!-- <div class="col-lg-3">
+                    <div class="card p-2">
+                        <div class="card-body">
+                            <div class="star">
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star"></i></span>
+                                <span><i class="bi bi-star"></i></span>
+                            </div>
+                            <img src="./Productos/aceite6.webp" class="img-fluid pb-3" alt="aceite cbd">                  
+                            <h4 class="head1">Pharma CBD Serum</h4>
+                            <p class="per1">CBD 5% Cannabidiol</p>
+                            <h4 class="head1">$84.00</h4>
+                            <button class="btnc my-4">Agregar al carrito</button>
+                        </div>
+                    </div>
+                </div>-->
+
+
+
+
+
 
       <!-- ====descuento Reprocann==== -->
 
@@ -307,7 +248,7 @@
         <div class="container py-5">
             <div class="row">
                 <div class="col-lg-10 m-auto text-center">
-                    <h1><span class="head1"><i class="bi bi-cash-coin"></i> Discount coupon for -20% :</span> PHJSNDV12836</h1>
+                    <h1><span class="head1"><i class="bi bi-cash-coin"></i> Registrado en Reprocann tenes descuentos % :)</span></h1>
                 </div>
                 <div class="col-lg-2 m-auto">
                     <button class="dbtn">Acceder</button>
@@ -326,7 +267,7 @@
                 <div class="col-lg-6 m-auto">
                     <p class="m-0">Controla tu envío</p>
                     <h1>Envio sin cargo zona AMBA</h1>
-                    <div class="line my-4"></div>
+                    <div class="line2 my-4"></div>
                     <p>Lorem ipsum dolor sit amet consectetur adipiscing elit 
                         diam litora neque a nisi potenti, conubia arcu congue 
                         dictumst habitasse magnis in pharetra rhoncus leo dis 
@@ -508,7 +449,7 @@
                 <div class="col-lg-7">
                     <p class="m-0">Tienda virtual</p>
                     <h1>Bienvenido a VerdePampa</h1>
-                    <div class="line2 my-4"></div>
+                    <div class="line my-4"></div>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipiscing elit 
                         diam litora neque a nisi potenti, conubia arcu congue 
@@ -600,6 +541,92 @@
         </div>
       </section>
 
+
+
+
+
+
+
+
+      
+
+
+      <!-- ====modal==== -->
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 titulo-principal" id="exampleModalLabel">Carrito</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body container-carrito">
+
+                <p class="carrito-vacio d-none">Tu carrito esta vacio <i class="bi bi-emoji-frown"></i></p>
+
+                <div class="carrito-productos disabled px-2">
+                    <div class="carrito-producto">
+                        <img class="carrito-producto-img" src="./Productos/aceite2.webp" alt="">
+                        <div class="carrito-producto-titulo">
+                            <small>Titulo</small>
+                            <h3>Aceite2</h3>
+                        </div>
+                        <div class="carrito-producto-cantidad">
+                            <small>Cantidad</small>
+                            <p>1</p>
+                        </div>
+                        <div class="carrito-producto-precio">
+                            <small>Precio</small>
+                            <p>$1000</p>
+                        </div>
+                        <div class="carrito-producto-subtotal">
+                            <small>Subtotal</small>
+                            <p>1000</p>
+                        </div>
+                        <button class="carrito-producto-eliminar"><i class="bi bi-trash"></i></button>
+                    </div>
+                    <div class="carrito-producto">
+                        <img class="carrito-producto-img" src="./Productos/aceite2.webp" alt="">
+                        <div class="carrito-producto-titulo">
+                            <small>Titulo</small>
+                            <h3>Aceite2</h3>
+                        </div>
+                        <div class="carrito-producto-cantidad">
+                            <small>Cantidad</small>
+                            <p>1</p>
+                        </div>
+                        <div class="carrito-producto-precio">
+                            <small>Precio</small>
+                            <p>$1000</p>
+                        </div>
+                        <div class="carrito-producto-subtotal">
+                            <small>Subtotal</small>
+                            <p>1000</p>
+                        </div>
+                        <button class="carrito-producto-eliminar"><i class="bi bi-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carrito-acciones disabled mb-3 mx-2">
+                <div class="carrito-acciones-izquierda">
+                    <button class="carrito-acciones-vaciar">Vaciar carrito</button>
+                </div>
+                <div class="carrito-acciones-derecha">
+                    <div class="carrito-acciones-total">
+                        <p>Total:  </p>
+                        <p id="total">  $3000</p>
+                    </div>
+                    <button class="carrito-acciones-comprar">Comprar ahora</button>
+                </div>
+            </div>
+
+            <p class="carrito-comprado mx-4 px-2 disabled">Muchas gracias por su compra. <i class="bi bi-emoji-laughing"></i></p>
+
+          </div>
+        </div>
+      </div>
+      
 
 
     <!-- Enlace JS Bootstrap -->

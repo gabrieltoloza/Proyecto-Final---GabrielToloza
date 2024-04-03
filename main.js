@@ -4,56 +4,48 @@ import { Productos } from "./Productos.js"
 
 const local = JSON.parse(localStorage.getItem('stock'))
 
-// stock de productos
+
 const stock = [
-    {   marca: 'sativex', 
-        detalles: `
-        Es un spray bucal que contiene una combinación de THC y CBD,
-        utilizado principalmente para el tratamiento de la espasticidad 
-        en pacientes con esclerosis múltiple.`,
-        precio: 45000
-        // Producto con 10% descuento con reprocann
-    },
+    new Productos('sativex',
+                `Es un spray bucal que contiene una combinación de THC y CBD,
+                utilizado principalmente para el tratamiento de la espasticidad 
+                en pacientes con esclerosis múltiple.`,
+                45000
+                // Producto con 10% descuento con reprocann
+    ),
+    
+    new Productos('epidiolex',
+                `Es un medicamento aprobado por la FDA para el tratamiento de
+                convulsiones asociadas con el síndrome de Lennox-Gastaut y
+                el síndrome de Dravet en pacientes pediátricos.`,
+                150000
+                // Producto con 10% descuento con reprocann
+    ),
 
-    {
-        marca: 'epidiolex',
-        detalles: `
-        Es un medicamento aprobado por la FDA para el tratamiento de
-        convulsiones asociadas con el síndrome de Lennox-Gastaut y
-        el síndrome de Dravet en pacientes pediátricos.`,
-        precio: 150000
-        // Producto con 10% descuento con reprocann
-    },
+    new Productos('marinol',
+                  `(dronabinol) Es una cápsula oral que contiene THC sintético,
+                  aprobada para tratar las náuseas y los vómitos asociados con 
+                  la quimioterapia, así como para estimular el apetito en 
+                  pacientes con VIH/SIDA.`,
+                  80000
+                  // Producto con 25% descuento con reprocann
+    ),
 
-    {
-        marca: 'marinol',
-        detalles: `
-        (dronabinol) Es una cápsula oral que contiene THC sintético,
-        aprobada para tratar las náuseas y los vómitos asociados con 
-        la quimioterapia, así como para estimular el apetito en 
-        pacientes con VIH/SIDA.`,
-        precio: 80000
-        // Producto con 25% descuento con reprocann
-    },
+    new Productos('syndros',
+                  `Medicamento de venta libre en algunos países, que contiene extracto 
+                  de cannabis y se utiliza para el alivio del dolor y la inflamación 
+                  en afecciones musculoesqueléticas.`,
+                  95000
+                  // Producto con 25% descuento con reprocann
+    ),
 
-    {
-        marca: 'syndros',
-        detalles: `
-        Es una solución oral de dronabinol, similar a Marinol, pero en
-        una forma líquida.`,
-        precio: 95000
-        // Producto con 25% descuento con reprocann
-    },
-
-    {
-        marca: 'canagro',
-        detalles: `
-        Medicamento de venta libre en algunos países, que contiene extracto 
-        de cannabis y se utiliza para el alivio del dolor y la inflamación 
-        en afecciones musculoesqueléticas.`,
-        precio: 70000
-        // Producto con 15% descuento con reprocann
-    }
+    new Productos('epidiolex',
+                  `Es un medicamento aprobado por la FDA para el tratamiento de
+                  convulsiones asociadas con el síndrome de Lennox-Gastaut y
+                  el síndrome de Dravet en pacientes pediátricos.`,
+                  150000
+                  // Producto con 15% descuento con reprocann
+    ),
 ]
 
 
@@ -75,33 +67,35 @@ const cargarProducto = () => {
 
     const producto = new Productos(marca, detalles, precio)
     console.log(producto);
-    local.push(producto)
-    localStorage.setItem('stock', JSON.stringify(local))
+    stock.push(producto)
+    localStorage.setItem('stock', JSON.stringify(stock))
 }
 
-
+//* OK
 // Funcion para listar el stock de productos
 const listarStock = (arr) => {
-    let i = []
-    for(let producto of arr){
-        i.push("\n" + producto.marca)
-    }
-    alert(i.join('\n'))
+    const i = []
+    arr.forEach((nombreProducto) => i.push("\n" + nombreProducto.marca))
+    alert(i.join("\n"))
 }
 
+//* OK
 // Funcion para aplicar el descuento segun el producto
-function descuentoReprocann(producto){
-    if(producto === 'sativex' || producto === 'epidiolex'){
-        const descuentoA = producto * 0.1
-        const descuentoFinal = producto - descuentoA
+function descuentoReprocann(marca, precio){
+    if(marca === 'sativex' || marca === 'epidiolex'){
+        console.log(`Marca: ${marca} | Precio: ${precio}`);
+        const descuentoA = precio * 0.1
+        const descuentoFinal = precio - descuentoA
         return descuentoFinal  
-    }else if (producto === 'marinol' || producto === 'syndros'){
-        const descuentoB = producto * 0.25
-        const descuentoFinal = producto - descuentoB
+    }else if (marca === 'marinol' || marca === 'syndros'){
+        console.log(`Marca: ${marca} | Precio: ${precio}`);
+        const descuentoB = precio * 0.25
+        const descuentoFinal = precio - descuentoB
         return descuentoFinal
     }else{
-        const descuentoC = producto * 0.15
-        const descuentoFinal = producto - descuentoC
+        console.log(`Marca: ${marca} | Precio: ${precio}`);
+        const descuentoC = precio * 0.15
+        const descuentoFinal = precio - descuentoC
         return descuentoFinal
     }
 }
@@ -131,20 +125,23 @@ while(primerEntrada !== 4){
         // Primero caso lista el stock de productos
         case 1:
             // Comprobamos si esta el stock en "localStorage", sino usamos el array "stock"
-            if (localStorage.getItem('stock')) {
-                listarStock(JSON.parse(localStorage.getItem('stock')))
+            if (local) {
+                listarStock(local)
+                console.log("Imprime localStorage");
             }else{
                 listarStock(stock)
+                console.log("Imprime stock");
             }
             break
         
         // Segundo caso procede a la interaccion para la compra del producto
         case 2:
             let tomarPedido = prompt("¿Que producto necesita?")
-            console.log(typeof tomarPedido, tomarPedido);
+            
             if (tomarPedido === null){ // Si el producto es nulo (le da al boton cancelar) vuelve a ejecutar el while
                 break
             }
+            //pedido del cliente
             let pedido = []
             let productoEncontrado = false // variable para manejar el error de entrada del usuario
 
@@ -165,11 +162,6 @@ while(primerEntrada !== 4){
                 }
             }
             
-            
-
-            
-            
-
             // si el producto no esta en el stock, rompe el ciclo y vuelve a ejecutar el while mostrando la alerta
             if(productoEncontrado === false){
                 alert("Producto no encontrado. Por favor seleccione un producto de la lista")
@@ -197,7 +189,8 @@ while(primerEntrada !== 4){
                 for(let i of pedido){
                     console.log(i.precio);
                     // aplicando descuento con la funcion declarada
-                    i.precio = descuentoReprocann(i.precio)
+                    console.log(pedido);
+                    i.precio = descuentoReprocann(i.marca ,i.precio)
                     alert(`El precio con descuento queda en ${i.precio}\n A continuacion ingrese sus datos para la facturación.`)
                     // generando la facturacion con la funcion declarada
                     const factura = datosFactura()
