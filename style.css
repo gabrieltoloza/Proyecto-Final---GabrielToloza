@@ -8,6 +8,7 @@ p {
 }
 
 
+
 .nav-item a {
     text-decoration: none;
     color: black;
@@ -704,6 +705,17 @@ p {
     text-transform: uppercase;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
+}
+
+
+
+
+/* ====facturacion==== */
+
+.container-facturacion {
+    font-family: 'Righteous', cursive;
+    color: rgb(93, 5, 175);
+   
 }
 
 

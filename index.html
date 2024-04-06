@@ -25,7 +25,7 @@
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-lg mt-0 mb-0">
+    <nav class="navbar navbar-expand-lg mt-0 mb-0 ">
         <div class="container">
           <a class="navbar-brand" href="#"><img src="./Logo.png" class="img-fluid" alt=""></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,28 +34,23 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav m-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Envíos</a>
+                <a id="btn-envios" class="nav-link" href="#">Envíos</a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link" href="#">
-                  Blog
-                </a>
+                <a class="nav-link btn-blog" href="#">Blog</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Tienda</a>
+                <a id="btn-tienda" class="nav-link" href="#">Tienda</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Reprocann</a>
+                <a class="nav-link btn-reprocann" href="#">Reprocann</a>
               </li>
             </ul>
             <form class="d-flex" role="search">
               <input class="px-2 search" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn1 me-2 px-3" type="submit">Search</button>
+              <button class="btn1 me-2 px-3" type="submit">Buscar</button>
               <span><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-cart-plus"></i></a></span>
-              <span class="p-2 numerito active">1</span>
+              <span class="p-2 conteo-productos active">0</span>
             </form>
           </div>
         </div>
@@ -77,8 +72,8 @@
                         eros justo mi proin, hendrerit hac nec risus quis ligula 
                         curae per.
                     </p>
-                    <button class="mbtn1 mt-4">Reprocann</button>
-                    <button class="mbtn2">Comenzar</button>
+                    <button class="mbtn1 btn-reprocann mt-4">Reprocann</button>
+                    <button class="mbtn2 btn-blog">Comenzar</button>
                 </div>
             </div>
         </div>
@@ -94,7 +89,7 @@
 
 
       <!-- seccion About -->
-      <section class="about py-5">
+      <section id="seccion-blog" class="about py-5">
         <div class="container py-5">
             <div class="row py-5">
                 <div class="col-lg-5 py-5 offset-lg-7 col-md-6 col-sm-12 col-12">
@@ -171,7 +166,7 @@
 
       <!-- ====seccion "Productos"==== -->
 
-      <section class="product bg-light">
+      <section id="seccion-tienda" class="product bg-light">
         <div class="container">
             <div class="row py-5 text-center">
                 <div class="col-lg-6 m-auto">
@@ -244,7 +239,7 @@
 
       <!-- ====descuento Reprocann==== -->
 
-      <section class="discount py-5">
+      <section id="seccion-reprocann" class="discount py-5">
         <div class="container py-5">
             <div class="row">
                 <div class="col-lg-10 m-auto text-center">
@@ -261,7 +256,7 @@
 
       <!-- ====seccio store, envios==== -->
 
-      <section class="store bg-light text-center">
+      <section id="seccion-envios" class="store bg-light text-center">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 m-auto">
@@ -551,7 +546,7 @@
       
 
 
-      <!-- ====modal==== -->
+      <!-- ====modal carrito==== -->
 
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -562,53 +557,16 @@
             </div>
             <div class="modal-body container-carrito">
 
-                <p class="carrito-vacio d-none">Tu carrito esta vacio <i class="bi bi-emoji-frown"></i></p>
+                <p class="carrito-vacio">Tu carrito esta vacio <i class="bi bi-emoji-frown"></i></p>
 
                 <div class="carrito-productos disabled px-2">
-                    <div class="carrito-producto">
-                        <img class="carrito-producto-img" src="./Productos/aceite2.webp" alt="">
-                        <div class="carrito-producto-titulo">
-                            <small>Titulo</small>
-                            <h3>Aceite2</h3>
-                        </div>
-                        <div class="carrito-producto-cantidad">
-                            <small>Cantidad</small>
-                            <p>1</p>
-                        </div>
-                        <div class="carrito-producto-precio">
-                            <small>Precio</small>
-                            <p>$1000</p>
-                        </div>
-                        <div class="carrito-producto-subtotal">
-                            <small>Subtotal</small>
-                            <p>1000</p>
-                        </div>
-                        <button class="carrito-producto-eliminar"><i class="bi bi-trash"></i></button>
-                    </div>
-                    <div class="carrito-producto">
-                        <img class="carrito-producto-img" src="./Productos/aceite2.webp" alt="">
-                        <div class="carrito-producto-titulo">
-                            <small>Titulo</small>
-                            <h3>Aceite2</h3>
-                        </div>
-                        <div class="carrito-producto-cantidad">
-                            <small>Cantidad</small>
-                            <p>1</p>
-                        </div>
-                        <div class="carrito-producto-precio">
-                            <small>Precio</small>
-                            <p>$1000</p>
-                        </div>
-                        <div class="carrito-producto-subtotal">
-                            <small>Subtotal</small>
-                            <p>1000</p>
-                        </div>
-                        <button class="carrito-producto-eliminar"><i class="bi bi-trash"></i></button>
-                    </div>
+
+                    <!-- ? Aqui va el producto inyectado con JS -->
+                    
                 </div>
             </div>
 
-            <div class="carrito-acciones disabled mb-3 mx-2">
+            <div class="carrito-acciones mb-3 mx-2">
                 <div class="carrito-acciones-izquierda">
                     <button class="carrito-acciones-vaciar">Vaciar carrito</button>
                 </div>
@@ -617,16 +575,112 @@
                         <p>Total:  </p>
                         <p id="total">  $3000</p>
                     </div>
-                    <button class="carrito-acciones-comprar">Comprar ahora</button>
+                    <button id="abrirSegundoModal" data-bs-toggle="modal" data-bs-target="#modalFacturacion" class="carrito-acciones-comprar">Comprar ahora</button>
                 </div>
             </div>
 
-            <p class="carrito-comprado mx-4 px-2 disabled">Muchas gracias por su compra. <i class="bi bi-emoji-laughing"></i></p>
+            <p class="carrito-comprado mx-4 px-2 ">Muchas gracias por su compra. <i class="bi bi-emoji-laughing"></i></p>
 
           </div>
         </div>
       </div>
       
+
+
+      <!-- ====modal factura==== -->
+
+
+      <div class="modal fade" id="modalFacturacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 titulo-principal" id="exampleModalLabel">Facturacion</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body container-facturacion">
+                <div class="container mb-2 div-search" style="max-width: 600px;">
+                    <form class="d-block form-search">
+                        <div>
+                            <label for="form-input-titular" class="form-label me-2 text-center pt-2 mx-1">Nombre y apellido: </label>
+                            <input name="nombre" id="form-input-titular" class="form-control mb-3 input-search" type="search" placeholder="Ingresar titular...">
+                        </div>
+                        <div>
+                            <label for="form-input-tarjeta" class="form-label me-2 text-center pt-2 mx-1">Numero de tarjeta: </label>
+                            <input name="nombre" id="form-input-tarjeta" class="form-control mb-3 input-search" type="search" placeholder="Ingresar tarjeta...">
+                        </div>
+                        <div>
+                            <label for="form-input-codigo" class="form-label me-2 text-center pt-2 mx-1">Codigo de seguridad: </label>
+                            <input name="nombre" id="form-input-codigo" class="form-control mb-3 input-search" type="search" placeholder="Ingresar codigo...">
+                        </div>
+                        <div>
+                            <label for="form-input-email" class="form-label me-2 text-center pt-2 mx-1">Email: </label>
+                            <input name="nombre" id="form-input-email" class="form-control mb-3 input-search" type="search" placeholder="Ingresar email...">
+                        </div>
+                        <div>
+                            <label for="form-input-direccion" class="form-label me-2 text-center pt-2 mx-1">Direccion: </label>
+                            <input name="nombre" id="form-input-direccion" class="form-control mb-3 input-search" type="search" placeholder="Ingresar direccion...">
+                        </div>
+                        <button class="mbtn1 mx-2 px-3" id="btnConfirmarFactura1" data-bs-toggle="modal" data-bs-target="#modalConfirmarFactura">Confirmar</button>
+                    </form>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      
+      
+
+
+      <!-- ====modal confirmarFactura==== -->
+
+      <div class="modal fade" id="modalConfirmarFactura" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 titulo-principal" id="exampleModalLabel">Confirmar Facturacion</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body container-facturacion">
+                <div class="container mb-2 div-search" id="container-confirmar-facturacion" style="max-width: 600px;">
+                    
+                        <!--? Aqui se inyectara el contenido de la facturacion desde JS  -->
+                    <p class="carrito-comprado mx-4 px-2 d-none">Muchas gracias por su compra. <i class="bi bi-emoji-laughing"></i></p>
+                </div>
+                
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- ====modal despedida==== -->
+
+
+      <div class="modal fade" id="modalDespedida" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 titulo-principal" id="exampleModalLabel">Compra Realizada</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body container-despedida">
+                    
+                <p class="carrito-comprado mx-4 px-2">Muchas gracias por su compra. <i class="bi bi-emoji-laughing"></i></p>
+                
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
 
 
     <!-- Enlace JS Bootstrap -->
