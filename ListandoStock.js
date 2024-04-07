@@ -393,9 +393,7 @@ function vaciarCarrito() {
     productosEnCarrito.length = 0
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
     cargarProductosEnCarrito()
-    if(productosEnLocalStorage.length == 0) {
-        localStorage.clear()
-    }
+    
     sumarCantidad()
 }
 
@@ -462,13 +460,18 @@ function compraTerminada() {
     productosEnCarrito.length = 0
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
 
-    if(productosEnLocalStorage.length == 0) {
-        localStorage.clear()
-    }
     sumarCantidad()
 }
 
 
+
+// funcion para limpiar el storage y que no quede ningun array vacio!
+function limpiarStorage() {
+    if(productosEnLocalStorage && productosEnLocalStorage.length == 0) {
+        localStorage.clear()
+    }
+}
+limpiarStorage()
 
 
 
