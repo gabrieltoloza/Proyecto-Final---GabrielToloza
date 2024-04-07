@@ -384,7 +384,7 @@ function eliminarDelCarrito(e) {
     cargarProductosEnCarrito()
 
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
-
+    limpiarStorage()
 }
 
 // evento y funcion para vaciar el carrito 
@@ -392,9 +392,10 @@ botonVaciar.addEventListener("click", vaciarCarrito)
 function vaciarCarrito() {
     productosEnCarrito.length = 0
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
+
     cargarProductosEnCarrito()
-    
     sumarCantidad()
+    limpiarStorage()
 }
 
 
@@ -461,6 +462,7 @@ function compraTerminada() {
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
 
     sumarCantidad()
+    limpiarStorage()
 }
 
 
