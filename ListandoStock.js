@@ -393,7 +393,7 @@ function vaciarCarrito() {
     productosEnCarrito.length = 0
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
     cargarProductosEnCarrito()
-    if(productosEnLocalStorage.length === 0) {
+    if(productosEnLocalStorage.length == 0) {
         localStorage.clear()
     }
     sumarCantidad()
