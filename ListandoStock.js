@@ -239,6 +239,7 @@ formularioProductos.addEventListener('submit', (event) =>{
     // llamando a la funcion de listado con los productos filtrados
     listandoStock(filtrado)
     categoriaHTML.innerText = `${categoria.categoria}`
+    agregarEventosACarrito()
     
 })
 
@@ -253,7 +254,9 @@ input.addEventListener('input', (event) =>{
         contenedorProductos.innerHTML = ''
         categoriaHTML.innerText = 'Todos los productos'
         listandoStock(stock)
+        agregarEventosACarrito()
     }
+
 })
 
 
@@ -280,26 +283,55 @@ if (productosEnLocalStorage) {
 }
 
 
-// evento que suma al carrito el pedido
-btnCarrito.forEach(boton => {
-    boton.addEventListener("click", (event) => {
 
-        const productoFiltrado = stock.find(producto => producto.id == event.currentTarget.id)
-        
-        if (productosEnCarrito.some(producto => producto.id == event.currentTarget.id)) {
-            const index = productosEnCarrito.findIndex(producto => producto.id == event.currentTarget.id)
-            productosEnCarrito[index].cantidad++
-        } else {
-            productoFiltrado.cantidad = 1
-            productosEnCarrito.push(productoFiltrado)
-        }
-        console.log(productosEnCarrito);
-        localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
-        sumarCantidad()
-        cargarProductosEnCarrito()
-    })
+// evento que suma al carrito el pedido
+function agregarEventosACarrito() {
+
+    btnCarrito = document.querySelectorAll('.btnCarrito')
+
+    btnCarrito.forEach(boton => {
+        boton.addEventListener("click", (event) => {
     
-})
+            // script que maneja el mensaje del producto agregado al carrito hecho con Toastify JS
+            Toastify({
+                text: "Producto agregado!",
+                duration: 3000,
+                // close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "linear-gradient(to right, #440480, #7D15DF)",
+                    borderRadius: "2rem",
+                },
+                offset: {
+                    x: '1.5rem', // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                    y: '1.5rem' // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                },
+                onClick: function(){} // Callback after click
+            }).showToast();
+    
+    
+    
+            const productoFiltrado = stock.find(producto => producto.id == event.currentTarget.id)
+            
+            if (productosEnCarrito.some(producto => producto.id == event.currentTarget.id)) {
+                const index = productosEnCarrito.findIndex(producto => producto.id == event.currentTarget.id)
+                productosEnCarrito[index].cantidad++
+            } else {
+                productoFiltrado.cantidad = 1
+                productosEnCarrito.push(productoFiltrado)
+            }
+            console.log(productosEnCarrito);
+            localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
+            sumarCantidad()
+            cargarProductosEnCarrito()
+        })
+        
+    })
+}
+
+
 
 
 
@@ -344,7 +376,7 @@ function cargarProductosEnCarrito () {
                                         </div>
                                         <div class="carrito-producto-subtotal">
                                             <small>Subtotal</small>
-                                            <p>$${producto.precio * producto.cantidad}</p>
+                                            <p>$${(producto.precio * producto.cantidad).toFixed(2)}</p>
                                         </div>
                                         <button class="carrito-producto-eliminar" id="${producto.id}"><i class="bi bi-trash"></i></button>`
             carritoProductos.append(contenedorCarrito)
@@ -375,14 +407,40 @@ function mostrarBotonEliminar() {
     })
 }
 
+
 // funcion para eliminar el producto del carrito 
 function eliminarDelCarrito(e) {
+
+    Toastify({
+        text: "Producto Eliminado!",
+        duration: 3000,
+        // close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "center", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+            background: "linear-gradient(to right, #C40606, #F12828)",
+            borderRadius: "2rem",
+        },
+        offset: {
+            x: '1.5rem', // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+            y: '1.5rem' // vertical axis - can be a number or a string indicating unity. eg: '2em'
+        },
+        onClick: function(){} // Callback after click
+    }).showToast();
+
+    //? Corrigiendo a partir de la devolucion!
     const botonId = e.currentTarget.id
     const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
+    
+    
+    productosEnCarrito[index].cantidad--
+    
+    if (productosEnCarrito[index].cantidad == 0) {
+        productosEnCarrito.splice(index, 1)
+    }
 
-    productosEnCarrito.splice(index, 1)
     cargarProductosEnCarrito()
-
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
     limpiarStorage()
 }
@@ -402,7 +460,7 @@ function vaciarCarrito() {
 // funcion para actualizar el total del pedido
 function actualizarTotal () {
     const total = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0)
-    totalCarrito.innerText = `$${total}`
+    totalCarrito.innerText = `$${total.toFixed(2)}`
 }
 
 
@@ -415,32 +473,36 @@ btnFacturacion.addEventListener("click", () => {
 
 //evento que cierra el segundo modal para abrir el tercer modal de confirmacion de factura con Bootstrap
 btnConfirmarFactura.addEventListener("click", (e) => {
-    e.preventDefault()
-    document.getElementById('modalFacturacion').classList.remove('show')
-    const total = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0)
-    const containerDatosFactura = document.querySelector('#container-confirmar-facturacion')
-    containerDatosFactura.innerHTML = `
-                                    <div>
-                                    <label for="form-input-name" class="form-label me-2 text-center pt-2 mx-1">Nombre y apellido: ${inputTitular.value}</label>
-                                    </div>
-                                    <div>
-                                        <label for="form-input-tarjeta" class="form-label me-2 text-center pt-2 mx-1">Numero de tarjeta: ${inputTarjeta.value}</label> 
-                                    </div>
-                                    <div>
-                                        <label for="form-input-codigo" class="form-label me-2 text-center pt-2 mx-1">Codigo de seguridad: ${inputCodigo.value}</label> 
-                                    </div>
-                                    <div>
-                                        <label for="form-input-email" class="form-label me-2 text-center pt-2 mx-1">Email: ${inputEmail.value}</label>
-                                    </div>
-                                    <div>
-                                        <label for="form-input-direccion" class="form-label me-2 text-center pt-2 mx-1">Direccion: ${inputDireccion.value}</label>
-                                    </div>
-                                    <div>
-                                        <label for="form-input-direccion" class="form-label me-2 text-center pt-2 mx-1">Precio: $${total}</label>
-                                    </div>
-                                    <button id="btnConfirmarFactura2" class="mbtn1 mx-2 px-3" data-bs-toggle="modal" data-bs-target="#modalDespedida">Confirmar</button>`
 
+    e.preventDefault()
+
+    document.getElementById('modalFacturacion').classList.remove('show')
+        const total = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0)
+        const containerDatosFactura = document.querySelector('#container-confirmar-facturacion')
+        containerDatosFactura.innerHTML = `
+                                        <div>
+                                        <label for="form-input-name" class="form-label me-2 text-center pt-2 mx-1">Nombre y apellido: ${inputTitular.value}</label>
+                                        </div>
+                                        <div>
+                                            <label for="form-input-tarjeta" class="form-label me-2 text-center pt-2 mx-1">Numero de tarjeta: ${inputTarjeta.value}</label> 
+                                        </div>
+                                        <div>
+                                            <label for="form-input-codigo" class="form-label me-2 text-center pt-2 mx-1">Codigo de seguridad: ${inputCodigo.value}</label> 
+                                        </div>
+                                        <div>
+                                            <label for="form-input-email" class="form-label me-2 text-center pt-2 mx-1">Email: ${inputEmail.value}</label>
+                                        </div>
+                                        <div>
+                                            <label for="form-input-direccion" class="form-label me-2 text-center pt-2 mx-1">Direccion: ${inputDireccion.value}</label>
+                                        </div>
+                                        <div>
+                                            <label for="form-input-direccion" class="form-label me-2 text-center pt-2 mx-1">Precio: $${total}</label>
+                                        </div>
+                                        <button id="btnConfirmarFactura2" class="mbtn1 mx-2 px-3" data-bs-toggle="modal" data-bs-target="#modalDespedida">Confirmar</button>`
+
+        
     mostrarBotonConfirmarFinal()
+    
 
 })
 
@@ -463,6 +525,7 @@ function compraTerminada() {
 
     sumarCantidad()
     limpiarStorage()
+    cargarProductosEnCarrito()
 }
 
 
@@ -474,6 +537,11 @@ function limpiarStorage() {
     }
 }
 limpiarStorage()
+
+
+
+
+
 
 
 
