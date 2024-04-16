@@ -139,6 +139,21 @@ let conteoProductos = document.querySelector('.conteo-productos')
 
 
 
+// ?correccion del entregable?
+
+let controladorCantidad = document.querySelector('.controlador-cantidad')
+let inputCantidadCard = document.querySelectorAll('.input-producto')
+let btnSumar = document.querySelectorAll('.btn-sumar')
+let btnRestar = document.querySelectorAll('.btn-restar')
+let valorInput;
+
+//* COMENZAR AQUI LOS PUNTOS ROJOS
+
+let btnSumar2 = document.querySelectorAll('.btn-sumar2')
+let btnRestar2 = document.querySelectorAll('.btn-restar2')
+let cantidadCarrito = document.querySelectorAll('.cantidad-carrito')
+
+
 
 
 // variables del carrito
@@ -188,6 +203,7 @@ const seccionReprocann = document.getElementById('seccion-reprocann')
 // Listando stock de la tienda
 function listandoStock (stock) {
     
+    
     stock.forEach((producto) => {
         const nuevoContenedor = document.createElement('div')
         nuevoContenedor.classList.add('col-lg-3')
@@ -206,6 +222,11 @@ function listandoStock (stock) {
                                         <h4 class="head1">${producto.marca}</h4>
                                         <p class="per1">${producto.detalles}</p>
                                         <h4 class="head1">$${producto.precio}</h4>
+                                        <div class="controlador-cantidad">
+                                            <button id="${producto.id}" class="btn-restar">-</button>
+                                            <input id="${producto.id}" class="input-producto" type="number" placeholder="${valorInput}">
+                                            <button id="${producto.id}" class="btn-sumar">+</button>
+                                        </div>
                                         <button class="btnCarrito btnc my-2 " id="${producto.id}">Agregar carrito</button>
                                     </div>
                                 </div>`            
@@ -221,11 +242,26 @@ function listandoStock (stock) {
         
     })    
     mostrarBotones()
+    agregarEventosACarrito()
+    chequearInput()
 }
 listandoStock(stock)
 
 
+// Funcion para chequear el valor del input y cambiarlo a 0,
+// tambien sirve para inhabilitar el acceso al input con el teclado.
+function chequearInput() {
+    inputCantidadCard = document.querySelectorAll('.input-producto')
 
+    inputCantidadCard.forEach(input => {
+        input.addEventListener("keydown", (e) => {
+            e.preventDefault()
+        })
+        if (input.value === '') {
+            input.value = 0
+        }
+    })
+}
 
 
 // evento para filtrar productos via formulario 
@@ -239,7 +275,7 @@ formularioProductos.addEventListener('submit', (event) =>{
     // llamando a la funcion de listado con los productos filtrados
     listandoStock(filtrado)
     categoriaHTML.innerText = `${categoria.categoria}`
-    agregarEventosACarrito()
+    
     
 })
 
@@ -254,18 +290,39 @@ input.addEventListener('input', (event) =>{
         contenedorProductos.innerHTML = ''
         categoriaHTML.innerText = 'Todos los productos'
         listandoStock(stock)
-        agregarEventosACarrito()
+        
     }
 
 })
 
 
 
-//funcion para mostrar los botones "agregar al carrito"
+
+//funcion para mostrar los botones "agregar al carrito" y variables de cantidades
 function mostrarBotones() {
     btnCarrito = document.querySelectorAll('.btnCarrito')
+    controladorCantidad = document.querySelector('.controlador-cantidad')
+    inputCantidadCard = document.querySelectorAll('.input-producto')
+    btnSumar = document.querySelectorAll('.btn-sumar')
+    btnRestar = document.querySelectorAll('.btn-restar')
+    
+    accionBotonesCantidadProducto()
 }
 
+
+function mostrarBotonesCantidadCarrito() {
+    btnSumar2 = document.querySelectorAll('.btn-sumar2')
+    btnRestar2 = document.querySelectorAll('.btn-restar2')
+    cantidadCarrito = document.querySelectorAll('.cantidad-carrito')
+
+    btnSumar2.forEach((boton) => {
+        boton.addEventListener("click", accioBtnSumarEnCarrito)
+    })
+
+    btnRestar2.forEach((boton) => {
+        boton.addEventListener("click", accionBtnRestarEnCarrito)
+    })
+}
 
 
 
@@ -284,22 +341,115 @@ if (productosEnLocalStorage) {
 
 
 
+
+
+
+
+
+
+
+// funcion que suma o resta la cantidad de productos a agregar al carrito, solo el valor del input
+function accionBotonesCantidadProducto () {
+    btnSumar.forEach((boton, index) => {
+        boton.addEventListener("click", () => {
+            inputCantidadCard[index].value++
+            console.log("Funciona el boton SUMAR");
+        })
+    })
+    btnRestar.forEach((boton, index) => {
+        boton.addEventListener("click", () => {
+            inputCantidadCard[index].value--
+            if (inputCantidadCard[index].value < 0) {
+                inputCantidadCard[index].value = 0
+                return;
+            }
+            console.log("Boton restar Funciona");
+        })
+    })
+}
+
+
+
+function accioBtnSumarEnCarrito(e) {
+    
+    const botonId = e.currentTarget.id
+    const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
+
+    productosEnCarrito[index].cantidad++
+    console.log("Boton carrito SUMAR funciona!!");
+}
+
+
+function accionBtnRestarEnCarrito(e) {
+
+    const botonId = e.currentTarget.id
+    const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
+
+    productosEnCarrito[index].cantidad--
+    if (productosEnCarrito[index].cantidad < 1) {
+        productosEnCarrito[index].cantidad = 1
+        return;
+    }
+    console.log("Boton carrito Restar funciona!!");
+}
+
+
+
+
 // evento que suma al carrito el pedido
 function agregarEventosACarrito() {
 
     btnCarrito = document.querySelectorAll('.btnCarrito')
 
-    btnCarrito.forEach(boton => {
+    btnCarrito.forEach((boton, index) => {
         boton.addEventListener("click", (event) => {
+            
+            
+            let cantidadSeleccionada = Number(inputCantidadCard[index].value)
+            console.log(cantidadSeleccionada);
+            
+            if (cantidadSeleccionada === 0) {
+                
+                Toastify({
+                    text: "Debes elegir una cantidad",
+                    duration: 1500,
+                    // close: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "right", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "linear-gradient(to right, #C40606, #F12828)",
+                        borderRadius: "2rem",
+                    },
+                    offset: {
+                        x: '1.5rem', // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                        y: '1.5rem' // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                    },
+                    onClick: function(){} // Callback after click
+                }).showToast();
+                return;
+            }
     
+    
+            const productoFiltrado = stock.find(producto => producto.id == event.currentTarget.id)
+            
+            if (productosEnCarrito.some(producto => producto.id == event.currentTarget.id)) {
+                const index = productosEnCarrito.findIndex(producto => producto.id == event.currentTarget.id)
+                productosEnCarrito[index].cantidad += cantidadSeleccionada
+            } else {
+                productoFiltrado.cantidad = cantidadSeleccionada
+                productosEnCarrito.push(productoFiltrado)
+            }
+
+
             // script que maneja el mensaje del producto agregado al carrito hecho con Toastify JS
             Toastify({
                 text: "Producto agregado!",
-                duration: 3000,
+                duration: 1500,
                 // close: true,
                 gravity: "top", // `top` or `bottom`
                 position: "right", // `left`, `center` or `right`
-                stopOnFocus: true, // Prevents dismissing of toast on hover
+                stopOnFocus: false, // Prevents dismissing of toast on hover
                 style: {
                     background: "linear-gradient(to right, #440480, #7D15DF)",
                     borderRadius: "2rem",
@@ -310,20 +460,13 @@ function agregarEventosACarrito() {
                 },
                 onClick: function(){} // Callback after click
             }).showToast();
-    
-    
-    
-            const productoFiltrado = stock.find(producto => producto.id == event.currentTarget.id)
-            
-            if (productosEnCarrito.some(producto => producto.id == event.currentTarget.id)) {
-                const index = productosEnCarrito.findIndex(producto => producto.id == event.currentTarget.id)
-                productosEnCarrito[index].cantidad++
-            } else {
-                productoFiltrado.cantidad = 1
-                productosEnCarrito.push(productoFiltrado)
-            }
+
             console.log(productosEnCarrito);
             localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
+
+            setInterval(() => {
+                inputCantidadCard[index].value = 0
+            }, 6000)
             sumarCantidad()
             cargarProductosEnCarrito()
         })
@@ -340,7 +483,6 @@ function sumarCantidad () {
     let numero = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0)
     conteoProductos.innerText = numero
 }
-
 
 
 
@@ -368,7 +510,11 @@ function cargarProductosEnCarrito () {
                                         </div>
                                         <div class="carrito-producto-cantidad">
                                             <small>Cantidad</small>
-                                            <p>${producto.cantidad}</p>
+                                            <div class="container-cantidad-carrito">
+                                                <button id="${producto.id}" class="btn-restar2 pb-1">-</button>
+                                                <p class="cantidad-carrito py-2 m-0">${producto.cantidad}</p>
+                                                <button id="${producto.id} class="btn-sumar2 pb-1">+</button>
+                                            </div>
                                         </div>
                                         <div class="carrito-producto-precio">
                                             <small>Precio</small>
@@ -380,6 +526,7 @@ function cargarProductosEnCarrito () {
                                         </div>
                                         <button class="carrito-producto-eliminar" id="${producto.id}"><i class="bi bi-trash"></i></button>`
             carritoProductos.append(contenedorCarrito)
+            
         })
     } else {
         carritoAcciones.classList.add('d-none')
@@ -387,11 +534,14 @@ function cargarProductosEnCarrito () {
         carritoProductos.classList.add('d-none')
         carritoVacio.classList.remove('d-none')
     }
-
+    
+    mostrarBotonesCantidadCarrito()
     mostrarBotonEliminar()
     actualizarTotal()
     sumarCantidad()
-    
+    console.log(btnSumar2);
+    console.log(btnRestar2);
+    console.log(cantidadCarrito);
 }
 cargarProductosEnCarrito()
 
@@ -406,6 +556,7 @@ function mostrarBotonEliminar() {
         boton.addEventListener("click", eliminarDelCarrito)
     })
 }
+
 
 
 // funcion para eliminar el producto del carrito 
@@ -433,7 +584,6 @@ function eliminarDelCarrito(e) {
     const botonId = e.currentTarget.id
     const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
     
-    
     productosEnCarrito[index].cantidad--
     
     if (productosEnCarrito[index].cantidad == 0) {
@@ -444,6 +594,8 @@ function eliminarDelCarrito(e) {
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
     limpiarStorage()
 }
+
+
 
 // evento y funcion para vaciar el carrito 
 botonVaciar.addEventListener("click", vaciarCarrito)

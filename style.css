@@ -396,6 +396,28 @@ p {
 
 
 
+.controlador-cantidad button {
+    font-size: 1rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: .35rem;
+    margin: 10px;
+}
+
+.input-producto::-webkit-inner-spin-button,
+.input-producto::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+
+.input-producto {
+    width: 50px;
+    appearance: none;
+    -moz-appearance: textfield;
+}
+
 
 /* ====descuento Reprocann==== */
 
@@ -707,6 +729,19 @@ p {
     border-bottom-left-radius: 1rem;
 }
 
+
+.container-cantidad-carrito {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-cantidad-carrito button {
+    font-size: 1rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: .35rem;
+    margin: 10px;
+}
 
 
 
