@@ -310,20 +310,6 @@ function mostrarBotones() {
 }
 
 
-function mostrarBotonesCantidadCarrito() {
-    btnSumar2 = document.querySelectorAll('.btn-sumar2')
-    btnRestar2 = document.querySelectorAll('.btn-restar2')
-    cantidadCarrito = document.querySelectorAll('.cantidad-carrito')
-
-    btnSumar2.forEach((boton) => {
-        boton.addEventListener("click", accioBtnSumarEnCarrito)
-    })
-
-    btnRestar2.forEach((boton) => {
-        boton.addEventListener("click", accionBtnRestarEnCarrito)
-    })
-}
-
 
 
 //array que se guarda en el localStorage
@@ -338,11 +324,6 @@ if (productosEnLocalStorage) {
 } else {
     productosEnCarrito = []
 }
-
-
-
-
-
 
 
 
@@ -367,33 +348,6 @@ function accionBotonesCantidadProducto () {
         })
     })
 }
-
-
-
-function accioBtnSumarEnCarrito(e) {
-    
-    const botonId = e.currentTarget.id
-    const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
-
-    productosEnCarrito[index].cantidad++
-    console.log("Boton carrito SUMAR funciona!!");
-}
-
-
-function accionBtnRestarEnCarrito(e) {
-
-    const botonId = e.currentTarget.id
-    const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
-
-    productosEnCarrito[index].cantidad--
-    if (productosEnCarrito[index].cantidad < 1) {
-        productosEnCarrito[index].cantidad = 1
-        return;
-    }
-    console.log("Boton carrito Restar funciona!!");
-}
-
-
 
 
 // evento que suma al carrito el pedido
@@ -513,7 +467,7 @@ function cargarProductosEnCarrito () {
                                             <div class="container-cantidad-carrito">
                                                 <button id="${producto.id}" class="btn-restar2 pb-1">-</button>
                                                 <p class="cantidad-carrito py-2 m-0">${producto.cantidad}</p>
-                                                <button id="${producto.id} class="btn-sumar2 pb-1">+</button>
+                                                <button id="${producto.id}" class="btn-sumar2 pb-1">+</button>
                                             </div>
                                         </div>
                                         <div class="carrito-producto-precio">
@@ -535,13 +489,14 @@ function cargarProductosEnCarrito () {
         carritoVacio.classList.remove('d-none')
     }
     
-    mostrarBotonesCantidadCarrito()
     mostrarBotonEliminar()
     actualizarTotal()
     sumarCantidad()
-    console.log(btnSumar2);
+    
+    mostrarBotonesCantidadCarrito()
     console.log(btnRestar2);
     console.log(cantidadCarrito);
+    console.log(btnSumar2);
 }
 cargarProductosEnCarrito()
 
@@ -594,6 +549,65 @@ function eliminarDelCarrito(e) {
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
     limpiarStorage()
 }
+
+
+
+
+// funciones para mostrar los botones cantidad del carrito
+//  y escucha los eventos para que sume o reste la
+function mostrarBotonesCantidadCarrito() {
+    btnSumar2 = document.querySelectorAll('.btn-sumar2')
+    btnRestar2 = document.querySelectorAll('.btn-restar2')
+    cantidadCarrito = document.querySelectorAll('.cantidad-carrito')
+
+    btnSumar2.forEach((boton) => {
+        boton.addEventListener("click", accioBtnSumarEnCarrito)
+    })
+
+    btnRestar2.forEach((boton) => {
+        boton.addEventListener("click", accionBtnRestarEnCarrito)
+    })
+    
+}
+
+
+// funciones de sumar o restar cantidad de los botones del carrito
+function accioBtnSumarEnCarrito(e) {
+    
+    const botonId = e.currentTarget.id
+    const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
+    console.log(productosEnCarrito[index].cantidad);
+    productosEnCarrito[index].cantidad += 1
+    console.log("Boton carrito SUMAR funciona!!");
+
+    localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
+    cargarProductosEnCarrito()
+
+}
+
+function accionBtnRestarEnCarrito(e) {
+
+    const botonId = e.currentTarget.id
+    const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
+    console.log(productosEnCarrito[index].cantidad);
+    productosEnCarrito[index].cantidad -= 1
+    if (productosEnCarrito[index].cantidad < 1) {
+        productosEnCarrito[index].cantidad = 1
+        return;
+    }
+    console.log("Boton carrito Restar funciona!!");
+    localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
+
+    cargarProductosEnCarrito()
+
+}
+
+
+
+
+
+
+
 
 
 
