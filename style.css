@@ -395,13 +395,20 @@ p {
 
 
 
+.controlador-cantidad {
+    justify-content: center;
+}
 
-.controlador-cantidad button {
-    font-size: 1rem;
-    width: 1.75rem;
-    height: 1.75rem;
+.controlador-cantidad input {
+    height: 35px;
+    margin: 10px;
+    border: solid 0.5px grey;
+}
+
+.controlador-cantidad button {  
     border-radius: .35rem;
     margin: 10px;
+    text-align: center;
 }
 
 .input-producto::-webkit-inner-spin-button,
@@ -745,6 +752,8 @@ p {
 
 
 
+
+
 /* ====facturacion==== */
 
 .container-facturacion {
@@ -754,6 +763,46 @@ p {
 }
 
 
+.input-datos-factura::-webkit-inner-spin-button,
+.input-datos-factura::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+
+.input-datos-factura {
+    appearance: none;
+    -moz-appearance: textfield;
+}
+
+.estilos-alerta {
+    border-radius: 0.5rem;
+    background-image: url(fondos/fondoAlertaFacturacion.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: black;
+    border: solid .25rem beige;
+}
+
+.estilos-alerta2 {
+    border-radius: 0.5rem;
+    background-image: url(fondos/fondoAlertaFacturacion.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: black;
+    border: solid .25rem beige;
+    height: 500px;
+    padding-top: 150px;
+    display: block;
+    align-items: center;
+}
+
+
+.estilos-alerta-key {
+    color: rgb(10, 2, 94) !important;
+    border-color: rgb(10, 2, 94) !important;
+}
 
 
 

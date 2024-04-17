@@ -171,14 +171,12 @@ const totalCarrito = document.querySelector('#total')
 
 //variables del modal de facturacion
 const btnFacturacion = document.querySelector('#abrirSegundoModal')
-let inputTitular = document.querySelector('#form-input-titular')
-let inputTarjeta = document.querySelector('#form-input-tarjeta')
 let inputCodigo = document.querySelector('#form-input-codigo')
-let inputEmail = document.querySelector('#form-input-email')
-let inputDireccion = document.querySelector('#form-input-direccion')
+const formularioFactura = document.querySelector('#formulario-validacion')
 const btnConfirmarFactura = document.querySelector('#btnConfirmarFactura1')
 let btnConfirmarFactura2 = document.querySelector('#btnConfirmarFactura2')
-
+let inputsDatosFactura = document.querySelectorAll('.input-datos-factura')
+const modalFactura = new bootstrap.Modal(document.getElementById('modalFacturacion'), {})
 
 
 
@@ -222,10 +220,10 @@ function listandoStock (stock) {
                                         <h4 class="head1">${producto.marca}</h4>
                                         <p class="per1">${producto.detalles}</p>
                                         <h4 class="head1">$${producto.precio}</h4>
-                                        <div class="controlador-cantidad">
-                                            <button id="${producto.id}" class="btn-restar">-</button>
-                                            <input id="${producto.id}" class="input-producto" type="number" placeholder="${valorInput}">
-                                            <button id="${producto.id}" class="btn-sumar">+</button>
+                                        <div class="controlador-cantidad d-flex">
+                                            <button id="${producto.id}" class="btn btn-outline-secondary btn-restar"><i class="bi bi-dash-lg"></i></button>
+                                            <input id="${producto.id}" class="form-control input-producto" type="number" placeholder="${valorInput}">
+                                            <button id="${producto.id}" class="btn btn-outline-secondary btn-sumar"><i class="bi bi-plus-lg"></i></button>
                                         </div>
                                         <button class="btnCarrito btnc my-2 " id="${producto.id}">Agregar carrito</button>
                                     </div>
@@ -494,9 +492,6 @@ function cargarProductosEnCarrito () {
     sumarCantidad()
     
     mostrarBotonesCantidadCarrito()
-    console.log(btnRestar2);
-    console.log(cantidadCarrito);
-    console.log(btnSumar2);
 }
 cargarProductosEnCarrito()
 
@@ -626,8 +621,15 @@ function vaciarCarrito() {
 // funcion para actualizar el total del pedido
 function actualizarTotal () {
     const total = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0)
-    totalCarrito.innerText = `$${total.toFixed(2)}`
+    totalCarrito.textContent = `$${total.toFixed(2)}`
 }
+
+
+
+
+
+
+// ========Seccion Modales============>
 
 
 
@@ -637,55 +639,110 @@ btnFacturacion.addEventListener("click", () => {
 })
 
 
-//evento que cierra el segundo modal para abrir el tercer modal de confirmacion de factura con Bootstrap
-btnConfirmarFactura.addEventListener("click", (e) => {
 
-    e.preventDefault()
-
-    document.getElementById('modalFacturacion').classList.remove('show')
-        const total = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0)
-        const containerDatosFactura = document.querySelector('#container-confirmar-facturacion')
-        containerDatosFactura.innerHTML = `
-                                        <div>
-                                        <label for="form-input-name" class="form-label me-2 text-center pt-2 mx-1">Nombre y apellido: ${inputTitular.value}</label>
-                                        </div>
-                                        <div>
-                                            <label for="form-input-tarjeta" class="form-label me-2 text-center pt-2 mx-1">Numero de tarjeta: ${inputTarjeta.value}</label> 
-                                        </div>
-                                        <div>
-                                            <label for="form-input-codigo" class="form-label me-2 text-center pt-2 mx-1">Codigo de seguridad: ${inputCodigo.value}</label> 
-                                        </div>
-                                        <div>
-                                            <label for="form-input-email" class="form-label me-2 text-center pt-2 mx-1">Email: ${inputEmail.value}</label>
-                                        </div>
-                                        <div>
-                                            <label for="form-input-direccion" class="form-label me-2 text-center pt-2 mx-1">Direccion: ${inputDireccion.value}</label>
-                                        </div>
-                                        <div>
-                                            <label for="form-input-direccion" class="form-label me-2 text-center pt-2 mx-1">Precio: $${total}</label>
-                                        </div>
-                                        <button id="btnConfirmarFactura2" class="mbtn1 mx-2 px-3" data-bs-toggle="modal" data-bs-target="#modalDespedida">Confirmar</button>`
-
-        
-    mostrarBotonConfirmarFinal()
-    
-
+// Evento de escucha para el campo "Codigo de Seguridad" para que solo admita 5 
+//   caracteres numeros y algunos comandos con el teclado para la experiencia de usuario
+inputCodigo.addEventListener("keydown", (e) => {
+    if (!["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "Backspace", "Delete", "Enter", "Tab"].includes(e.key)) {
+        e.preventDefault()
+    }
 })
 
 
 
-// funcion para mostrar el boton confirmarFactura final!
-function mostrarBotonConfirmarFinal() {
-    btnConfirmarFactura2 = document.querySelector('#btnConfirmarFactura2')
+// Evento que cierra el segundo modal para abrir SweetAlert con los datos 
+//   recuperados del formulario anterior modal.
+btnConfirmarFactura.addEventListener("click", (event) => {
 
-    btnConfirmarFactura2.addEventListener("click", compraTerminada)
-}
+    isValid = true
+    
+    inputsDatosFactura.forEach(input => {
+        if (!input.validity.valid) {
+            isValid = false
+        }else {
+            formularioFactura.classList.add('was-validated')
+        }
+    })
+
+    if (isValid && formularioFactura.classList.contains('was-validated')) {
+        console.log("entra el evento");
+        event.preventDefault()
+        Swal.fire({
+            title: "¿Confirma el envío de datos personasles para su facturación?",
+            showDenyButton: true,
+            confirmButtonText: "Confirmar",
+            denyButtonText: `Cancelar`,
+            customClass: {
+                popup: "estilos-alerta2"
+            }
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                cargarProductosEnCarrito()
+                actualizarTotal()
+                Swal.fire({
+                    title: "Datos de la factura",
+                    html:`
+                    <i class="estilos-alerta-key">Titular:</i> <b>${inputsDatosFactura[0].value}</b><br>
+                    <i class="estilos-alerta-key">Numero de Tarjeta:</i> <b>${inputsDatosFactura[1].value}</b><br>
+                    <i class="estilos-alerta-key">Codigo de Seguridad:</i> <b>${inputsDatosFactura[2].value}</b><br>
+                    <i class="estilos-alerta-key">Correo electronico:</i> <b>${inputsDatosFactura[3].value}</b><br>
+                    <i class="estilos-alerta-key">Direccion:</i> <b>${inputsDatosFactura[4].value}</b><br>
+                    <i class="estilos-alerta-key">Total:</i> <b>${totalCarrito.textContent}</b>`,
+                    confirmButtonText: "Confirme sus datos",
+                    showDenyButton: true,
+                    denyButtonText: "Cancelar",
+                    customClass: {
+                        popup: "estilos-alerta2",
+                    }
+                }).then((result) =>{
+                    if(result.isConfirmed) {
+                        modalFactura.hide();
+                        inputsDatosFactura.forEach(input => {
+                            input.value = ''
+                            formularioFactura.classList.remove('was-validated')
+                        })     
+                        compraTerminada()                
+                        Swal.fire({
+                            title: "Compra Realizada",
+                            html:`
+                                  <b>Revise su correo electrónico para visualizar su factura.</b><br>  
+                                  <b>El producto llegara a la dirección que indico en la misma.</b><br>
+                                  <b>¡Muchas gracias por su compra!</b><br>`,
+                            customClass:{
+                                popup: "estilos-alerta2",
+                                title: "estilos-alerta-key"
+                            },
+                        })
+                    } else if (result.isDenied) {
+                        Swal.fire({
+                            title: "¡Debe confirmar sus datos para finalizar la compra!",
+                            customClass: {
+                                popup: "estilos-alerta2"
+                            },
+                            icon: "warning",
+                            iconColor: "red",
+                        })
+                    }
+                })
+            } else if (result.isDenied) {
+                Swal.fire({
+                    title: "¡Debe proporcionar sus datos para continuar con la compra",
+                    customClass: {
+                        popup: "estilos-alerta"
+                    },
+                    icon: "warning",
+                    iconColor: "red",
+                })
+            }
+        })
+    }
+})
 
 
 
 // funcion que cierra el tercer modal para abrir el modal final con la despedida!! 
 function compraTerminada() {
-    document.querySelector('#modalConfirmarFactura').classList.remove('show')
     productosEnCarrito.length = 0
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
 
@@ -693,6 +750,7 @@ function compraTerminada() {
     limpiarStorage()
     cargarProductosEnCarrito()
 }
+
 
 
 
@@ -712,6 +770,7 @@ limpiarStorage()
 
 
 
+// ===== SECCION DE EFECTOS DE DESPLAZAMIENTO======
 
 // seccion del DOM para el desplazamiento de los botones del Navbar
 

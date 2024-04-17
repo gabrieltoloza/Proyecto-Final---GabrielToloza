@@ -607,25 +607,25 @@
                     <form id="formulario-validacion" class="d-block form-search">
                         <div>
                             <label for="form-input-titular" class="form-label me-2 text-center pt-2 mx-1">Nombre y apellido: </label>
-                            <input name="nombre" id="form-input-titular" class="form-control mb-3 input-search" type="search" placeholder="Ingresar titular..." required>
+                            <input name="nombre" id="form-input-titular" class="form-control mb-3 input-datos-factura" type="search" placeholder="Ingresar titular..." required>
                         </div>
                         <div>
                             <label for="form-input-tarjeta" class="form-label me-2 text-center pt-2 mx-1">Numero de tarjeta: </label>
-                            <input name="nombre" id="form-input-tarjeta" class="form-control mb-3 input-search" type="number" placeholder="Ingresar tarjeta..." required >
+                            <input name="tarjeta" id="form-input-tarjeta" class="form-control mb-3 input-datos-factura" type="number" placeholder="Ingresar tarjeta..." required >
                         </div>
                         <div>
                             <label for="form-input-codigo" class="form-label me-2 text-center pt-2 mx-1">Codigo de seguridad: </label>
-                            <input name="nombre" id="form-input-codigo" class="form-control mb-3 input-search" type="number" placeholder="Ingresar codigo..." required >
+                            <input name="codigo-tarjeta" id="form-input-codigo" class="form-control mb-3 input-datos-factura" type="text" maxlength="5" placeholder="Ingresar codigo..." required >
                         </div>
                         <div>
                             <label for="form-input-email" class="form-label me-2 text-center pt-2 mx-1">Email: </label>
-                            <input name="nombre" id="form-input-email" class="form-control mb-3 input-search" type="email" placeholder="ejemplo@gmail.com" required >
+                            <input name="email" id="form-input-email" class="form-control mb-3 input-datos-factura" type="email" pattern=".*@.*\..*" placeholder="ejemplo@gmail.com" required >
                         </div>
                         <div>
                             <label for="form-input-direccion" class="form-label me-2 text-center pt-2 mx-1">Direccion: </label>
-                            <input name="nombre" id="form-input-direccion" class="form-control mb-3 input-search" type="search" placeholder="Ejemplo 2584" required >
+                            <input name="direccion" id="form-input-direccion" class="form-control mb-3 input-datos-factura" type="text" pattern=".* .+" placeholder="Ejemplo 2584" required >
                         </div>
-                        <button class="mbtn1 mx-2 px-3" id="btnConfirmarFactura1" data-bs-toggle="modal" data-bs-target="#modalConfirmarFactura" type="submit">Confirmar</button>
+                        <button class="mbtn1 mx-2 px-3" id="btnConfirmarFactura1" >Confirmar</button>
                     </form>
                 </div>
             </div>
@@ -637,56 +637,11 @@
       
 
 
-      <!-- ====modal confirmarFactura==== -->
-
-      <div class="modal fade" id="modalConfirmarFactura" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5 titulo-principal" id="exampleModalLabel">Confirmar Facturacion</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body container-facturacion">
-                <div class="container mb-2 div-search" id="container-confirmar-facturacion" style="max-width: 600px;">
-                    
-                        <!--? Aqui se inyectara el contenido de la facturacion desde JS  -->
-                    <p class="carrito-comprado mx-4 px-2 d-none">Muchas gracias por su compra. <i class="bi bi-emoji-laughing"></i></p>
-                </div>
-                
-            </div>
-
-
-          </div>
-        </div>
-      </div>
 
 
 
-      <!-- ====modal despedida==== -->
-
-
-      <div class="modal fade" id="modalDespedida" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5 titulo-principal" id="exampleModalLabel">Compra Realizada</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body container-despedida">
-                    
-                <p class="carrito-comprado mx-4 px-2">Muchas gracias por su compra. <i class="bi bi-emoji-laughing"></i></p>
-                
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-
-
-      
+    <!-- ==== Enlace SweetAlert2 ==== -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--==== Enlace JS Toastify ====-->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- Enlace JS Bootstrap -->
