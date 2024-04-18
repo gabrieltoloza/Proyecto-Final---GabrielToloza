@@ -157,6 +157,7 @@ let cantidadCarrito = document.querySelectorAll('.cantidad-carrito')
 
 
 // variables del carrito
+const modalCarrito = new bootstrap.Modal(document.getElementById('exampleModal'), {})
 let carritoProductos = document.querySelector('.carrito-productos')
 let carritoVacio = document.querySelector('.carrito-vacio')
 let carritoAcciones = document.querySelector('.carrito-acciones')
@@ -410,7 +411,9 @@ function agregarEventosACarrito() {
                     x: '1.5rem', // horizontal axis - can be a number or a string indicating unity. eg: '2em'
                     y: '1.5rem' // vertical axis - can be a number or a string indicating unity. eg: '2em'
                 },
-                onClick: function(){} // Callback after click
+                onClick: function(){
+                    window.scrollTo({top: 0, behavior: "smooth"});
+                } // Callback after click
             }).showToast();
 
             console.log(productosEnCarrito);
@@ -607,7 +610,29 @@ function accionBtnRestarEnCarrito(e) {
 
 
 // evento y funcion para vaciar el carrito 
-botonVaciar.addEventListener("click", vaciarCarrito)
+botonVaciar.addEventListener("click", () => {
+    Swal.fire({
+        title: "¿Estas seguro que quieres eliminar los productos agregados al carrito?",
+        showCancelButton: true,
+        confirmButtonText: "Eliminar",
+        denyButtonText: `Don't save`,
+        customClass: "estilos-alerta2"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            modalCarrito.hide()
+            vaciarCarrito()
+            Swal.fire({
+                title: "Productos eliminados exitosamente",
+                customClass: "estilos-alerta2"
+            });
+        } else if (result.isDenied) {
+            Swal.fire({
+                
+            });
+        }
+      });
+})
+
 function vaciarCarrito() {
     productosEnCarrito.length = 0
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
@@ -824,3 +849,5 @@ btnReprocann.forEach(boton => {
         })
     })
 })
+
+
