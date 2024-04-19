@@ -3,9 +3,32 @@
     margin: 0;
     box-sizing: border-box;    
 }
+
+
+body {
+    background: url(fondos/fondoPrincipal.jpg) fixed;
+    background-repeat: no-repeat;
+}
+
+hr {
+    border: solid;
+    height: 5px;
+    background-color: rgb(52, 0, 100);
+    margin: 20px 0;
+}
+
 p {
     font-family: 'Righteous', cursive;
 }
+
+.navbar {
+    background: transparent;
+    height: 4rem;
+    transition: .7s ease-in-out;
+    border-radius:0 0 .75rem .75rem;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
 
 
 
@@ -13,14 +36,14 @@ p {
     text-decoration: none;
     color: black;
     font-weight: 600;
+    padding: 1rem;
     text-transform: uppercase;
-    margin-right: 15px;
     transition: all 0.4s;
     font-family: 'Righteous', cursive;
 }
 
 .nav-item a:hover {
-    color: rgb(171, 97, 240);
+    color: rgb(6, 171, 23);
 }
 
 .navbar-brand {
@@ -32,14 +55,14 @@ p {
 .search {
     height: 45px;
     outline: none;
-    border: 2px solid rgb(171, 97, 240);
+    border: 2px solid rgb(65, 63, 63);
     background-color: transparent;
     border-radius: 20px 0px 0px 20px;
     border-right: none;
     transition: all 0.4s;
 }
 .search:hover {
-    border: 2px solid rgb(93, 5, 175);
+    border: 2px solid rgb(56, 147, 0);
     border-right: none;
 }
 
@@ -47,30 +70,31 @@ p {
     height: 45px;
     outline: none;
     border: none;
-    background-color: rgb(171, 97, 240);
-    color: white;
+    background-color: rgb(65, 63, 63);
+    color: beige;
+    font-weight: bold;
     border-radius: 0px 20px 20px 0px;
     transition: all 0.4s;
 }
 
 .btn1:hover {
-    background-color: rgb(93, 5, 175);
+    background-color: rgb(56, 147, 0);
 }
 
 .bi-cart-plus {
     font-size: 30px;
-    color: black;
+    color: rgb(14, 11, 11);
     cursor: pointer;
     padding-top: 5px;
     transition: all 0.4s;
 }
 
 .bi-cart-plus:hover {
-    color: rgb(93, 5, 175);
+    color: rgb(56, 147, 0);
 }
 
 .numerito {
-    color: rgb(171, 97, 240);
+    color: rgb(93, 5, 175);
     border-radius: .25rem;
     font-weight: bold;
     font-size: 1.1rem;
@@ -103,11 +127,11 @@ p {
 
 
 .main {
-    background: url(./logoPrincipal.jpg) no-repeat;
-    background-size: cover;
+    background: transparent;
+    /* background-size: cover; */
     height: 100vh;
     width: 100%;
-    color: rgb(245, 243, 243);
+    color: rgb(7, 7, 7);
 }
 
 .main h1 {
@@ -116,14 +140,14 @@ p {
 }
 
 .main p:nth-child(1){
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
     padding-top: 80px;
 }
 
 .main p:nth-of-type(2){
-    font-size: 18px;
-    color: white;
+    font-size: 20px;
+    color: rgb(7, 7, 7);
 }
 
 .mbtn1 {
@@ -132,6 +156,7 @@ p {
     outline: none;
     border: none;
     color: white;
+    font-family: 'Righteous', cursive;
     background: rgb(171, 97, 240);
     border-radius: 50px;
     transition: all 0.4s;
@@ -145,9 +170,11 @@ p {
     width: 25%;
     outline: none;
     background-color: transparent;
-    color: white;
-    border: 1px solid white;
+    font-weight: bolder;
+    color: rgb(93, 5, 175);
+    border: 3px solid rgb(93, 5, 175);
     border-radius: 50px;
+    font-family: 'Righteous', cursive;
     transition: all 0.4s;
 }
 .mbtn2:hover {
@@ -195,7 +222,7 @@ p {
 .separacion {
     height: 100px;
     width: 100%;
-    background-color: rgb(93, 5, 175);
+    background-color: transparent;
 }
 
 
@@ -211,7 +238,7 @@ p {
 
 
 .about {
-    background: url(./segundoFondoAceite.jpg)no-repeat;
+    background: transparent;
     background-size: cover;
     height: 90vh;
     width: 100%;
@@ -258,13 +285,13 @@ p {
 
 
 .welcome {
-    background: rgb(93, 5, 175);
+    background: transparent;
 }
 
 .line2 {
     height: 6px;
     width: 30%;
-    background-color: rgb(171, 97, 240);
+    background-color: rgb(45, 45, 45);
     border-radius: 30px;
     display: inline-block;
 }
@@ -272,28 +299,44 @@ p {
 .welcome h1 {
     font-size: 3rem;
     font-weight: bold;
+    color: black;
 }
 
 .welcome .card {
     border: none;
     border-radius: 0;
     cursor: pointer;
+    background: rgb(45, 45, 45);
 }
 
 .welcome i {
     font-size: 45px;
     color: rgb(93, 5, 175);
+    color: #fff;
 }
 
 .welcome h2 {
     font-weight: lighter;
     padding: 10px 0px;
+    color: #fff;
+}
+
+.welcome p {
+    color: black;
+}
+
+.card-container p {
+    color: #fff;
 }
 
 
 
-
 /* ====seccion "Productos"==== */
+
+
+.product {
+    background: transparent !important;
+}
 
 
 .product h1 {
@@ -302,9 +345,13 @@ p {
     font-family: 'Righteous', cursive;
 }
 
-.product h4 {
-    
+.product h4,
+.product h3 {
     font-family: 'Righteous', cursive;
+}
+
+.card {
+    border-radius: .75rem !important;
 }
 
 .product p:nth-child(1){
@@ -321,6 +368,11 @@ p {
 .product form {
     font-weight: bold;
     font-family: 'Righteous', cursive;
+}
+
+
+.input-search {
+    border: 1px solid;
 }
 
 .input-search:focus {
@@ -345,7 +397,8 @@ p {
 }
 
 .product .card-body {
-    border: 1px dashed rgb(190, 185, 185);
+    border: 2px dashed rgb(93, 5, 175);
+    border-radius: 0.5rem;
 }
 
 .head1 {
@@ -355,6 +408,10 @@ p {
 
 .per1 {
     color: rgb(168, 162, 162);
+}
+
+.per2 {
+    color: rgb(193, 5, 175);
 }
 
 .btnc {
@@ -402,13 +459,16 @@ p {
 .controlador-cantidad input {
     height: 40px;
     margin: 10px;
-    border: solid 0.5px grey;
+    border: solid 1.6px rgb(93, 5, 175);
+    color: rgb(93, 5, 175);
 }
 
 .controlador-cantidad button {  
     border-radius: .35rem;
     margin: 10px;
     text-align: center;
+    border: solid 1.6px rgb(93, 5, 175);
+    color: rgb(93, 5, 175);
 }
 
 .input-producto::-webkit-inner-spin-button,
@@ -425,6 +485,11 @@ p {
     -moz-appearance: textfield;
 }
 
+.categoria {
+    font-weight: bold;
+    font-family: 'Righteous', cursive;
+}
+
 
 /* ====descuento Reprocann==== */
 
@@ -432,7 +497,7 @@ p {
 
 
 .discount {
-    background-color: rgb(93, 5, 175);
+    background-color: rgb(45, 45, 45);
     color: #fff;
 }
 
@@ -458,6 +523,10 @@ p {
 
 
 /* ====seccion Envios==== */
+
+#seccion-envios {
+    background: transparent !important;
+}
 
 .store h1 {
     font-size: 3rem;
@@ -488,11 +557,13 @@ p {
     border: none;
     transition: all 0.4s;
     cursor: pointer;
+    background-color: rgb(45, 45, 45);
+    color: white;
 }
 
 .store .card:hover {
     background-color: rgb(93, 5, 175);
-    color: white;
+    
 }
 
 .store .card:hover .per1 {
@@ -506,11 +577,15 @@ p {
 
 /* ====seller==== */
 
+.seller {
+    background: transparent !important;
+}
+
+
 .seller h1 {
     font-size: 3rem;
     font-weight: bold;
 }
-
 
 .seller i{
     color: rgb(93, 5, 175);
@@ -526,13 +601,18 @@ p {
     object-fit: cover;
 }
 
+.news-img2 {
+    height: 80%;
+    width: 80%;
+    border-radius: 1.5rem;
+}
 
 
 
 /* ====contact==== */
 
 .contact {
-    background: url(./fondoContacto.jpg)no-repeat;
+    background: transparent;
     background-size: cover;
     width: 100%;
 }
@@ -540,17 +620,18 @@ p {
 .contact h1 {
     font-size: 3rem;
     font-weight: bold;
-    color: white;
+    color: black
 }
 
 .contact p {
-    color: white;
+    color: black;
 }
 
 .circle {
     height: 40px;
     width: 40px;
     border-radius: 50%;
+    border: 1px solid ;
     background-color: white;
     color: black;
     text-align: center;
@@ -562,8 +643,7 @@ p {
 .contact input {
     height: 40px;
     width: 100%;
-    border: none;
-    outline: none;
+    border: 1px solid ;
     background-color: white;
     margin-top: 10px;
     padding: 10px;
@@ -573,7 +653,7 @@ p {
 .contact textarea {
     height: 100px;
     width: 100%;
-    border: none;
+    border: 1px solid ;
     outline: none;
     background-color: white;
     margin-top: 10px;
@@ -585,17 +665,17 @@ p {
 .cbtn {
     height: 50px;
     width: 65%;
-    outline: none;
     border: none;
-    color: black;
-    background: white;
+    color: white;
+    background: rgb(105, 32, 173);
     border-radius: 50px;
-    font-weight: lighter;
-    transition: all 0.3s;
+    font-weight: bold;
+    transition: all 1s;
 }
 
 .cbtn:hover {
-    background: rgb(185, 185, 185);
+    background: black;
+    color: white;
 }
 
 
@@ -605,7 +685,7 @@ p {
 /* ====footer==== */
 
 .footer {
-    background: rgb(93, 5, 175);
+    background: rgb(105, 32, 173);
 }
 
 .s1 {
@@ -643,6 +723,7 @@ p {
 
 
 /* ====modal==== */
+
 
 
 
@@ -750,7 +831,16 @@ p {
     margin: 10px;
 }
 
+@keyframes balanceo {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
 
+.animate {
+    animation: balanceo 1s ease-in-out infinite;
+}
 
 
 

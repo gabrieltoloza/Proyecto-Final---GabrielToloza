@@ -7,8 +7,10 @@
 
     <!-- ! DESCOMENTAR UNA VEZ TERMINADA LA INTERFAZ !  -->
     <!-- <script type="module" defer src="./main.js"></script> -->
+    <script defer src="./desplazamientoNavLink.js"></script>
     <script defer src="./Productos.js"></script>
     <script defer src="./ListandoStock.js"></script>
+    <script defer src="./facturacion.js"></script>
     <!-- ! DESCOMENTAR UNA VEZ TERMINADA LA INTERFAZ !  -->
 
 
@@ -29,14 +31,14 @@
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-lg mt-0 mb-0 ">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-          <a class="navbar-brand" href="#"><img src="./Logo.png" class="img-fluid" alt=""></a>
+          <a class="navbar-brand" id="logo-header" href="#"><img src="./Logo.png" class="news-img2" alt=""></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="bi bi-list"></i></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav m-auto m-2 mb-lg-0">
               <li class="nav-item">
                 <a id="btn-envios" class="nav-link" href="#">Envíos</a>
               </li>
@@ -63,11 +65,11 @@
       <!-- sector main -->
       <section class="main py-5">
         <div class="container">
-            <div class="row py-5 sectionDiv2">
+            <div class="row  sectionDiv2">
                 <div class="col-lg-6 py-5">
                     <p class="m-0">Productos organicos</p>
                     <h1>Productos medicinales</h1>
-                    <div class="line my-4"></div>
+                    <div class="line2 my-4"></div>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipiscing 
                         elit diam litora neque a nisi potenti, conubia arcu 
@@ -84,18 +86,14 @@
       </section>
 
 
-      <!-- ====separacion==== -->
 
-      <div class="separacion">
-
-      </div>
-
+      
 
 
       <!-- seccion About -->
-      <section id="seccion-blog" class="about py-5">
-        <div class="container py-5">
-            <div class="row py-5">
+      <section id="seccion-blog" class="about ">
+        <div class="container">
+            <div class="row py-2">
                 <div class="col-lg-5 py-5 offset-lg-7 col-md-6 col-sm-12 col-12">
                     <p class="p-0">Medicina alternativa</p>
                     <h1>Educate con los mejores tratamientos naturales</h1>
@@ -112,15 +110,19 @@
         </div>
       </section>
 
+
+
+
       <!-- ====seccion Welcome=== -->
 
       <section class="welcome text-center pb-5">
         <div class="container py-5">
+            <hr>
             <div class="row py-5 text-white">
                 <div class="col-lg-6 m-auto">
                     <p class="m-0">Tienda virtual</p>
                     <h1>Bienvenido a VerdePampa</h1>
-                    <div class="line my-4"></div>
+                    <div class="line2 my-4"></div>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipiscing elit 
                         diam litora neque a nisi potenti, conubia arcu congue 
@@ -132,7 +134,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card py-3">
-                        <div class="card-body">
+                        <div class="card-body card-container">
                             <span><i class="bi bi-shop-window"></i></span>
                             <h2>Siempre Fresco</h2>
                             <p>
@@ -143,7 +145,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="card py-3">
-                        <div class="card-body">
+                        <div class="card-body card-container">
                             <span><i class="bi bi-capsule"></i></span>
                             <h2>Medicina terapéutica</h2>
                             <p>
@@ -154,7 +156,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="card py-3">
-                        <div class="card-body">
+                        <div class="card-body card-container">
                             <span><i class="bi bi-heart-pulse"></i></span>
                             <h2>Tratamientos alternativos</h2>
                             <p>
@@ -168,21 +170,19 @@
       </section>
 
 
+      
+
+
       <!-- ====seccion "Productos"==== -->
 
       <section id="seccion-tienda" class="product bg-light">
         <div class="container">
+            <hr>
             <div class="row py-5 text-center">
                 <div class="col-lg-6 m-auto">
-                    <p class="m-0">Tienda virtual</p>
-                    <h1>Productos destacados</h1>
-                    <div class="line2 my-4"></div>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit 
-                        diam litora neque a nisi potenti, conubia arcu congue 
-                        dictumst habitasse magnis in pharetra rhoncus leo dis 
-                        commodo.
-                    </p>
+                    <h3 class="m-0">Tienda virtual</h3>
+                    <br>
+                    <h1>¡Hecha un vistazo a nuestros productos!</h1>
                 </div>
             </div>
             
@@ -195,13 +195,13 @@
             </div>
             <div class="row py-5 text-center">
                 <div class="col-lg-6 m-auto">
-                    <h1 class="categoria">
+                    <h3 class="categoria">
                         <!--?  Inyeccion de categoria con JS -->
                         Todos los productos
-                    </h1>
+                    </h3>
                 </div>
             </div>
-            <div class="row contenedor-productos">
+            <div class="row contenedor-productos g-2">
 
                 <!--? Aqui va la inyeccion de productos con JS  -->
 
@@ -214,29 +214,6 @@
             </div>
         </div>
       </section>
-
-
-
-      <!-- * RESPALDO DEL CONTENEDOR DE ARTICULOS -->
-                <!-- <div class="col-lg-3">
-                    <div class="card p-2">
-                        <div class="card-body">
-                            <div class="star">
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star"></i></span>
-                                <span><i class="bi bi-star"></i></span>
-                            </div>
-                            <img src="./Productos/aceite6.webp" class="img-fluid pb-3" alt="aceite cbd">                  
-                            <h4 class="head1">Pharma CBD Serum</h4>
-                            <p class="per1">CBD 5% Cannabidiol</p>
-                            <h4 class="head1">$84.00</h4>
-                            <button class="btnc my-4">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>-->
-
-
 
 
 
@@ -258,7 +235,9 @@
 
 
 
-      <!-- ====seccio store, envios==== -->
+
+
+      <!-- ====seccion store, envios==== -->
 
       <section id="seccion-envios" class="store bg-light text-center">
         <div class="container">
@@ -315,13 +294,14 @@
         </div>
       </section>
 
-
+      
 
 
       <!-- ====seller==== -->
 
       <section class="seller bg-light py-5">
         <div class="container py-5">
+            <hr>
             <div class="row">
                 <div class="col-lg-6">
                     <h1 class="py-5">Nuevos productos</h1>
@@ -444,11 +424,12 @@
 
       <section class="contact py-5">
         <div class="container py-3">
+            <hr>
             <div class="row">
                 <div class="col-lg-7">
                     <p class="m-0">Tienda virtual</p>
                     <h1>Bienvenido a VerdePampa</h1>
-                    <div class="line my-4"></div>
+                    <div class="line2 my-4"></div>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipiscing elit 
                         diam litora neque a nisi potenti, conubia arcu congue 

@@ -170,43 +170,12 @@ const totalCarrito = document.querySelector('#total')
 
 
 
-//variables del modal de facturacion
-const btnFacturacion = document.querySelector('#abrirSegundoModal')
-let inputCodigo = document.querySelector('#form-input-codigo')
-const formularioFactura = document.querySelector('#formulario-validacion')
-const btnConfirmarFactura = document.querySelector('#btnConfirmarFactura1')
-let btnConfirmarFactura2 = document.querySelector('#btnConfirmarFactura2')
-let inputsDatosFactura = document.querySelectorAll('.input-datos-factura')
-const modalFactura = new bootstrap.Modal(document.getElementById('modalFacturacion'), {})
-
-
-
-
-//variables de secciones para el desplazamiento
-const btnEnvios = document.getElementById('btn-envios')
-const btnBlog = document.querySelectorAll('.btn-blog')
-const btnTienda = document.getElementById('btn-tienda')
-const btnReprocann = document.querySelectorAll('.btn-reprocann')
-
-const seccionEnvios = document.getElementById('seccion-envios')
-const seccionBlog = document.getElementById('seccion-blog')
-const seccionTienda = document.getElementById('seccion-tienda')
-const seccionReprocann = document.getElementById('seccion-reprocann')
-
-
-
-
-
-
-
 // Listando stock de la tienda
 function listandoStock (stock) {
-    
     
     stock.forEach((producto) => {
         const nuevoContenedor = document.createElement('div')
         nuevoContenedor.classList.add('col-lg-3')
-
 
         nuevoContenedor.innerHTML = `
                                 <div class="card p-2 text-center">
@@ -219,7 +188,7 @@ function listandoStock (stock) {
                                         </div>
                                         <img src="${producto.imagenUrl}" class="img-fluid news-img pb-3" alt="${producto.categoria}">                  
                                         <h4 class="head1">${producto.marca}</h4>
-                                        <p class="per1">${producto.detalles}</p>
+                                        <p class="per2">${producto.detalles}</p>
                                         <h4 class="head1">$${producto.precio}</h4>
                                         <div class="controlador-cantidad d-flex">
                                             <button id="${producto.id}" class="btn btn-outline-secondary btn-restar"><i class="bi bi-dash-lg"></i></button>
@@ -230,7 +199,7 @@ function listandoStock (stock) {
                                     </div>
                                 </div>`            
         contenedorProductos.append(nuevoContenedor)
-        
+
         // breve animacion para que no sea tan brusco cualquier cambio en el listado de productos hecho con DOM
         nuevoContenedor.animate([
             {opacity: '0'},
@@ -238,7 +207,6 @@ function listandoStock (stock) {
         ], {
             duration: 1000,
         })
-        
     })    
     mostrarBotones()
     agregarEventosACarrito()
@@ -251,7 +219,6 @@ listandoStock(stock)
 // tambien sirve para inhabilitar el acceso al input con el teclado.
 function chequearInput() {
     inputCantidadCard = document.querySelectorAll('.input-producto')
-
     inputCantidadCard.forEach(input => {
         input.addEventListener("keydown", (e) => {
             e.preventDefault()
@@ -270,12 +237,16 @@ formularioProductos.addEventListener('submit', (event) =>{
     contenedorProductos.innerHTML = ''
     const filtrado = stock.filter((producto) => producto.categoria === input.value || producto.marca.includes(input.value))
     const categoria = stock.find((producto) => producto.categoria === input.value)
-
     // llamando a la funcion de listado con los productos filtrados
     listandoStock(filtrado)
-    categoriaHTML.innerText = `${categoria.categoria}`
-    
-    
+
+    if (input.value == '') {
+        event.preventDefault()
+    } else if (!categoria) {
+        categoriaHTML.innerText = `${filtrado[0].categoria}`
+    } else {
+        categoriaHTML.innerText = `${categoria.categoria}`
+    }
 })
 
 
@@ -284,7 +255,6 @@ formularioProductos.addEventListener('submit', (event) =>{
 // evento que escucha el valor del input, si esta vacio devuelve todos los elementos del stock
 input.addEventListener('input', (event) =>{
     const valorInput = event.target.value
-
     if (valorInput === '') {
         contenedorProductos.innerHTML = ''
         categoriaHTML.innerText = 'Todos los productos'
@@ -333,7 +303,6 @@ function accionBotonesCantidadProducto () {
     btnSumar.forEach((boton, index) => {
         boton.addEventListener("click", () => {
             inputCantidadCard[index].value++
-            console.log("Funciona el boton SUMAR");
         })
     })
     btnRestar.forEach((boton, index) => {
@@ -343,7 +312,6 @@ function accionBotonesCantidadProducto () {
                 inputCantidadCard[index].value = 0
                 return;
             }
-            console.log("Boton restar Funciona");
         })
     })
 }
@@ -353,37 +321,28 @@ function accionBotonesCantidadProducto () {
 function agregarEventosACarrito() {
 
     btnCarrito = document.querySelectorAll('.btnCarrito')
-
     btnCarrito.forEach((boton, index) => {
         boton.addEventListener("click", (event) => {
-            
-            
             let cantidadSeleccionada = Number(inputCantidadCard[index].value)
-            console.log(cantidadSeleccionada);
-            
             if (cantidadSeleccionada === 0) {
-                
                 Toastify({
                     text: "Debes elegir una cantidad",
                     duration: 1500,
-                    // close: true,
-                    gravity: "top", // `top` or `bottom`
-                    position: "right", // `left`, `center` or `right`
-                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    gravity: "top", 
+                    position: "center",
+                    stopOnFocus: true, 
                     style: {
                         background: "linear-gradient(to right, #C40606, #F12828)",
                         borderRadius: "2rem",
                     },
                     offset: {
-                        x: '1.5rem', // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-                        y: '1.5rem' // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                        x: '1.5rem',
+                        y: '1.5rem' 
                     },
-                    onClick: function(){} // Callback after click
+                    onClick: function(){}
                 }).showToast();
                 return;
             }
-    
-    
             const productoFiltrado = stock.find(producto => producto.id == event.currentTarget.id)
             
             if (productosEnCarrito.some(producto => producto.id == event.currentTarget.id)) {
@@ -394,29 +353,26 @@ function agregarEventosACarrito() {
                 productosEnCarrito.push(productoFiltrado)
             }
 
-
             // script que maneja el mensaje del producto agregado al carrito hecho con Toastify JS
             Toastify({
                 text: "Producto agregado!",
                 duration: 1500,
-                // close: true,
-                gravity: "top", // `top` or `bottom`
-                position: "right", // `left`, `center` or `right`
-                stopOnFocus: false, // Prevents dismissing of toast on hover
+                gravity: "top", 
+                position: "center", 
+                stopOnFocus: false, 
                 style: {
                     background: "linear-gradient(to right, #440480, #7D15DF)",
                     borderRadius: "2rem",
                 },
                 offset: {
-                    x: '1.5rem', // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-                    y: '1.5rem' // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                    x: '1.5rem',
+                    y: '1.5rem' 
                 },
                 onClick: function(){
                     window.scrollTo({top: 0, behavior: "smooth"});
-                } // Callback after click
+                } 
             }).showToast();
 
-            console.log(productosEnCarrito);
             localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
 
             setInterval(() => {
@@ -425,7 +381,6 @@ function agregarEventosACarrito() {
             sumarCantidad()
             cargarProductosEnCarrito()
         })
-        
     })
 }
 
@@ -451,9 +406,8 @@ function cargarProductosEnCarrito () {
         carritoComprado.classList.add('d-none')
         carritoAcciones.classList.remove('d-none')
         carritoProductos.classList.remove('d-none')
-    
         carritoProductos.innerHTML = ''
-    
+
         productosEnCarrito.forEach(producto => {
             const contenedorCarrito = document.createElement('div')
             contenedorCarrito.classList.add('carrito-producto')
@@ -479,9 +433,8 @@ function cargarProductosEnCarrito () {
                                             <small>Subtotal</small>
                                             <p>$${(producto.precio * producto.cantidad).toFixed(2)}</p>
                                         </div>
-                                        <button class="carrito-producto-eliminar" id="${producto.id}"><i class="bi bi-trash"></i></button>`
+                                        <button class="carrito-producto-eliminar" id="${producto.id}"><i class="icono-eliminar-${producto.id} bi bi-trash"></i></button>`
             carritoProductos.append(contenedorCarrito)
-            
         })
     } else {
         carritoAcciones.classList.add('d-none')
@@ -489,11 +442,9 @@ function cargarProductosEnCarrito () {
         carritoProductos.classList.add('d-none')
         carritoVacio.classList.remove('d-none')
     }
-    
     mostrarBotonEliminar()
     actualizarTotal()
     sumarCantidad()
-    
     mostrarBotonesCantidadCarrito()
 }
 cargarProductosEnCarrito()
@@ -503,8 +454,8 @@ cargarProductosEnCarrito()
 
 //funcion para mostrar los botones de eliminar producto del carrito
 function mostrarBotonEliminar() {
-    botonEliminarCarrito = document.querySelectorAll('.carrito-producto-eliminar')
 
+    botonEliminarCarrito = document.querySelectorAll('.carrito-producto-eliminar')
     botonEliminarCarrito.forEach(boton => {
         boton.addEventListener("click", eliminarDelCarrito)
     })
@@ -518,10 +469,9 @@ function eliminarDelCarrito(e) {
     Toastify({
         text: "Producto Eliminado!",
         duration: 3000,
-        // close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "center", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
+        gravity: "top",
+        position: "center",
+        stopOnFocus: true, 
         style: {
             background: "linear-gradient(to right, #C40606, #F12828)",
             borderRadius: "2rem",
@@ -533,7 +483,6 @@ function eliminarDelCarrito(e) {
         onClick: function(){} // Callback after click
     }).showToast();
 
-    //? Corrigiendo a partir de la devolucion!
     const botonId = e.currentTarget.id
     const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
     
@@ -565,7 +514,6 @@ function mostrarBotonesCantidadCarrito() {
     btnRestar2.forEach((boton) => {
         boton.addEventListener("click", accionBtnRestarEnCarrito)
     })
-    
 }
 
 
@@ -574,10 +522,9 @@ function accioBtnSumarEnCarrito(e) {
     
     const botonId = e.currentTarget.id
     const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
-    console.log(productosEnCarrito[index].cantidad);
+    
     productosEnCarrito[index].cantidad += 1
-    console.log("Boton carrito SUMAR funciona!!");
-
+    
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
     cargarProductosEnCarrito()
 
@@ -587,52 +534,21 @@ function accionBtnRestarEnCarrito(e) {
 
     const botonId = e.currentTarget.id
     const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
-    console.log(productosEnCarrito[index].cantidad);
+    
     productosEnCarrito[index].cantidad -= 1
     if (productosEnCarrito[index].cantidad < 1) {
         productosEnCarrito[index].cantidad = 1
         return;
     }
-    console.log("Boton carrito Restar funciona!!");
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
 
     cargarProductosEnCarrito()
-
 }
 
 
 
 
-
-
-
-
-
-
-// evento y funcion para vaciar el carrito 
-botonVaciar.addEventListener("click", () => {
-    Swal.fire({
-        title: "¿Estas seguro que quieres eliminar los productos agregados al carrito?",
-        showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        denyButtonText: `Don't save`,
-        customClass: "estilos-alerta2"
-      }).then((result) => {
-        if (result.isConfirmed) {
-            modalCarrito.hide()
-            vaciarCarrito()
-            Swal.fire({
-                title: "Productos eliminados exitosamente",
-                customClass: "estilos-alerta2"
-            });
-        } else if (result.isDenied) {
-            Swal.fire({
-                
-            });
-        }
-      });
-})
-
+// funcion para eliminar el localStorage y actualizar datos del carrito al eliminar los productos
 function vaciarCarrito() {
     productosEnCarrito.length = 0
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
@@ -649,136 +565,6 @@ function actualizarTotal () {
     totalCarrito.textContent = `$${total.toFixed(2)}`
 }
 
-
-
-
-
-
-// ========Seccion Modales============>
-
-
-
-//evento que cierra el primer modal para abrir el segundo modal de facturacion con Bootstrap
-btnFacturacion.addEventListener("click", () => {
-    document.querySelector('#exampleModal').classList.remove('show')
-})
-
-
-
-// Evento de escucha para el campo "Codigo de Seguridad" para que solo admita 5 
-//   caracteres numeros y algunos comandos con el teclado para la experiencia de usuario
-inputCodigo.addEventListener("keydown", (e) => {
-    if (!["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "Backspace", "Delete", "Enter", "Tab"].includes(e.key)) {
-        e.preventDefault()
-    }
-})
-
-
-
-// Evento que cierra el segundo modal para abrir SweetAlert con los datos 
-//   recuperados del formulario anterior modal.
-btnConfirmarFactura.addEventListener("click", (event) => {
-
-    isValid = true
-    
-    inputsDatosFactura.forEach(input => {
-        if (!input.validity.valid) {
-            isValid = false
-        }else {
-            formularioFactura.classList.add('was-validated')
-        }
-    })
-
-    if (isValid && formularioFactura.classList.contains('was-validated')) {
-        console.log("entra el evento");
-        event.preventDefault()
-        Swal.fire({
-            title: "¿Confirma el envío de datos personasles para su facturación?",
-            showDenyButton: true,
-            confirmButtonText: "Confirmar",
-            denyButtonText: `Cancelar`,
-            customClass: {
-                popup: "estilos-alerta2"
-            }
-        }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                cargarProductosEnCarrito()
-                actualizarTotal()
-                Swal.fire({
-                    title: "Datos de la factura",
-                    html:`
-                    <i class="estilos-alerta-key">Titular:</i> <b>${inputsDatosFactura[0].value}</b><br>
-                    <i class="estilos-alerta-key">Numero de Tarjeta:</i> <b>${inputsDatosFactura[1].value}</b><br>
-                    <i class="estilos-alerta-key">Codigo de Seguridad:</i> <b>${inputsDatosFactura[2].value}</b><br>
-                    <i class="estilos-alerta-key">Correo electronico:</i> <b>${inputsDatosFactura[3].value}</b><br>
-                    <i class="estilos-alerta-key">Direccion:</i> <b>${inputsDatosFactura[4].value}</b><br>
-                    <i class="estilos-alerta-key">Total:</i> <b>${totalCarrito.textContent}</b>`,
-                    confirmButtonText: "Confirme sus datos",
-                    showDenyButton: true,
-                    denyButtonText: "Cancelar",
-                    customClass: {
-                        popup: "estilos-alerta2",
-                    }
-                }).then((result) =>{
-                    if(result.isConfirmed) {
-                        modalFactura.hide();
-                        inputsDatosFactura.forEach(input => {
-                            input.value = ''
-                            formularioFactura.classList.remove('was-validated')
-                        })     
-                        compraTerminada()                
-                        Swal.fire({
-                            title: "Compra Realizada",
-                            html:`
-                                  <b>Revise su correo electrónico para visualizar su factura.</b><br>  
-                                  <b>El producto llegara a la dirección que indico en la misma.</b><br>
-                                  <b>¡Muchas gracias por su compra!</b><br>`,
-                            customClass:{
-                                popup: "estilos-alerta2",
-                                title: "estilos-alerta-key"
-                            },
-                        })
-                    } else if (result.isDenied) {
-                        Swal.fire({
-                            title: "¡Debe confirmar sus datos para finalizar la compra!",
-                            customClass: {
-                                popup: "estilos-alerta2"
-                            },
-                            icon: "warning",
-                            iconColor: "red",
-                        })
-                    }
-                })
-            } else if (result.isDenied) {
-                Swal.fire({
-                    title: "¡Debe proporcionar sus datos para continuar con la compra",
-                    customClass: {
-                        popup: "estilos-alerta"
-                    },
-                    icon: "warning",
-                    iconColor: "red",
-                })
-            }
-        })
-    }
-})
-
-
-
-// funcion que cierra el tercer modal para abrir el modal final con la despedida!! 
-function compraTerminada() {
-    productosEnCarrito.length = 0
-    localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
-
-    sumarCantidad()
-    limpiarStorage()
-    cargarProductosEnCarrito()
-}
-
-
-
-
 // funcion para limpiar el storage y que no quede ningun array vacio!
 function limpiarStorage() {
     if(productosEnLocalStorage && productosEnLocalStorage.length == 0) {
@@ -786,68 +572,3 @@ function limpiarStorage() {
     }
 }
 limpiarStorage()
-
-
-
-
-
-
-
-
-
-// ===== SECCION DE EFECTOS DE DESPLAZAMIENTO======
-
-// seccion del DOM para el desplazamiento de los botones del Navbar
-
-btnEnvios.addEventListener("click", (e) => {
-    e.preventDefault()
-    const posicionSeccionEnvios = seccionEnvios.getBoundingClientRect().top + window.scrollY
-    const nuevaPosicion = posicionSeccionEnvios - 75
-
-    window.scrollTo({
-        top: nuevaPosicion,
-        behavior: "smooth"
-    })
-})
-
-
-btnBlog.forEach(boton => {
-    boton.addEventListener("click", (e) => {
-        e.preventDefault()
-        const posicionSeccionEnvios = seccionBlog.getBoundingClientRect().top + window.scrollY
-        const nuevaPosicion = posicionSeccionEnvios - 50
-    
-        window.scrollTo({
-            top: nuevaPosicion,
-            behavior: "smooth"
-        })
-    })
-})
-
-
-btnTienda.addEventListener("click", (e) => {
-    e.preventDefault()
-    const posicionSeccionEnvios = seccionTienda.getBoundingClientRect().top + window.scrollY
-    const nuevaPosicion = posicionSeccionEnvios + 20
-
-    window.scrollTo({
-        top: nuevaPosicion,
-        behavior: "smooth"
-    })
-})
-
-
-btnReprocann.forEach(boton => {
-    boton.addEventListener("click", (e) => {
-        e.preventDefault()
-        const posicionSeccionEnvios = seccionReprocann.getBoundingClientRect().top + window.scrollY
-        const nuevaPosicion = posicionSeccionEnvios - 230
-    
-        window.scrollTo({
-            top: nuevaPosicion,
-            behavior: "smooth"
-        })
-    })
-})
-
-

@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "categoria" : "productor",
+        "descuento": 25
+    },
+    {
+        "id": 2,
+        "categoria": "consumidor",
+        "descuento": 17
+    },
+    {
+        "id": 3,
+        "categoria": "paciente",
+        "descuento": 38
+    },
+    {
+        "id": 4,
+        "categoria": "profesional",
+        "descuento": 38
+    }
+]
