@@ -449,10 +449,10 @@ function eliminarDelCarrito(e) {
 
     Toastify({
         text: "Producto Eliminado!",
-        duration: 3000,
+        duration: 1500,
         gravity: "top",
         position: "center",
-        stopOnFocus: true, 
+        stopOnFocus: false, 
         style: {
             background: "linear-gradient(to right, #C40606, #F12828)",
             borderRadius: "2rem",
@@ -477,7 +477,7 @@ function eliminarDelCarrito(e) {
             duration: 3000,
             gravity: "top",
             position: "center",
-            stopOnFocus: true, 
+            stopOnFocus: false, 
             style: {
                 background: "linear-gradient(to right, #C40606, #F12828)",
                 borderRadius: "2rem",
