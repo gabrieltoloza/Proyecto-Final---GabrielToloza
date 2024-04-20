@@ -72,7 +72,6 @@ window.addEventListener("scroll", () => {
 
 // al hacer click en el logo te desplaza hacia el inicio
 logoHeader.addEventListener("click", (event) => {
-    console.log("el boton de logo funciona");
     event.preventDefault();
     window.scrollTo({top: 0, behavior: "smooth"});
 })

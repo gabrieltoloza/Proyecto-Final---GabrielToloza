@@ -5,10 +5,8 @@ let inputCodigo = document.querySelector('#form-input-codigo')
 const formularioFactura = document.querySelector('#formulario-validacion')
 const btnConfirmarFactura = document.querySelector('#btnConfirmarFactura1')
 let btnConfirmarFactura2 = document.querySelector('#btnConfirmarFactura2')
-let inputsDatosFactura = document.querySelectorAll('.input-datos-factura')
 const modalFactura = new bootstrap.Modal(document.getElementById('modalFacturacion'), {})
-
-
+let inputsDatosFactura = document.querySelectorAll('.input-datos-factura')
 
 
 

@@ -1,25 +1,3 @@
-/*
-    El proyecto entregable se basa en listar los productos del stock en la seccion de productos, 
-    hay dos categorias, semillas y aceites. Luego de agregar al carrito, debera ir hasta arriba de todo 
-    y hacer click en el carrito donde aparecera los productos agregados y sus especificaciones.
-    Hay un boton para vaciar el carrito, y otro boton para comprar. Al confirmar la compra se abre 
-    un modal para ingresar los datos de la factura. Al confirmar los datos de la factura se abre
-    otro modal donde figura los datos ingresados pero esta vez se suma el precio total de los productos
-    agregados. Al dar confirmar se abre otro modal despidiendo al usuario y eliminando los productos del carrito
-    simulando que ya se efectuo la compra.
-
-    Ademas tiene efectos de desplazamientos con DOM al hacer click en el menu del navbar.
-
-    El resto de elementos como la minibarra de busqueda superior y secciones que no tienen relevancia 
-    las deje asi porque las voy a usar mas adelante si es que las ocupo en este curso, sino quedan
-    para el curso final de backend... Me tome el trabajo de hacer la pagina que voy a usar o tratar de usar
-    durante toda la cursada.
-
-    Esto que hice es toda la logica del primer proyecto Entregable aplicando los ultimos temas que vimos.
-*/ 
-
-
-
 
 const stock = [
 
@@ -168,8 +146,6 @@ const totalCarrito = document.querySelector('#total')
 
 
 
-
-
 // Listando stock de la tienda
 function listandoStock (stock) {
     
@@ -236,16 +212,21 @@ formularioProductos.addEventListener('submit', (event) =>{
     event.preventDefault()
     contenedorProductos.innerHTML = ''
     const filtrado = stock.filter((producto) => producto.categoria === input.value || producto.marca.includes(input.value))
-    const categoria = stock.find((producto) => producto.categoria === input.value)
     // llamando a la funcion de listado con los productos filtrados
     listandoStock(filtrado)
+    
+    let categorias = new Set()
+
 
     if (input.value == '') {
         event.preventDefault()
-    } else if (!categoria) {
-        categoriaHTML.innerText = `${filtrado[0].categoria}`
+    } else if (filtrado && !filtrado.length < 1) {
+        filtrado.forEach(producto => {
+            categorias.add(producto.categoria)
+        })
+        categoriaHTML.textContent = `${Array.from(categorias).join(",")}`
     } else {
-        categoriaHTML.innerText = `${categoria.categoria}`
+        categoriaHTML.textContent = `Producto no encontrado`
     }
 })
 
@@ -415,7 +396,7 @@ function cargarProductosEnCarrito () {
                                         <img class="carrito-producto-img" src="${producto.imagenUrl}" alt="${producto.categoria}">
                                         <div class="carrito-producto-titulo">
                                             <small>Titulo</small>
-                                            <h3>${producto.marca}</h3>
+                                            <h6>${producto.marca}</h6>
                                         </div>
                                         <div class="carrito-producto-cantidad">
                                             <small>Cantidad</small>
@@ -477,10 +458,10 @@ function eliminarDelCarrito(e) {
             borderRadius: "2rem",
         },
         offset: {
-            x: '1.5rem', // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-            y: '1.5rem' // vertical axis - can be a number or a string indicating unity. eg: '2em'
+            x: '1.5rem',
+            y: '1.5rem' 
         },
-        onClick: function(){} // Callback after click
+        onClick: function(){} 
     }).showToast();
 
     const botonId = e.currentTarget.id
@@ -490,6 +471,23 @@ function eliminarDelCarrito(e) {
     
     if (productosEnCarrito[index].cantidad == 0) {
         productosEnCarrito.splice(index, 1)
+
+        Toastify({
+            text: "Haz eliminado el producto del carrito de compras",
+            duration: 3000,
+            gravity: "top",
+            position: "center",
+            stopOnFocus: true, 
+            style: {
+                background: "linear-gradient(to right, #C40606, #F12828)",
+                borderRadius: "2rem",
+            },
+            offset: {
+                x: '1.5rem',
+                y: '1.5rem' 
+            },
+            onClick: function(){} 
+        }).showToast();
     }
 
     cargarProductosEnCarrito()
