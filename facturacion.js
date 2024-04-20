@@ -8,12 +8,14 @@ let btnConfirmarFactura2 = document.querySelector('#btnConfirmarFactura2')
 const modalFactura = new bootstrap.Modal(document.getElementById('modalFacturacion'), {})
 let inputsDatosFactura = document.querySelectorAll('.input-datos-factura')
 
-
 // variables Reprocann
 let inputsReprocann = document.querySelectorAll('.input-datos-factura-reprocann')
 const reprocannDescuento = document.querySelector('#btn-descuento-reprocann')
 const formularioReprocann = document.querySelector('#formulario-reprocann')
 const btnConfirmarReprocann = document.querySelector('#btnConfirmarReprocann')
+
+
+
 
 
 
@@ -211,7 +213,7 @@ reprocannDescuento.addEventListener("click", (event) => {
 
 
     btnConfirmarReprocann.addEventListener("click", (event) => {
-
+        
         isValid = true
 
         inputsReprocann.forEach(input => {
@@ -221,7 +223,7 @@ reprocannDescuento.addEventListener("click", (event) => {
                 formularioReprocann.classList.add('was-validated')
             }
         })
-    
+        
         if (isValid && formularioReprocann.classList.contains('was-validated')) {
             event.preventDefault()
             Swal.fire({
@@ -234,15 +236,63 @@ reprocannDescuento.addEventListener("click", (event) => {
                 }
             }).then(result => {
                 if (result.isConfirmed) {
-                    inputsReprocann.forEach(input => {
-                        input.value = ''
-                        formularioReprocann.classList.remove('was-validated')
-                    })     
+                      
                     let jsonDb = fetch('./categorias_reprocann.json')
                     jsonDb.then(response => response.json()
-                           .then(datos => console.log(datos))
-                           //! CONTINUAR LOGICA FETCH DESDE AQUI
-                           //! CONTINUAR LOGICA FETCH DESDE AQUI
+                            .then(datos => {
+                                
+                                const categoria = datos.find((obj) => obj.categoria == inputsReprocann[2].value.toLowerCase())
+                                
+                                if (!categoria) {
+                                    Swal.fire({
+                                        title: "Categoria no encontrada",
+                                        html:   `Debe seleccionar una categoria que exista. Las opciones son: 
+                                                <strong> consumidor </strong>, 
+                                                <strong> paciente </strong>, 
+                                                <strong> productor </strong>, 
+                                                <strong> profesional </strong>.
+                                                 Vuelva a intentarlo agregando una opcion disponible`,
+                                        confirmButtonText: "Confirmar",
+                                        customClass: {
+                                            popup: "estilos-alerta2"
+                                        }
+                                    })
+                                    return;
+                                }
+
+                                productosEnCarrito.forEach(producto => {
+                                    const precioProductoCarrito = producto.precio
+                                    const valorDescuento = (categoria.descuento / 100) * precioProductoCarrito
+
+                                    producto.precio -= valorDescuento
+                                    cargarProductosEnCarrito()
+                                })
+                                Swal.fire({
+                                    title: "Descuentos aplicados",
+                                    text: `Se ha aplicado la rebaja de precios en su carrito de compras.
+                                            Segun su categoria usted tiene un ${categoria.descuento}% 
+                                            de descuento en todos los productos. Por favor verifique 
+                                            su nueva cotizacion en el carrito de compras`,
+                                    confirmButtonText: "Confirmar",
+                                    customClass: {
+                                        popup: "estilos-alerta2"
+                                    }
+                                })
+                                //!! CONTROLAR QUE NO SE PUEDA HACER MAS DE UN DESCUENTO
+                                //!! CONTROLAR QUE NO SE PUEDA HACER MAS DE UN DESCUENTO
+                                //!! CONTROLAR QUE NO SE PUEDA HACER MAS DE UN DESCUENTOS
+                            })
+                            .catch(err => {
+                                Swal.fire({
+                                    title: "Error 404",
+                                    text: `Ocurrio un error inesperado, vuelva a intentarlo`,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        popup: "estilos-alerta2"
+                                    }
+                                })
+                            })
+                            
                     )
                 }
             })
@@ -252,3 +302,16 @@ reprocannDescuento.addEventListener("click", (event) => {
 
 
 
+
+
+
+
+
+
+
+
+//! COLOCAR ESTAS LINEA PARA QUE SE LIMPIEN LOS CAMPOS DEL FORMULARIO REPROCANN 
+// inputsReprocann.forEach(input => {
+//     input.value = ''
+//     formularioReprocann.classList.remove('was-validated')
+// })   

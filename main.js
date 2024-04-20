@@ -409,7 +409,7 @@ function cargarProductosEnCarrito () {
                                         </div>
                                         <div class="carrito-producto-precio">
                                             <small>Precio</small>
-                                            <p>$${producto.precio}</p>
+                                            <p>$${producto.precio.toFixed(2)}</p>
                                         </div>
                                         <div class="carrito-producto-subtotal">
                                             <small>Subtotal</small>
