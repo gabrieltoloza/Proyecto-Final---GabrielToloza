@@ -117,15 +117,14 @@ let conteoProductos = document.querySelector('.conteo-productos')
 
 
 
-// ?correccion del entregable?
 
+// logica de productos
 let controladorCantidad = document.querySelector('.controlador-cantidad')
 let inputCantidadCard = document.querySelectorAll('.input-producto')
 let btnSumar = document.querySelectorAll('.btn-sumar')
 let btnRestar = document.querySelectorAll('.btn-restar')
 let valorInput;
 
-//* COMENZAR AQUI LOS PUNTOS ROJOS
 
 let btnSumar2 = document.querySelectorAll('.btn-sumar2')
 let btnRestar2 = document.querySelectorAll('.btn-restar2')
@@ -143,6 +142,8 @@ let carritoComprado = document.querySelector('.carrito-comprado')
 let botonEliminarCarrito = document.querySelectorAll('.carrito-producto-eliminar')
 const botonVaciar = document.querySelector('.carrito-acciones-vaciar')
 const totalCarrito = document.querySelector('#total')
+
+
 
 
 
@@ -224,7 +225,7 @@ formularioProductos.addEventListener('submit', (event) =>{
         filtrado.forEach(producto => {
             categorias.add(producto.categoria)
         })
-        categoriaHTML.textContent = `${Array.from(categorias).join(",")}`
+        categoriaHTML.textContent = `Categorias: ${Array.from(categorias).join(",")}`
     } else {
         categoriaHTML.textContent = `Producto no encontrado`
     }

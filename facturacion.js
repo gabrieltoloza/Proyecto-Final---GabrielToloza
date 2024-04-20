@@ -9,6 +9,13 @@ const modalFactura = new bootstrap.Modal(document.getElementById('modalFacturaci
 let inputsDatosFactura = document.querySelectorAll('.input-datos-factura')
 
 
+// variables Reprocann
+let inputsReprocann = document.querySelectorAll('.input-datos-factura-reprocann')
+const reprocannDescuento = document.querySelector('#btn-descuento-reprocann')
+const formularioReprocann = document.querySelector('#formulario-reprocann')
+const btnConfirmarReprocann = document.querySelector('#btnConfirmarReprocann')
+
+
 
 
 //evento que cierra el primer modal para abrir el segundo modal de facturacion con Bootstrap
@@ -176,5 +183,72 @@ function compraTerminada() {
     limpiarStorage()
     cargarProductosEnCarrito()
 }
+
+
+// evento para manejar el descuento Reprocann
+
+reprocannDescuento.addEventListener("click", (event) => {
+    
+    Toastify({
+        text: "Completa con tus datos reales",
+        duration: 3000,
+        gravity: "top", 
+        position: "left",
+        stopOnFocus: false, 
+        className: "centrar-toasty",
+        style: {
+            background: "linear-gradient(to right, #C40606, #F12828)",
+            borderRadius: "2rem",
+            width: "300px",
+            height: "60px",
+        },
+        offset: {
+            x: '1.5rem',
+            y: '4rem' 
+        },
+        onClick: function(){}
+    }).showToast();
+
+
+    btnConfirmarReprocann.addEventListener("click", (event) => {
+
+        isValid = true
+
+        inputsReprocann.forEach(input => {
+            if (!input.validity.valid) {
+                isValid = false
+            }else {
+                formularioReprocann.classList.add('was-validated')
+            }
+        })
+    
+        if (isValid && formularioReprocann.classList.contains('was-validated')) {
+            event.preventDefault()
+            Swal.fire({
+                title: "¿Confirma sus datos de Reprocann??",
+                showDenyButton: true,
+                confirmButtonText: "Confirmar",
+                denyButtonText: `Cancelar`,
+                customClass: {
+                    popup: "estilos-alerta2"
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    inputsReprocann.forEach(input => {
+                        input.value = ''
+                        formularioReprocann.classList.remove('was-validated')
+                    })     
+                    let jsonDb = fetch('./categorias_reprocann.json')
+                    jsonDb.then(response => response.json()
+                           .then(datos => console.log(datos))
+                           //! CONTINUAR LOGICA FETCH DESDE AQUI
+                           //! CONTINUAR LOGICA FETCH DESDE AQUI
+                    )
+                }
+            })
+        }
+    })
+})
+
 
 

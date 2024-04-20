@@ -65,15 +65,14 @@
             <div class="row  sectionDiv2">
                 <div class="col-lg-6 py-5">
                     <p class="m-0">Productos organicos</p>
-                    <h1>Productos medicinales</h1>
+                    <h1>Verde Pampa</h1>
                     <div class="line2 my-4"></div>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing 
-                        elit diam litora neque a nisi potenti, conubia arcu 
-                        congue dictumst habitasse magnis in pharetra rhoncus 
-                        leo dis commodo. Ut erat porta congue imperdiet tellus 
-                        eros justo mi proin, hendrerit hac nec risus quis ligula 
-                        curae per.
+                        Bienvenido a VerdePampa, una tienda virtual enfocada en el uso del
+                        cannabis medicinal. Nuestra tienda posee productos organicos e 
+                        industriales. Puedes registrarte en nuestro Blog para poder ver 
+                        las ultimas noticias sobre el mundo cannabis y su avance en la 
+                        investigacion cientifica.
                     </p>
                     <button class="mbtn1 btn-reprocann mt-4">Reprocann</button>
                     <button class="mbtn2 btn-blog">Comenzar</button>
@@ -92,14 +91,11 @@
         <div class="container">
             <div class="row py-2">
                 <div class="col-lg-5 py-5 offset-lg-7 col-md-6 col-sm-12 col-12">
-                    <p class="p-0">Medicina alternativa</p>
+                    <p class="p-0"><b>Blog</b></p>
                     <h1>Educate con los mejores tratamientos naturales</h1>
                     <div class="line2 my-4"></div>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing
-                         elit diam litora neque a nisi potenti, conubia arcu
-                          congue dictumst habitasse magnis in pharetra
-                           rhoncus leo dis commodo.
+                        Explora investigaciones recientes sobre cannabis medicinal en nuestro blog. Mantente al día con avances científicos en este campo. Descubre sus efectos en enfermedades crónicas y su potencial terapéutico. ¡La ciencia está transformando nuestra comprensión del cannabis!
                     </p>
                     <button class="mbtn1 mt-4">Read More</button>
                 </div>
@@ -117,14 +113,14 @@
             <hr>
             <div class="row py-5 text-white">
                 <div class="col-lg-6 m-auto">
-                    <p class="m-0">Tienda virtual</p>
-                    <h1>Bienvenido a VerdePampa</h1>
+                    <p class="m-0">¿Porque elegirnos?</p>
+                    <h1>Debes quedarte tranquilo</h1>
                     <div class="line2 my-4"></div>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit 
-                        diam litora neque a nisi potenti, conubia arcu congue 
-                        dictumst habitasse magnis in pharetra rhoncus leo dis 
-                        commodo.
+                        Nos preocupamos por la calidad de nuestros activos
+                        ya que que comprendemos que lo importante es que
+                        tengas una grata experiencia si estas ingresando
+                        a este mundo.
                     </p>
                 </div>
             </div>
@@ -132,10 +128,12 @@
                 <div class="col-lg-4">
                     <div class="card py-3">
                         <div class="card-body card-container">
-                            <span><i class="bi bi-shop-window"></i></span>
-                            <h2>Siempre Fresco</h2>
+                            <span><i class="bi bi-bag-heart"></i></span>
+                            <h2>Control de calidad</h2>
                             <p>
-                                Lorem ipsum dolor sit amet
+                                Antes de listar un producto, debe
+                                pasar por un riguroso control de calidad
+                                por entidades gubernamentales.
                             </p>
                         </div>
                     </div>
@@ -146,7 +144,9 @@
                             <span><i class="bi bi-capsule"></i></span>
                             <h2>Medicina terapéutica</h2>
                             <p>
-                                Lorem ipsum dolor sit amet
+                                Cada vez mas las personas eligen 
+                                medicina organica, por lo que te recomendamos
+                                hechar un vistazo a la comunidad del blog.
                             </p>
                         </div>
                     </div>
@@ -157,7 +157,9 @@
                             <span><i class="bi bi-heart-pulse"></i></span>
                             <h2>Tratamientos alternativos</h2>
                             <p>
-                                Lorem ipsum dolor sit amet
+                                ¿Te dijimos que heches un vistazo al blog?
+                                Dentro hay una seccion de tratamientos 
+                                alternativos como por ejemplo: Ansiedad.
                             </p>
                         </div>
                     </div>
@@ -220,11 +222,37 @@
       <section id="seccion-reprocann" class="discount py-5">
         <div class="container py-5">
             <div class="row">
-                <div class="col-lg-10 m-auto text-center">
-                    <h1><span class="head1"><i class="bi bi-cash-coin"></i> Registrado en Reprocann tenes descuentos % :)</span></h1>
+                
+                <div class="col-lg-3 m-auto">
+                    <!-- Boton Descuento Reprocann -->
+                    <div class="dropdown ">
+                        <button id="btn-descuento-reprocann" type="button" class="dbtn dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" >
+                          Acceder
+                        </button>
+                        <form id="formulario-reprocann" class="dropdown-menu p-4 modal-facturacion1">
+                            <div class="mb-3">
+                                <label for="titular-reprocann" class="form-label"><b>Nombre y apellido:</b></label>
+                                <input type="text" class="form-control input-datos-factura-reprocann" id="titular-reprocann" pattern="^[a-zA-Z\s]*$" title="¡Debe completar el campo con su nombre y apellido!" placeholder="Ingrese nombre completo..." required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email-reprocann" class="form-label"><b>Correo electronico:</b> </label>
+                                <input type="email" class="form-control input-datos-factura-reprocann" id="email-reprocann" pattern=".*@.*\..*" placeholder="ejemplo@example.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="categoria-reprocann" class="form-label"><small><b>A continuacion ingrese su categoria. Las categorias son: consumidor, paciente, productor, profesional</b></small></label>
+                                <input type="text" class="form-control mt-1 input-datos-factura-reprocann" id="categoria-reprocann" placeholder="Ingrese su categoria" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="documento-reprocann" class="form-label"><b>DNI:</b></label>
+                                <input type="number" class="form-control input-datos-factura-reprocann" id="documento-reprocann" placeholder="Ingrese su dni" required>
+                            </div>
+                            <button id="btnConfirmarReprocann" type="submit" class="btn btn-primary">Confirmar</button>
+                        </form>
+                      </div>
                 </div>
-                <div class="col-lg-2 m-auto">
-                    <button class="dbtn">Acceder</button>
+                
+                <div class="col-lg-9 m-auto text-center">
+                    <h1><span class="head1"> <i class="bi bi-arrow-left"></i> Registrado en Reprocann tenes descuentos <i class="bi bi-cash-coin"></i></span></h1>
                 </div>
             </div>
         </div>
@@ -232,7 +260,7 @@
 
 
 
-
+      <!-- <button id="btn-descuento-reprocann" class="dbtn">Acceder</button> -->
 
       <!-- ====seccion store, envios==== -->
 
@@ -241,12 +269,12 @@
             <div class="row">
                 <div class="col-lg-6 m-auto">
                     <p class="m-0">Controla tu envío</p>
-                    <h1>Envio sin cargo zona AMBA</h1>
+                    <h1>¿Preocupado por donde se encuentra tu compra?</h1>
                     <div class="line2 my-4"></div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit 
-                        diam litora neque a nisi potenti, conubia arcu congue 
-                        dictumst habitasse magnis in pharetra rhoncus leo dis 
-                        commodo.
+                    <p>
+                        Puedes chequear el estado de tu envio en <a href="#" >aqui</a>.
+                        Sin embargo debes relajarte, nuestro principal interes es que
+                        tengas una grata experiencia de compra:
                     </p>
                 </div>
             </div>
@@ -424,14 +452,14 @@
             <hr>
             <div class="row">
                 <div class="col-lg-7">
-                    <p class="m-0">Tienda virtual</p>
-                    <h1>Bienvenido a VerdePampa</h1>
+                    <p class="m-0">Contacto</p>
+                    <h1>¿Quieres atencion personalizada?</h1>
                     <div class="line2 my-4"></div>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit 
-                        diam litora neque a nisi potenti, conubia arcu congue 
-                        dictumst habitasse magnis in pharetra rhoncus leo dis 
-                        commodo.
+                        Completa el formulario para recibir atencion personalizada.
+                        Tendras una guia mediante profesionales sobre lo que necesitas.
+                        Si tu categoria es "paciente", tendras una orientacion profesional
+                        para registrarte en Reprocann.
                     </p>
                     <div class="row py-3">
                         <div class="col-lg-6">
@@ -574,8 +602,8 @@
 
       <div class="modal fade" id="modalFacturacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
+          <div class="modal-content modal-facturacion1">
+            <div class="modal-header ">
               <h1 class="modal-title fs-5 titulo-principal" id="exampleModalLabel">Facturacion</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -614,6 +642,7 @@
       
       
 
+      <!-- ===== Dropdown para manejar el descuento Reprocann ==== -->
 
 
 

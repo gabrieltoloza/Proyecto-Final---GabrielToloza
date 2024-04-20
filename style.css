@@ -846,6 +846,34 @@ p {
 
 /* ====facturacion==== */
 
+
+.modal-facturacion1 {
+    background-image: url(fondos/fondoFacturacion.jpg);
+    object-fit: cover;
+    background-size: cover;
+    border: solid 1.5px;
+}
+
+
+.modal-facturacion2 {
+    position: relative;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.modal-facturacion2::before {
+    content: "";
+    background-image: url(fondos/fondoFacturacion.jpg);
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    filter: blur(0px);
+    z-index: -1;
+}
+
+
 .container-facturacion {
     font-family: 'Righteous', cursive;
     color: rgb(93, 5, 175);
@@ -862,6 +890,21 @@ p {
 
 
 .input-datos-factura {
+    border: 1px solid;
+    appearance: none;
+    -moz-appearance: textfield;
+}
+
+.input-datos-factura-reprocann::-webkit-inner-spin-button,
+.input-datos-factura-reprocann::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+
+.input-datos-factura-reprocann {
+    border: 1px solid;
     appearance: none;
     -moz-appearance: textfield;
 }
@@ -902,4 +945,10 @@ p {
 .d-none {
     display: none;
     
+}
+
+.centrar-toasty {
+    text-align: center;
+    padding: 1rem;
+    font-weight: bold;
 }
