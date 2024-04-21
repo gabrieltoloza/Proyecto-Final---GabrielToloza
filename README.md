@@ -9,21 +9,31 @@
 
 - En el caso de confirmar se limpia el storage, se actualizan todas las cantidades del carrito y se limpian los campos del formulario.
 
+- En la seccion de Reprocann se debe ingresar datos via formulario para cargar al "supuesto usuario registrado en Reprocann", este formulario tiene validaciones, entonces el sistema busca en un archivo .json que simula una base de datos con los descuentos disponibles segun la categoria que se registre. Para todo hay un mensaje para el cliente, si encuentra una categoria indica que se aplicaron los descuentos y su porcentaje, si no encuentra la categoria le pide al usuario que ingrese la correcta dandole opciones, si hay una falla en el uso de fetch se muestra un mensaje tipo error 404 "intente nuevamente", si sale todo bien se visualizan los cambios en el listado de productos asi como en el carrito, luego de esto no se puede volver a hacer el descuento y en el mismo boton se muestra otro msj y color. Al reiniciar el navegador se resetea la funcion.
+
+
 - El resto del Javascript pertence a la experiencia de usuario para que no sea tan tosco. 
 
-#### Hay 3 archivos " .js":
+
+
+#### Hay 4 archivos " .js":
 
 - main.js =>  Guarda la logica para mostrar los productos y la logica del carrito .
-- desplazamientosDOM.js =>  Guarda los eventos de desplazamiento del navbar y botones de la seccion main(html)
-- facturacion.js =>  Guarda la logica de la facturacion de la compra.
+- desplazamientosDOM.js =>  Guarda los eventos de desplazamiento del navbar y botones de la seccion main (html)
+- facturacion_y_Reprocann.js =>  Guarda la logica de la facturacion de la compra y el descuento Reprocann
 - Productos.js =>  Guarda la clase de objetos que se maneja en el archivo " main.js"
 
+
+
+
+
+
+### Aclaración:
 
 
 >Me tome el trabajo de hacer la pagina que voy tratar de usar durante toda la carrera de backend, tanto en este curso como en los que vienen, por ende la seccion "Blog", "Envios", "Nuevos Productos", "Contacto" y el buscador inicial del navbar lo voy a utilizar cuando trabaje con Node.js o algun framework.
 
 
-### Aclaración:
 
 > El **_Blog_** lo voy a usar para crear un login/register para que el cliente pueda crear articulos sobre el mundo del cannabis medicinal. Tendra una base de datos con un patron MVC.
 
@@ -37,4 +47,4 @@
 
 **¡ IMPORTANTE !** 
 
-> **EL FORMULARIO DEBE COMPLETARSE A MANO PARA PROBAR LAS VALIDACIONES BASICAS DESDE EL CLIENTE Y ASI CHEQUEAR QUE FUNCIONEN COMO SE ESPERA NORMALMENTE**.
+> **LOS FORMULARIOS DEBEN COMPLETARSE A MANO PARA PROBAR LAS VALIDACIONES BASICAS DESDE EL CLIENTE Y ASI CHEQUEAR QUE FUNCIONEN COMO SE ESPERA NORMALMENTE**.
