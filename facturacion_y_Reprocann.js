@@ -1,5 +1,4 @@
 //  variables del modal de facturacion
-
 const btnFacturacion = document.querySelector('#abrirSegundoModal')
 let inputCodigo = document.querySelector('#form-input-codigo')
 const formularioFactura = document.querySelector('#formulario-validacion')
@@ -13,6 +12,7 @@ let inputsReprocann = document.querySelectorAll('.input-datos-factura-reprocann'
 const reprocannDescuento = document.querySelector('#btn-descuento-reprocann')
 const formularioReprocann = document.querySelector('#formulario-reprocann')
 const btnConfirmarReprocann = document.querySelector('#btnConfirmarReprocann')
+const colorPrecioActializado = document.querySelectorAll('.card-h4')
 
 
 
@@ -128,8 +128,8 @@ btnConfirmarFactura.addEventListener("click", (event) => {
                                   <b>El producto llegara a la dirección que indico en la misma.</b><br>
                                   <b>¡Muchas gracias por su compra!</b><br>`,
                             confirmButtonText: "Continuar comprando",
-                            showCancelButton: true,
-                            cancelButtonText: "Terminar compra",
+                            showDenyButton: true,
+                            denyButtonText: "Terminar compra",
                             customClass:{
                                 popup: "estilos-alerta2",
                                 title: "estilos-alerta-key"
@@ -181,16 +181,28 @@ function compraTerminada() {
     productosEnCarrito.length = 0
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
 
+    
     sumarCantidad()
     limpiarStorage()
     cargarProductosEnCarrito()
 }
 
 
-// evento para manejar el descuento Reprocann
+// evento para manejar el descuento Reprocann con su funcion.
+reprocannDescuento.addEventListener("click", handlerReprocann, true)
 
-reprocannDescuento.addEventListener("click", (event) => {
-    
+
+
+// funcion que controla el descuento Reprocann
+function handlerReprocann (event) {
+
+    formularioReprocann.animate([
+        {opacity: '0'},
+        {opacity: '1'}
+    ], {
+        duration: 700,
+    })
+
     Toastify({
         text: "Completa con tus datos reales",
         duration: 3000,
@@ -216,16 +228,22 @@ reprocannDescuento.addEventListener("click", (event) => {
         
         isValid = true
 
+        //! Datos del usuario registrado
+        let usuarioReprocann = []
+
         inputsReprocann.forEach(input => {
             if (!input.validity.valid) {
                 isValid = false
             }else {
                 formularioReprocann.classList.add('was-validated')
+                usuarioReprocann.push(input.value)
             }
         })
-        
+
+
         if (isValid && formularioReprocann.classList.contains('was-validated')) {
             event.preventDefault()
+
             Swal.fire({
                 title: "¿Confirma sus datos de Reprocann??",
                 showDenyButton: true,
@@ -234,84 +252,141 @@ reprocannDescuento.addEventListener("click", (event) => {
                 customClass: {
                     popup: "estilos-alerta2"
                 }
+            
+
             }).then(result => {
                 if (result.isConfirmed) {
-                      
-                    let jsonDb = fetch('./categorias_reprocann.json')
-                    jsonDb.then(response => response.json()
-                            .then(datos => {
-                                
-                                const categoria = datos.find((obj) => obj.categoria == inputsReprocann[2].value.toLowerCase())
-                                
-                                if (!categoria) {
-                                    Swal.fire({
-                                        title: "Categoria no encontrada",
-                                        html:   `Debe seleccionar una categoria que exista. Las opciones son: 
-                                                <strong> consumidor </strong>, 
-                                                <strong> paciente </strong>, 
-                                                <strong> productor </strong>, 
-                                                <strong> profesional </strong>.
-                                                 Vuelva a intentarlo agregando una opcion disponible`,
-                                        confirmButtonText: "Confirmar",
-                                        customClass: {
-                                            popup: "estilos-alerta2"
-                                        }
-                                    })
-                                    return;
-                                }
-
-                                productosEnCarrito.forEach(producto => {
-                                    const precioProductoCarrito = producto.precio
-                                    const valorDescuento = (categoria.descuento / 100) * precioProductoCarrito
-
-                                    producto.precio -= valorDescuento
-                                    cargarProductosEnCarrito()
-                                })
-                                Swal.fire({
-                                    title: "Descuentos aplicados",
-                                    text: `Se ha aplicado la rebaja de precios en su carrito de compras.
-                                            Segun su categoria usted tiene un ${categoria.descuento}% 
-                                            de descuento en todos los productos. Por favor verifique 
-                                            su nueva cotizacion en el carrito de compras`,
-                                    confirmButtonText: "Confirmar",
-                                    customClass: {
-                                        popup: "estilos-alerta2"
-                                    }
-                                })
-                                //!! CONTROLAR QUE NO SE PUEDA HACER MAS DE UN DESCUENTO
-                                //!! CONTROLAR QUE NO SE PUEDA HACER MAS DE UN DESCUENTO
-                                //!! CONTROLAR QUE NO SE PUEDA HACER MAS DE UN DESCUENTOS
-                            })
-                            .catch(err => {
-                                Swal.fire({
-                                    title: "Error 404",
-                                    text: `Ocurrio un error inesperado, vuelva a intentarlo`,
-                                    confirmButtonText: "Ok",
-                                    customClass: {
-                                        popup: "estilos-alerta2"
-                                    }
-                                })
-                            })
-                            
-                    )
+                    //! CHEQUEAR SI HACE FALTA USAR SESSION STORAGE
+                    // sessionStorage.setItem("usuarioReprocann", JSON.stringify(usuarioReprocann))
+                    aplicarDescuentoReprocann()
                 }
             })
         }
     })
-})
+}
 
 
 
+//  Funcion para aplicar el descuento Reprocann
+function aplicarDescuentoReprocann () {
+
+    let jsonDb = fetch('./categorias_reprocann.json')
+    jsonDb.then(response => response.json()
+            .then(datos => {
+                
+                const categoria = datos.find((obj) => obj.categoria == inputsReprocann[2].value.toLowerCase())
+                
+                if (!categoria) {
+                    Swal.fire({
+                        title: "Categoria no encontrada",
+                        html:   `Debe seleccionar una categoria que exista. Las opciones son: 
+                                <strong> consumidor </strong>, 
+                                <strong> paciente </strong>, 
+                                <strong> productor </strong>, 
+                                <strong> profesional </strong>.
+                                    Vuelva a intentarlo agregando una opcion disponible`,
+                        confirmButtonText: "Confirmar",
+                        customClass: {
+                            popup: "estilos-alerta2"
+                        }
+                    })
+                    return;
+                }
+                if (productosEnCarrito && productosEnCarrito.length > 0) {
+                    productosEnCarrito.forEach(producto => {
+                        const precioProductoCarrito = producto.precio
+                        const valorDescuento = (categoria.descuento / 100) * precioProductoCarrito
+                        
+                        producto.precio -= valorDescuento
+                        
+                    })
+                    
+                    cargarProductosEnCarrito()
+
+                    stock.forEach(producto => {
+                        const precioProductoCarrito = producto.precio
+                        const valorDescuento = (categoria.descuento / 100) * precioProductoCarrito
+                        
+                        producto.precio -= valorDescuento
+                    }) 
+                } else {
+                    stock.forEach(producto => {
+                        const precioProductoCarrito = producto.precio
+                        const valorDescuento = (categoria.descuento / 100) * precioProductoCarrito
+                        
+                        producto.precio -= valorDescuento
+                    }) 
+                    cargarProductosEnCarrito()
+                }
+                
+                contenedorProductos.innerHTML = ''
+                listandoStock(stock)
+                
+                
+                Swal.fire({
+                    title: "Descuentos aplicados",
+                    text: `Se ha aplicado la rebaja de precios en su carrito de compras.
+                            Segun su categoria usted tiene un ${categoria.descuento}% 
+                            de descuento en todos los productos. Por favor verifique 
+                            su nueva cotizacion en el carrito de compras`,
+                    confirmButtonText: "Confirmar",
+                    customClass: {
+                        popup: "estilos-alerta2"
+                    }
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        //
+                    }
+                })
+                
+                reprocannDescuento.removeEventListener("click", handlerReprocann, true)
+                reprocannDescuento.toggleAttribute("data-bs-toggle")
+                reprocannDescuento.textContent = "Descuento aplicado"
+                reprocannDescuento.classList.remove("dbtn", "dropdown-toggle")
+                reprocannDescuento.classList.add("dbtn-confirmado")
 
 
+                inputsReprocann.forEach(input => {
+                    input.value = ''
+                    formularioReprocann.classList.remove('was-validated')
+                })   
+
+                
+            })
+            .catch(err => {
+                Swal.fire({
+                    title: "Error 404",
+                    text: `Ocurrio un error inesperado, vuelva a intentarlo`,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        popup: "estilos-alerta2"
+                    }
+                })
+            })  
+    )
+}
 
 
+// function comprobarUsuarioReprocann (event) {
 
+//     let usuarioRegistrado = JSON.parse(sessionStorage.getItem("usuarioReprocann"))
+    
+//     let jsonDb = fetch('./categorias_reprocann.json')
+//     jsonDb.then(response => response.json())
+//             .then(datos => {
+//                 if (usuarioRegistrado) {
+//                     const categoriaEncontrada = datos.find(dato => dato.categoria == usuarioRegistrado[2])
+                    
+//                     stock.forEach(producto => {
+//                         const precioProductoCarrito = producto.precio
+//                         const valorDescuento = (categoriaEncontrada.descuento / 100) * precioProductoCarrito
+                        
+//                         producto.precio -= valorDescuento
+                        
+//                     })
+//                 } else {
+//                     console.log("No existe local storage");
+//                 }
+//             })
+// }
 
-
-
-//! COLOCAR ESTAS LINEA PARA QUE SE LIMPIEN LOS CAMPOS DEL FORMULARIO REPROCANN 
-// inputsReprocann.forEach(input => {
-//     input.value = ''
-//     formularioReprocann.classList.remove('was-validated')
-// })   

@@ -144,6 +144,8 @@ const botonVaciar = document.querySelector('.carrito-acciones-vaciar')
 const totalCarrito = document.querySelector('#total')
 
 
+const accederReprocann = document.querySelector('#btn-descuento-reprocann')
+
 
 
 
@@ -166,7 +168,7 @@ function listandoStock (stock) {
                                         <img src="${producto.imagenUrl}" class="img-fluid news-img pb-3" alt="${producto.categoria}">                  
                                         <h4 class="head1">${producto.marca}</h4>
                                         <p class="per2">${producto.detalles}</p>
-                                        <h4 class="head1">$${producto.precio}</h4>
+                                        <h4 class="head1 card-h4">$${producto.precio.toFixed(2)}</h4>
                                         <div class="controlador-cantidad d-flex">
                                             <button id="${producto.id}" class="btn btn-outline-secondary btn-restar"><i class="bi bi-dash-lg"></i></button>
                                             <input id="${producto.id}" class="form-control input-producto" type="number" placeholder="${valorInput}">
@@ -507,7 +509,7 @@ function mostrarBotonesCantidadCarrito() {
     cantidadCarrito = document.querySelectorAll('.cantidad-carrito')
 
     btnSumar2.forEach((boton) => {
-        boton.addEventListener("click", accioBtnSumarEnCarrito)
+        boton.addEventListener("click", accionBtnSumarEnCarrito)
     })
 
     btnRestar2.forEach((boton) => {
@@ -517,7 +519,7 @@ function mostrarBotonesCantidadCarrito() {
 
 
 // funciones de sumar o restar cantidad de los botones del carrito
-function accioBtnSumarEnCarrito(e) {
+function accionBtnSumarEnCarrito(e) {
     
     const botonId = e.currentTarget.id
     const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
@@ -568,6 +570,6 @@ function actualizarTotal () {
 function limpiarStorage() {
     if(productosEnLocalStorage && productosEnLocalStorage.length == 0) {
         localStorage.clear()
-    }
+    } 
 }
 limpiarStorage()

@@ -1,7 +1,7 @@
 //variables de secciones para el desplazamiento
 const btnEnvios = document.getElementById('btn-envios')
 const btnBlog = document.querySelectorAll('.btn-blog')
-const btnTienda = document.getElementById('btn-tienda')
+const btnTienda = document.querySelectorAll('.btn-tienda')
 const btnReprocann = document.querySelectorAll('.btn-reprocann')
 const seccionEnvios = document.getElementById('seccion-envios')
 const seccionTienda = document.getElementById('seccion-tienda')
@@ -28,12 +28,12 @@ function desplazamientoNavLink(boton, pixeles, destino) {
     })
 }
 
-desplazamientoNavLink(btnTienda, 400, seccionTienda) // Desplazamiento hacia la tienda
+// desplazamientoNavLink(btnTienda, 400, seccionTienda) // Desplazamiento hacia la tienda
 desplazamientoNavLink(btnEnvios, 1, seccionEnvios) // Desplazamiento hacia el envio
 
 
 // desplazamiento para NodeList con los botones
-function desplacamientoNodoNavLink (nodo, pixeles, seccion) {
+function desplazamientoNodoNavLink (nodo, pixeles, seccion) {
     nodo.forEach(boton => {
         boton.addEventListener("click", (e) => {
             e.preventDefault()
@@ -48,9 +48,9 @@ function desplacamientoNodoNavLink (nodo, pixeles, seccion) {
     })
 }
 
-desplacamientoNodoNavLink(btnBlog, 50, seccionBlog) // Desplazamiento hacia el blog (que no se usa)
-desplacamientoNodoNavLink(btnReprocann, 230, seccionReprocann) // Desplazamiento hacia la seccion Reprocann
-
+desplazamientoNodoNavLink(btnBlog, 50, seccionBlog) // Desplazamiento hacia el blog (que no se usa)
+desplazamientoNodoNavLink(btnReprocann, 230, seccionReprocann) // Desplazamiento hacia la seccion Reprocann
+desplazamientoNodoNavLink(btnTienda, -230, seccionTienda)
 
 
 

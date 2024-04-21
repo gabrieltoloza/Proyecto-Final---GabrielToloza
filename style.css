@@ -414,6 +414,12 @@ p {
     color: rgb(193, 5, 175);
 }
 
+.per3 {
+    color: rgb(193, 5, 175);
+    font-weight: 400;
+    margin: 0;
+}
+
 .btnc {
     height: 50px;
     width: 50%;
@@ -511,14 +517,41 @@ p {
     border-radius: 50px;
     margin: 0 auto;
     display: block;
-    font-weight: lighter;
+    font-weight: bold;
     transition: all 0.4s;
+    font-family: 'Righteous', cursive;
 
 }
 .dbtn:hover {
     background-color: rgb(228, 228, 288);
 }
 
+.dbtn-confirmado {
+    height: 50px;
+    width: 75%;
+    outline: none;
+    border: none;
+    color: white;
+    background-color: rgb(193, 5, 175);
+    border-radius: 50px;
+    margin: 0 auto;
+    display: block;
+    font-weight: bold;
+    transition: all 0.4s;
+    font-family: 'Righteous', cursive;
+}
+
+.dbtn-confirmado:hover {
+    background-color: rgb(125, 21, 223);
+    transform: scale(1.2)
+}
+
+.confirmar-reprocann {
+    background: rgb(45, 45, 45);
+    border: solid 1px rgb(45, 45, 45);
+    margin: 8px 5px 5px 0px;
+    width: 100%;
+}
 
 
 
