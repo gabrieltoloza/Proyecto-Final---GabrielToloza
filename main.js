@@ -8,14 +8,14 @@ const stock = [
                 45.00,
                 'aceites',
                 './Productos/aceite6.webp'
-                // Producto con 10% descuento con reprocann
+
     ),
     new Productos('bioactiva',
                 `CBD 15% Via oral`,
                 150.00,
                 'aceites',
                 './Productos/aceite2.webp'
-                // Producto con 10% descuento con reprocann
+
     ),
 
     new Productos('Aceite de Cañamo',
@@ -23,7 +23,7 @@ const stock = [
                   80.00,
                   'aceites',
                   './Productos/aceite3.webp'
-                  // Producto con 25% descuento con reprocann
+
     ),
 
     new Productos('The Green Brand',
@@ -31,7 +31,7 @@ const stock = [
                   69.99,
                   'aceites',
                   './Productos/aceite5.webp'
-                  // Producto con 25% descuento con reprocann
+
     ),
     
     new Productos('Selva',
@@ -39,7 +39,7 @@ const stock = [
                   45.37,
                   'aceites',
                   './Productos/aceite7.webp'
-                  // Producto con 25% descuento con reprocann
+
     ),
 
     new Productos('Sativa',
@@ -47,7 +47,7 @@ const stock = [
                   50.00,
                   'aceites',
                   './Productos/aceite8.jpg'
-                  // Producto con 25% descuento con reprocann
+
     ),
 
 
@@ -59,7 +59,7 @@ const stock = [
                   17.00,
                   'semillas',
                   './Productos/semillas1.jpg'
-                  // Producto con 25% descuento con reprocann
+
     ),
 
     new Productos('Gorila Haze',
@@ -67,7 +67,7 @@ const stock = [
                   11.00,
                   'semillas',
                   './Productos/semillas2.jpg'
-                  // Producto con 25% descuento con reprocann
+
     ),
 
     new Productos('Amnezia Haze XL',
@@ -75,7 +75,7 @@ const stock = [
                   35.00,
                   'semillas',
                   './Productos/semillas3.jpg'
-                  // Producto con 25% descuento con reprocann
+
     ),
 
     new Productos('Anandamida',
@@ -83,7 +83,7 @@ const stock = [
                   10.00,
                   'semillas',
                   './Productos/semillas4.webp'
-                  // Producto con 25% descuento con reprocann
+
     ),
 
     new Productos('Serious Seeds',
@@ -91,7 +91,7 @@ const stock = [
                   20.00,
                   'semillas',
                   './Productos/semillas5.jpg'
-                  // Producto con 25% descuento con reprocann
+
     ),
 
     new Productos('Sensi Seeds',
@@ -99,7 +99,7 @@ const stock = [
                   24.00,
                   'semillas',
                   './Productos/semillas6.jpg'
-                  // Producto con 25% descuento con reprocann
+
     ),
     
 ]
@@ -142,6 +142,7 @@ let carritoComprado = document.querySelector('.carrito-comprado')
 let botonEliminarCarrito = document.querySelectorAll('.carrito-producto-eliminar')
 const botonVaciar = document.querySelector('.carrito-acciones-vaciar')
 const totalCarrito = document.querySelector('#total')
+let iconoEliminar = document.querySelector('.icono-eliminar')
 
 
 const accederReprocann = document.querySelector('#btn-descuento-reprocann')
@@ -192,6 +193,8 @@ function listandoStock (stock) {
     chequearInput()
 }
 listandoStock(stock)
+
+
 
 
 // Funcion para chequear el valor del input y cambiarlo a 0,
@@ -417,7 +420,7 @@ function cargarProductosEnCarrito () {
                                             <small>Subtotal</small>
                                             <p>$${(producto.precio * producto.cantidad).toFixed(2)}</p>
                                         </div>
-                                        <button class="carrito-producto-eliminar" id="${producto.id}"><i class="icono-eliminar-${producto.id} bi bi-trash"></i></button>`
+                                        <button class="carrito-producto-eliminar" id="${producto.id}"><i class="icono-eliminar bi bi-trash"></i></button>`
             carritoProductos.append(contenedorCarrito)
         })
     } else {
@@ -439,6 +442,7 @@ cargarProductosEnCarrito()
 //funcion para mostrar los botones de eliminar producto del carrito
 function mostrarBotonEliminar() {
 
+    iconoEliminar = document.querySelector('.icono-eliminar')
     botonEliminarCarrito = document.querySelectorAll('.carrito-producto-eliminar')
     botonEliminarCarrito.forEach(boton => {
         boton.addEventListener("click", eliminarDelCarrito)
@@ -502,7 +506,7 @@ function eliminarDelCarrito(e) {
 
 
 // funciones para mostrar los botones cantidad del carrito
-//  y escucha los eventos para que sume o reste la
+//  y escucha los eventos para que sume o reste la cantidad
 function mostrarBotonesCantidadCarrito() {
     btnSumar2 = document.querySelectorAll('.btn-sumar2')
     btnRestar2 = document.querySelectorAll('.btn-restar2')
@@ -538,7 +542,16 @@ function accionBtnRestarEnCarrito(e) {
     
     productosEnCarrito[index].cantidad -= 1
     if (productosEnCarrito[index].cantidad < 1) {
-        productosEnCarrito[index].cantidad = 1
+        botonEliminarCarrito[index].animate([
+            { transform: 'translateY(0px)' },
+            { transform: 'translateY(-10px)' },
+            { transform: 'translateY(6px)' },
+            { transform: 'translateY(0px)' },
+        ], {
+          duration: 500,
+          iterations: 1
+        })
+        productosEnCarrito[index].cantidad = 1  
         return;
     }
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))

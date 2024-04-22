@@ -30,12 +30,12 @@
     
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-          <a class="navbar-brand" id="logo-header" href="#"><img src="./Logo.png" class="news-img2" alt=""></a>
+          <a class="navbar-brand" id="logo-header" href="#"><img src="./fondos/Logo.png" class="news-img2" alt=""></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="bi bi-list"></i></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav m-auto m-2 mb-lg-0">
+            <ul class="navbar-nav m-auto m-2 ">
               <li class="nav-item">
                 <a id="btn-envios" class="nav-link" href="#">Envíos</a>
               </li>
@@ -49,16 +49,17 @@
                 <a class="nav-link btn-reprocann" href="#">Reprocann</a>
               </li>
             </ul>
-            <form class="d-flex" role="search">
-              <input class="px-2 search" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn1 me-2 px-3" type="submit">Buscar</button>
-              <span><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-cart-plus"></i></a></span>
-              <span class="p-2 conteo-productos active">0</span>
-            </form>
+            <div class="d-flex">
+              <div class="m-2 p-2">
+                <p class="pt-3 mx-2 fw-bold bienvenida">Bienvenido a Verde Pampa</p>
+              </div>
+              <span class="pt-3"><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-cart-plus"></i></a></span>
+              <span class="px-2 py-4 conteo-productos active">0</span>
+            </>
           </div>
         </div>
       </nav>
-
+    
       <!-- sector main -->
       <section class="main py-5">
         <div class="container">

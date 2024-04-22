@@ -876,6 +876,10 @@ p {
 }
 
 
+.icono-eliminar {
+    display: inline-block;
+}
+
 
 /* ====facturacion==== */
 
@@ -979,9 +983,12 @@ p {
     display: none;
     
 }
-
 .centrar-toasty {
     text-align: center;
     padding: 1rem;
     font-weight: bold;
+}
+
+.bienvenida-nombre {
+    color: rgb(193, 5, 175);
 }

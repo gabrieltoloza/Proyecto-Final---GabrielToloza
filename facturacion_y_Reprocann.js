@@ -120,7 +120,7 @@ btnConfirmarFactura.addEventListener("click", (event) => {
                             formularioFactura.classList.remove('was-validated')
                         })     
                         compraTerminada()   
-                                  
+                        // cliente.agregarCompra(productosEnCarrito.marca)          
                         Swal.fire({
                             title: "Compra Realizada",
                             html:`
@@ -180,8 +180,8 @@ btnConfirmarFactura.addEventListener("click", (event) => {
 function compraTerminada() {
     productosEnCarrito.length = 0
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
-
     
+
     sumarCantidad()
     limpiarStorage()
     cargarProductosEnCarrito()
@@ -230,6 +230,7 @@ function handlerReprocann (event) {
 
         //! Datos del usuario registrado
         let usuarioReprocann = []
+        let productosMarca = []
 
         inputsReprocann.forEach(input => {
             if (!input.validity.valid) {
@@ -240,6 +241,10 @@ function handlerReprocann (event) {
             }
         })
 
+        productosEnCarrito.forEach(producto => {
+            productosMarca.push(producto.marca)
+        })
+        usuarioReprocann.push(productosMarca)
 
         if (isValid && formularioReprocann.classList.contains('was-validated')) {
             event.preventDefault()
@@ -256,15 +261,14 @@ function handlerReprocann (event) {
 
             }).then(result => {
                 if (result.isConfirmed) {
-                    //! CHEQUEAR SI HACE FALTA USAR SESSION STORAGE
-                    // sessionStorage.setItem("usuarioReprocann", JSON.stringify(usuarioReprocann))
+                    //! GUARDAR COMPRA EN LOCAL STORAGE
+                    sessionStorage.setItem("usuarioReprocann", JSON.stringify(usuarioReprocann))
                     aplicarDescuentoReprocann()
                 }
             })
         }
     })
 }
-
 
 
 //  Funcion para aplicar el descuento Reprocann
@@ -293,15 +297,9 @@ function aplicarDescuentoReprocann () {
                     return;
                 }
                 if (productosEnCarrito && productosEnCarrito.length > 0) {
-                    productosEnCarrito.forEach(producto => {
-                        const precioProductoCarrito = producto.precio
-                        const valorDescuento = (categoria.descuento / 100) * precioProductoCarrito
-                        
-                        producto.precio -= valorDescuento
-                        
-                    })
                     
-                    cargarProductosEnCarrito()
+                    //! SOLUCIONAR EL PROBLEMA DEL DESCUENTO DOBLE AL INICIAR LA APP
+                    
 
                     stock.forEach(producto => {
                         const precioProductoCarrito = producto.precio
@@ -309,6 +307,7 @@ function aplicarDescuentoReprocann () {
                         
                         producto.precio -= valorDescuento
                     }) 
+                    cargarProductosEnCarrito()
                 } else {
                     stock.forEach(producto => {
                         const precioProductoCarrito = producto.precio
@@ -316,7 +315,7 @@ function aplicarDescuentoReprocann () {
                         
                         producto.precio -= valorDescuento
                     }) 
-                    cargarProductosEnCarrito()
+                    actualizarTotal()
                 }
                 
                 contenedorProductos.innerHTML = ''
@@ -367,26 +366,4 @@ function aplicarDescuentoReprocann () {
 }
 
 
-// function comprobarUsuarioReprocann (event) {
-
-//     let usuarioRegistrado = JSON.parse(sessionStorage.getItem("usuarioReprocann"))
-    
-//     let jsonDb = fetch('./categorias_reprocann.json')
-//     jsonDb.then(response => response.json())
-//             .then(datos => {
-//                 if (usuarioRegistrado) {
-//                     const categoriaEncontrada = datos.find(dato => dato.categoria == usuarioRegistrado[2])
-                    
-//                     stock.forEach(producto => {
-//                         const precioProductoCarrito = producto.precio
-//                         const valorDescuento = (categoriaEncontrada.descuento / 100) * precioProductoCarrito
-                        
-//                         producto.precio -= valorDescuento
-                        
-//                     })
-//                 } else {
-//                     console.log("No existe local storage");
-//                 }
-//             })
-// }
 
