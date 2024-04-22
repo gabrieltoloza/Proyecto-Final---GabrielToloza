@@ -465,7 +465,6 @@ function mostrarBotonEliminar() {
 }
 
 
-
 // funcion para eliminar el producto del carrito 
 function eliminarDelCarrito(e) {
 
