@@ -296,32 +296,19 @@ function aplicarDescuentoReprocann () {
                     })
                     return;
                 }
-                if (productosEnCarrito && productosEnCarrito.length > 0) {
-                    
-                    //! SOLUCIONAR EL PROBLEMA DEL DESCUENTO DOBLE AL INICIAR LA APP
-                    
-
-                    stock.forEach(producto => {
-                        const precioProductoCarrito = producto.precio
-                        const valorDescuento = (categoria.descuento / 100) * precioProductoCarrito
-                        
-                        producto.precio -= valorDescuento
-                    }) 
-                    cargarProductosEnCarrito()
-                } else {
-                    stock.forEach(producto => {
-                        const precioProductoCarrito = producto.precio
-                        const valorDescuento = (categoria.descuento / 100) * precioProductoCarrito
-                        
-                        producto.precio -= valorDescuento
-                    }) 
-                    actualizarTotal()
-                }
                 
+                stock.forEach(producto => {
+                    const precioProductoCarrito = producto.precio
+                    const valorDescuento = (categoria.descuento / 100) * precioProductoCarrito
+                    
+                    producto.precio -= valorDescuento
+                }) 
+                cargarProductosEnCarrito()
                 contenedorProductos.innerHTML = ''
                 listandoStock(stock)
                 
                 
+
                 Swal.fire({
                     title: "Descuentos aplicados",
                     text: `Se ha aplicado la rebaja de precios en su carrito de compras.
@@ -367,3 +354,7 @@ function aplicarDescuentoReprocann () {
 
 
 
+function reloadCarrito() {
+    const storage = JSON.parse(localStorage.getItem("productosEnCarrito"))
+    
+}

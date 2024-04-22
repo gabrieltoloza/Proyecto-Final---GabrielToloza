@@ -6,12 +6,14 @@ const stock = [
     new Productos('pharma cbd serum',
                 `CBD 5% Cannabidiol`,
                 45.00,
+                45.00,
                 'aceites',
                 './Productos/aceite6.webp'
 
     ),
     new Productos('bioactiva',
                 `CBD 15% Via oral`,
+                150.00,
                 150.00,
                 'aceites',
                 './Productos/aceite2.webp'
@@ -21,6 +23,7 @@ const stock = [
     new Productos('Aceite de Cañamo',
                   `24% Cannabidiol Organico`,
                   80.00,
+                  80.00,
                   'aceites',
                   './Productos/aceite3.webp'
 
@@ -28,6 +31,7 @@ const stock = [
 
     new Productos('The Green Brand',
                   `24% Relajando Fisico`,
+                  69.99,
                   69.99,
                   'aceites',
                   './Productos/aceite5.webp'
@@ -37,6 +41,7 @@ const stock = [
     new Productos('Selva',
                   `2.75%CBD `,
                   45.37,
+                  45.37,
                   'aceites',
                   './Productos/aceite7.webp'
 
@@ -44,6 +49,7 @@ const stock = [
 
     new Productos('Sativa',
                   `5% Solucion oral`,
+                  50.00,
                   50.00,
                   'aceites',
                   './Productos/aceite8.jpg'
@@ -57,6 +63,7 @@ const stock = [
     new Productos('Amnezia Haze',
                   `CBD 10% Solid`,
                   17.00,
+                  17.00,
                   'semillas',
                   './Productos/semillas1.jpg'
 
@@ -64,6 +71,7 @@ const stock = [
 
     new Productos('Gorila Haze',
                   `Renetik Seeds`,
+                  11.00,
                   11.00,
                   'semillas',
                   './Productos/semillas2.jpg'
@@ -73,6 +81,7 @@ const stock = [
     new Productos('Amnezia Haze XL',
                   `Feminizadas Autoflorecientes`,
                   35.00,
+                  35.00,
                   'semillas',
                   './Productos/semillas3.jpg'
 
@@ -80,6 +89,7 @@ const stock = [
 
     new Productos('Anandamida',
                   `Autocultivo organico`,
+                  10.00,
                   10.00,
                   'semillas',
                   './Productos/semillas4.webp'
@@ -89,6 +99,7 @@ const stock = [
     new Productos('Serious Seeds',
                   `Bumble Gum`,
                   20.00,
+                  20.00,
                   'semillas',
                   './Productos/semillas5.jpg'
 
@@ -96,6 +107,7 @@ const stock = [
 
     new Productos('Sensi Seeds',
                   `Mandarin Punch Fem`,
+                  24.00,
                   24.00,
                   'semillas',
                   './Productos/semillas6.jpg'
@@ -188,10 +200,13 @@ function listandoStock (stock) {
             duration: 1000,
         })
     })    
+
     mostrarBotones()
     agregarEventosACarrito()
     chequearInput()
+    
 }
+
 listandoStock(stock)
 
 

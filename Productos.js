@@ -1,10 +1,11 @@
 class Productos {
     static id = 0
 
-    constructor(marca, detalles, precio, categoria, imagenUrl) {
+    constructor(marca, detalles, precio, precioOriginal, categoria, imagenUrl) {
         this.id = ++Productos.id
         this.marca = marca
         this.detalles = detalles
+        this.precioOriginal = precioOriginal
         this.precio = precio
         this.categoria = categoria
         this.imagenUrl = imagenUrl
