@@ -1,122 +1,4 @@
 
-const stock = [
-
-    // ====aceites====
-
-    new Productos('pharma cbd serum',
-                `CBD 5% Cannabidiol`,
-                45.00,
-                45.00,
-                'aceites',
-                './Productos/aceite6.webp'
-
-    ),
-    new Productos('bioactiva',
-                `CBD 15% Via oral`,
-                150.00,
-                150.00,
-                'aceites',
-                './Productos/aceite2.webp'
-
-    ),
-
-    new Productos('Aceite de Cañamo',
-                  `24% Cannabidiol Organico`,
-                  80.00,
-                  80.00,
-                  'aceites',
-                  './Productos/aceite3.webp'
-
-    ),
-
-    new Productos('The Green Brand',
-                  `24% Relajando Fisico`,
-                  69.99,
-                  69.99,
-                  'aceites',
-                  './Productos/aceite5.webp'
-
-    ),
-    
-    new Productos('Selva',
-                  `2.75%CBD `,
-                  45.37,
-                  45.37,
-                  'aceites',
-                  './Productos/aceite7.webp'
-
-    ),
-
-    new Productos('Sativa',
-                  `5% Solucion oral`,
-                  50.00,
-                  50.00,
-                  'aceites',
-                  './Productos/aceite8.jpg'
-
-    ),
-
-
-
-    // ====semillas====
-
-    new Productos('Amnezia Haze',
-                  `CBD 10% Solid`,
-                  17.00,
-                  17.00,
-                  'semillas',
-                  './Productos/semillas1.jpg'
-
-    ),
-
-    new Productos('Gorila Haze',
-                  `Renetik Seeds`,
-                  11.00,
-                  11.00,
-                  'semillas',
-                  './Productos/semillas2.jpg'
-
-    ),
-
-    new Productos('Amnezia Haze XL',
-                  `Feminizadas Autoflorecientes`,
-                  35.00,
-                  35.00,
-                  'semillas',
-                  './Productos/semillas3.jpg'
-
-    ),
-
-    new Productos('Anandamida',
-                  `Autocultivo organico`,
-                  10.00,
-                  10.00,
-                  'semillas',
-                  './Productos/semillas4.webp'
-
-    ),
-
-    new Productos('Serious Seeds',
-                  `Bumble Gum`,
-                  20.00,
-                  20.00,
-                  'semillas',
-                  './Productos/semillas5.jpg'
-
-    ),
-
-    new Productos('Sensi Seeds',
-                  `Mandarin Punch Fem`,
-                  24.00,
-                  24.00,
-                  'semillas',
-                  './Productos/semillas6.jpg'
-
-    ),
-    
-]
-
-
 
 
 // Variables de productos
@@ -144,7 +26,6 @@ let cantidadCarrito = document.querySelectorAll('.cantidad-carrito')
 
 
 
-
 // variables del carrito
 const modalCarrito = new bootstrap.Modal(document.getElementById('exampleModal'), {})
 let carritoProductos = document.querySelector('.carrito-productos')
@@ -155,11 +36,33 @@ let botonEliminarCarrito = document.querySelectorAll('.carrito-producto-eliminar
 const botonVaciar = document.querySelector('.carrito-acciones-vaciar')
 const totalCarrito = document.querySelector('#total')
 let iconoEliminar = document.querySelector('.icono-eliminar')
-
-
 const accederReprocann = document.querySelector('#btn-descuento-reprocann')
 
 
+
+
+let productosDB = "./productos.json"
+
+
+
+
+const listandoStockMain = fetch(productosDB)
+                    .then(responde => responde.json())
+                        .then(data => {
+                            listandoStock(data)
+                        })
+                        .catch(err => {
+                            // el usuario ve la alerta pero el desarrollador ve el tipo de error por consola
+                            console.log(err.name)
+                            Swal.fire({
+                                title: "Error 404",
+                                text: `Ocurrio un error inesperado, vuelva a intentarlo`,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    popup: "estilos-alerta2"
+                                }
+                            })
+                        })
 
 
 // Listando stock de la tienda
@@ -200,14 +103,12 @@ function listandoStock (stock) {
             duration: 1000,
         })
     })    
-
     mostrarBotones()
-    agregarEventosACarrito()
+    agregarEventosACarrito(productosEnCarrito)
     chequearInput()
     
 }
 
-listandoStock(stock)
 
 
 
@@ -231,24 +132,39 @@ function chequearInput() {
 formularioProductos.addEventListener('submit', (event) =>{
 
     event.preventDefault()
-    contenedorProductos.innerHTML = ''
-    const filtrado = stock.filter((producto) => producto.categoria === input.value || producto.marca.includes(input.value))
-    // llamando a la funcion de listado con los productos filtrados
-    listandoStock(filtrado)
-    
-    let categorias = new Set()
+    const filtrandoStock = fetch(productosDB)
+                            .then(response => response.json())
+                                .then(datos => {
 
+                                    contenedorProductos.innerHTML = ''
+                                    const filtrado = datos.filter((producto) => (producto.categoria === input.value ||  producto.marca.includes(input.value)))
+                                    listandoStock(filtrado)
 
-    if (input.value == '') {
-        event.preventDefault()
-    } else if (filtrado && !filtrado.length < 1) {
-        filtrado.forEach(producto => {
-            categorias.add(producto.categoria)
-        })
-        categoriaHTML.textContent = `Categorias: ${Array.from(categorias).join(",")}`
-    } else {
-        categoriaHTML.textContent = `Producto no encontrado`
-    }
+                                    
+                                    let categorias = new Set()
+                                    if (input.value == '') {
+                                        event.preventDefault()
+                                    } else if (filtrado && !filtrado.length < 1) {
+                                        filtrado.forEach(producto => {
+                                            categorias.add(producto.categoria)
+                                        })
+                                        categoriaHTML.textContent = `Categorias: ${Array.from(categorias).join(",")}`
+                                    } else {
+                                        categoriaHTML.textContent = `Producto no encontrado`
+                                    }
+                                })
+                                .catch(err => {
+                                    // el usuario ve la alerta pero el desarrollador ve el tipo de error por consola
+                                    console.log(err.name)
+                                    Swal.fire({
+                                        title: "Error 404",
+                                        text: `Ocurrio un error inesperado, vuelva a intentarlo`,
+                                        confirmButtonText: "Ok",
+                                        customClass: {
+                                            popup: "estilos-alerta2"
+                                        }
+                                    })
+                                })
 })
 
 
@@ -257,13 +173,29 @@ formularioProductos.addEventListener('submit', (event) =>{
 // evento que escucha el valor del input, si esta vacio devuelve todos los elementos del stock
 input.addEventListener('input', (event) =>{
     const valorInput = event.target.value
+
     if (valorInput === '') {
         contenedorProductos.innerHTML = ''
         categoriaHTML.innerText = 'Todos los productos'
-        listandoStock(stock)
-        
-    }
+        const escucharInput = fetch(productosDB)
+                                .then(response => response.json())
+                                    .then(datos => {
+                                        listandoStock(datos)
+                                    })
+                                    .catch(err => {
+                                        // el usuario ve la alerta pero el desarrollador ve el tipo de error por consola
+                                        console.log(err.name)
+                                        Swal.fire({
+                                            title: "Error 404",
+                                            text: `Ocurrio un error inesperado, vuelva a intentarlo`,
+                                            confirmButtonText: "Ok",
+                                            customClass: {
+                                                popup: "estilos-alerta2"
+                                            }
+                                        })
+                                    })
 
+    }
 })
 
 
@@ -283,18 +215,7 @@ function mostrarBotones() {
 
 
 
-//array que se guarda en el localStorage
 
-let productosEnCarrito = []
-const productosEnLocalStorage = JSON.parse(localStorage.getItem("productosEnCarrito"))
-
-// condicional para tomar los datos del localStorage
-if (productosEnLocalStorage) {
-    productosEnCarrito = productosEnLocalStorage
-    sumarCantidad()
-} else {
-    productosEnCarrito = []
-}
 
 
 
@@ -319,13 +240,33 @@ function accionBotonesCantidadProducto () {
 }
 
 
+
+//array que se guarda en el localStorage
+
+let productosEnCarrito = []
+const productosEnLocalStorage = JSON.parse(localStorage.getItem("productosEnCarrito"))
+
+// condicional para tomar los datos del localStorage
+if (productosEnLocalStorage) {
+    productosEnCarrito = productosEnLocalStorage
+    sumarCantidad()
+} else {
+    productosEnCarrito = []
+}
+
+
+
 // evento que suma al carrito el pedido
-function agregarEventosACarrito() {
+function agregarEventosACarrito(carritoLocalStorage) {
 
     btnCarrito = document.querySelectorAll('.btnCarrito')
     btnCarrito.forEach((boton, index) => {
         boton.addEventListener("click", (event) => {
+
             let cantidadSeleccionada = Number(inputCantidadCard[index].value)
+            
+            const eventoID = event.currentTarget.id
+
             if (cantidadSeleccionada === 0) {
                 Toastify({
                     text: "Debes elegir una cantidad",
@@ -345,72 +286,81 @@ function agregarEventosACarrito() {
                 }).showToast();
                 return;
             }
-            const productoFiltrado = stock.find(producto => producto.id == event.currentTarget.id)
-            
-            if (productosEnCarrito.some(producto => producto.id == event.currentTarget.id)) {
-                const index = productosEnCarrito.findIndex(producto => producto.id == event.currentTarget.id)
-                productosEnCarrito[index].cantidad += cantidadSeleccionada
-            } else {
-                productoFiltrado.cantidad = cantidadSeleccionada
-                productosEnCarrito.push(productoFiltrado)
-            }
 
-            // script que maneja el mensaje del producto agregado al carrito hecho con Toastify JS
-            Toastify({
-                text: "Producto agregado!",
-                duration: 1500,
-                gravity: "top", 
-                position: "center", 
-                stopOnFocus: false, 
-                style: {
-                    background: "linear-gradient(to right, #440480, #7D15DF)",
-                    borderRadius: "2rem",
-                },
-                offset: {
-                    x: '1.5rem',
-                    y: '1.5rem' 
-                },
-                onClick: function(){
-                    window.scrollTo({top: 0, behavior: "smooth"});
-                } 
-            }).showToast();
+            const stockenEventos = fetch(productosDB)
+                                            .then(response => response.json())
+                                                .then(datos => {
+                                                    
+                                                    const productoFiltrado = datos.find(producto => producto.id === Number(eventoID))
 
-            localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
+                                                    
+                                                    if (carritoLocalStorage.some(producto => producto.id == eventoID)) {
+                                                        const index = carritoLocalStorage.findIndex(producto => producto.id == eventoID)
+                                                        carritoLocalStorage[index].cantidad += cantidadSeleccionada
+                                                    } else {
+                                                        productoFiltrado.cantidad = cantidadSeleccionada
+                                                        carritoLocalStorage.push(productoFiltrado)
+                                                    }
+                                                    
+                                                    // script que maneja el mensaje del producto agregado al carrito hecho con Toastify JS
+                                                    Toastify({
+                                                        text: "Producto agregado!",
+                                                        duration: 1500,
+                                                        gravity: "top", 
+                                                        position: "center", 
+                                                        stopOnFocus: false, 
+                                                        style: {
+                                                            background: "linear-gradient(to right, #440480, #7D15DF)",
+                                                            borderRadius: "2rem",
+                                                        },
+                                                        offset: {
+                                                            x: '1.5rem',
+                                                            y: '1.5rem' 
+                                                        },
+                                                        onClick: function(){} 
+                                                    }).showToast();
 
-            setInterval(() => {
-                inputCantidadCard[index].value = 0
-            }, 6000)
-            sumarCantidad()
-            cargarProductosEnCarrito()
+                                                    localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
+
+                                                    setInterval(() => {
+                                                        inputCantidadCard[index].value = 0
+                                                    }, 6000)
+                                                    sumarCantidad()
+                                                    cargarProductosEnCarrito(productosEnCarrito)
+
+                                                })
+                                                .catch(err => {
+                                                    console.log(err.name)
+                                                    Swal.fire({
+                                                        title: "Error 404",
+                                                        text: `Ocurrio un error inesperado, vuelva a intentarlo`,
+                                                        confirmButtonText: "Ok",
+                                                        customClass: {
+                                                            popup: "estilos-alerta2"
+                                                        }
+                                                    })
+                                                })
+                                                
         })
-    })
-}
-
-
-
-
-
-// funcion para sumar la cantidad de productos en carrito
-function sumarCantidad () {
-    let numero = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0)
-    conteoProductos.innerText = numero
+    }) 
 }
 
 
 
 
 // funcion para cargar los productos elegidos traidos del localStorage
-function cargarProductosEnCarrito () {
-
+function cargarProductosEnCarrito (productos) {
+    
     if (productosEnCarrito.length > 0) {
-
+        
         carritoVacio.classList.add('d-none')
         carritoComprado.classList.add('d-none')
         carritoAcciones.classList.remove('d-none')
         carritoProductos.classList.remove('d-none')
         carritoProductos.innerHTML = ''
 
-        productosEnCarrito.forEach(producto => {
+        productos.forEach(producto => {
+            
             const contenedorCarrito = document.createElement('div')
             contenedorCarrito.classList.add('carrito-producto')
             contenedorCarrito.innerHTML = `
@@ -444,12 +394,13 @@ function cargarProductosEnCarrito () {
         carritoProductos.classList.add('d-none')
         carritoVacio.classList.remove('d-none')
     }
+    
     mostrarBotonEliminar()
     actualizarTotal()
     sumarCantidad()
     mostrarBotonesCantidadCarrito()
 }
-cargarProductosEnCarrito()
+cargarProductosEnCarrito(productosEnCarrito)
 
 
 
@@ -511,7 +462,7 @@ function eliminarDelCarrito(e) {
         }).showToast();
     }
 
-    cargarProductosEnCarrito()
+    cargarProductosEnCarrito(productosEnCarrito)
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
     limpiarStorage()
 }
@@ -545,7 +496,7 @@ function accionBtnSumarEnCarrito(e) {
     productosEnCarrito[index].cantidad += 1
     
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
-    cargarProductosEnCarrito()
+    cargarProductosEnCarrito(productosEnCarrito)
 
 }
 
@@ -570,20 +521,18 @@ function accionBtnRestarEnCarrito(e) {
     }
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
 
-    cargarProductosEnCarrito()
+    cargarProductosEnCarrito(productosEnCarrito)
 }
 
 
 
 
-// funcion para eliminar el localStorage y actualizar datos del carrito al eliminar los productos
-function vaciarCarrito() {
-    productosEnCarrito.length = 0
-    localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
 
-    cargarProductosEnCarrito()
-    sumarCantidad()
-    limpiarStorage()
+
+// funcion para sumar la cantidad de productos en carrito
+function sumarCantidad () {
+    let numero = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0)
+    conteoProductos.innerText = numero
 }
 
 
@@ -592,6 +541,19 @@ function actualizarTotal () {
     const total = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0)
     totalCarrito.textContent = `$${total.toFixed(2)}`
 }
+
+
+
+// funcion para eliminar el localStorage y actualizar datos del carrito al eliminar los productos
+function vaciarCarrito() {
+    productosEnCarrito.length = 0
+    localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
+
+    cargarProductosEnCarrito(productosEnCarrito)
+    sumarCantidad()
+    limpiarStorage()
+}
+
 
 // funcion para limpiar el storage y que no quede ningun array vacio!
 function limpiarStorage() {

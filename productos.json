@@ -1,0 +1,128 @@
+[
+    {
+        "id": 1,
+        "marca": "pharma cbd serum",
+        "detalles": "CBD 5% Cannabidiol",
+        "precio": 45.00,
+        "precioOriginal": 45.00,
+        "categoria": "aceites",
+        "imagenUrl": "./Productos/aceite6.webp"
+    },
+
+    {
+        "id": 2,
+        "marca": "CBD 15% Via oral",
+        "detalles": "CBD 5% Cannabidiol",
+        "precio": 150.00,
+        "precioOriginal": 150.00,
+        "categoria": "aceites",
+        "imagenUrl": "./Productos/aceite2.webp"
+    },
+
+    {
+        "id": 3,
+        "marca": "Aceite de Cañamo",
+        "detalles": "24% Cannabidiol Organico",
+        "precio": 80.00,
+        "precioOriginal": 80.00,
+        "categoria": "aceites",
+        "imagenUrl": "./Productos/aceite3.webp"
+    },
+
+    {
+        "id": 4,
+        "marca": "The Green Brand",
+        "detalles": "24% Relajando Fisico",
+        "precio": 69.99,
+        "precioOriginal": 69.99,
+        "categoria": "aceites",
+        "imagenUrl": "./Productos/aceite5.webp"
+    },
+
+    {
+        "id": 5,
+        "marca": "Selva",
+        "detalles": "2.75%CBD",
+        "precio": 45.37,
+        "precioOriginal": 45.37,
+        "categoria": "aceites",
+        "imagenUrl": "./Productos/aceite7.webp"
+    },
+
+    {
+        "id": 6,
+        "marca": "Sativa",
+        "detalles": "5% Solucion oral",
+        "precio": 50.00,
+        "precioOriginal": 50.00,
+        "categoria": "aceites",
+        "imagenUrl": "./Productos/aceite8.jpg"
+    },
+
+
+
+
+
+
+    {
+        "id": 7,
+        "marca": "Amnezia Haze",
+        "detalles": "CBD 10% Solid",
+        "precio": 17.00,
+        "precioOriginal": 17.00,
+        "categoria": "semillas",
+        "imagenUrl": "./Productos/semillas1.jpg"
+    },
+
+    {
+        "id": 8,
+        "marca": "Gorila Haze",
+        "detalles": "Renetik Seeds",
+        "precio": 11.00,
+        "precioOriginal": 11.00,
+        "categoria": "semillas",
+        "imagenUrl": "./Productos/semillas2.jpg"
+    },
+
+    {
+        "id": 9,
+        "marca": "Amnezia Haze XL",
+        "detalles": "Feminizadas Autoflorecientes",
+        "precio": 35.00,
+        "precioOriginal": 35.00,
+        "categoria": "semillas",
+        "imagenUrl": "./Productos/semillas3.jpg"
+    },
+
+    {
+        "id": 10,
+        "marca": "Anandamida",
+        "detalles": "Autocultivo organico",
+        "precio": 10.00,
+        "precioOriginal": 10.00,
+        "categoria": "semillas",
+        "imagenUrl": "./Productos/semillas4.webp"
+    },
+
+    {
+        "id": 11,
+        "marca": "Serious Seeds",
+        "detalles": "Bumble Gum",
+        "precio": 20.00,
+        "precioOriginal": 20.00,
+        "categoria": "semillas",
+        "imagenUrl": "./Productos/semillas5.jpg"
+    },
+
+    {
+        "id": 12,
+        "marca": "Sensi Seeds",
+        "detalles": "Mandarin Punch Fem",
+        "precio": 24.00,
+        "precioOriginal": 24.00,
+        "categoria": "semillas",
+        "imagenUrl": "./Productos/semillas6.jpg"
+    }
+
+]
+

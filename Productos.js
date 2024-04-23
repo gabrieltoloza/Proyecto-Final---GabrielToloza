@@ -5,8 +5,8 @@ class Productos {
         this.id = ++Productos.id
         this.marca = marca
         this.detalles = detalles
-        this.precioOriginal = precioOriginal
         this.precio = precio
+        this.precioOriginal = precioOriginal
         this.categoria = categoria
         this.imagenUrl = imagenUrl
     }

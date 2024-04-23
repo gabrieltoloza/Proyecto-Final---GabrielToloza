@@ -29,7 +29,8 @@ btnFacturacion.addEventListener("click", () => {
 
 
 // evento y consumo de funcion para vaciar el carrito 
-botonVaciar.addEventListener("click", () => {
+botonVaciar.addEventListener("click", (event) => {
+    
     Swal.fire({
         title: "¿Estas seguro que quieres eliminar todos los productos agregados al carrito?",
         showCancelButton: true,
@@ -95,7 +96,7 @@ btnConfirmarFactura.addEventListener("click", (event) => {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                cargarProductosEnCarrito()
+                cargarProductosEnCarrito(productosEnCarrito)
                 actualizarTotal()
                 Swal.fire({
                     title: "Datos de la factura",
@@ -146,6 +147,10 @@ btnConfirmarFactura.addEventListener("click", (event) => {
                                         behavior: "smooth",
                                     })
                                 }, 500)
+                            } else if (result.isDenied) {
+                                setTimeout(() => {
+                                    window.scrollTo({top: 0, behavior: "smooth"});
+                                }, 500)
                             }
                         })
                     } else if (result.isDenied) {
@@ -184,7 +189,7 @@ function compraTerminada() {
 
     sumarCantidad()
     limpiarStorage()
-    cargarProductosEnCarrito()
+    cargarProductosEnCarrito(productosEnCarrito)
 }
 
 
@@ -229,6 +234,7 @@ function handlerReprocann (event) {
         isValid = true
 
         //! Datos del usuario registrado
+
         let usuarioReprocann = []
         let productosMarca = []
 
@@ -261,9 +267,23 @@ function handlerReprocann (event) {
 
             }).then(result => {
                 if (result.isConfirmed) {
-                    //! GUARDAR COMPRA EN LOCAL STORAGE
-                    sessionStorage.setItem("usuarioReprocann", JSON.stringify(usuarioReprocann))
-                    aplicarDescuentoReprocann()
+
+                    if (!productosEnCarrito || productosEnCarrito.length == 0 ) {
+
+                        Swal.fire({
+                            title: "Debes generar un pedido",
+                            text: `Debes agregar productos a tu carrito para poder aplicar el descuento`,
+                            confirmButtonText: "Ok",
+                            customClass: {
+                                popup: "estilos-alerta2"
+                            }
+                        })
+                        return;
+    
+                    } else {
+                        sessionStorage.setItem("usuarioReprocann", JSON.stringify(usuarioReprocann))
+                        aplicarDescuentoReprocann()
+                    }
                 }
             })
         }
@@ -273,7 +293,7 @@ function handlerReprocann (event) {
 
 //  Funcion para aplicar el descuento Reprocann
 function aplicarDescuentoReprocann () {
-
+    
     let jsonDb = fetch('./categorias_reprocann.json')
     jsonDb.then(response => response.json()
             .then(datos => {
@@ -295,49 +315,48 @@ function aplicarDescuentoReprocann () {
                         }
                     })
                     return;
-                }
-                
-                stock.forEach(producto => {
-                    const precioProductoCarrito = producto.precio
-                    const valorDescuento = (categoria.descuento / 100) * precioProductoCarrito
+
+
+                } else {
+
+                    productosEnCarrito.forEach(producto => {
+                        const precioProductoCarrito = producto.precio
+                        const valorDescuento = (categoria.descuento / 100) * precioProductoCarrito
+    
+                        producto.precio-= valorDescuento
+                        
+                    })
+                    cargarProductosEnCarrito(productosEnCarrito)
+                    Swal.fire({
+                        title: "Descuentos aplicados",
+                        text: `Se ha aplicado la rebaja de precios en su carrito de compras.
+                                Segun su categoria usted tiene un ${categoria.descuento}% 
+                                de descuento en todos los productos. Por favor verifique 
+                                su nueva cotizacion en el carrito de compras`,
+                        confirmButtonText: "Confirmar",
+                        customClass: {
+                            popup: "estilos-alerta2"
+                        }
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            //
+                            
+                        }
+                    })
                     
-                    producto.precio -= valorDescuento
-                }) 
-                cargarProductosEnCarrito()
-                contenedorProductos.innerHTML = ''
-                listandoStock(stock)
-                
-                
-
-                Swal.fire({
-                    title: "Descuentos aplicados",
-                    text: `Se ha aplicado la rebaja de precios en su carrito de compras.
-                            Segun su categoria usted tiene un ${categoria.descuento}% 
-                            de descuento en todos los productos. Por favor verifique 
-                            su nueva cotizacion en el carrito de compras`,
-                    confirmButtonText: "Confirmar",
-                    customClass: {
-                        popup: "estilos-alerta2"
-                    }
-                }).then(result => {
-                    if (result.isConfirmed) {
-                        //
-                    }
-                })
-                
-                reprocannDescuento.removeEventListener("click", handlerReprocann, true)
-                reprocannDescuento.toggleAttribute("data-bs-toggle")
-                reprocannDescuento.textContent = "Descuento aplicado"
-                reprocannDescuento.classList.remove("dbtn", "dropdown-toggle")
-                reprocannDescuento.classList.add("dbtn-confirmado")
-
-
-                inputsReprocann.forEach(input => {
-                    input.value = ''
-                    formularioReprocann.classList.remove('was-validated')
-                })   
-
-                
+                    reprocannDescuento.removeEventListener("click", handlerReprocann, true)
+                    reprocannDescuento.toggleAttribute("data-bs-toggle")
+                    reprocannDescuento.textContent = "Descuento aplicado"
+                    reprocannDescuento.classList.remove("dbtn", "dropdown-toggle")
+                    reprocannDescuento.classList.add("dbtn-confirmado")
+    
+    
+                    inputsReprocann.forEach(input => {
+                        input.value = ''
+                        formularioReprocann.classList.remove('was-validated')
+                    })
+                }
+                         
             })
             .catch(err => {
                 Swal.fire({
@@ -350,11 +369,7 @@ function aplicarDescuentoReprocann () {
                 })
             })  
     )
-}
-
-
-
-function reloadCarrito() {
-    const storage = JSON.parse(localStorage.getItem("productosEnCarrito"))
     
 }
+
+

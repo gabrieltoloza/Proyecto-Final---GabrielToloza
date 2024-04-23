@@ -28,7 +28,6 @@ function desplazamientoNavLink(boton, pixeles, destino) {
     })
 }
 
-// desplazamientoNavLink(btnTienda, 400, seccionTienda) // Desplazamiento hacia la tienda
 desplazamientoNavLink(btnEnvios, 1, seccionEnvios) // Desplazamiento hacia el envio
 
 
@@ -50,7 +49,7 @@ function desplazamientoNodoNavLink (nodo, pixeles, seccion) {
 
 desplazamientoNodoNavLink(btnBlog, 50, seccionBlog) // Desplazamiento hacia el blog (que no se usa)
 desplazamientoNodoNavLink(btnReprocann, 230, seccionReprocann) // Desplazamiento hacia la seccion Reprocann
-desplazamientoNodoNavLink(btnTienda, -230, seccionTienda)
+desplazamientoNodoNavLink(btnTienda, -230, seccionTienda) // Desplazamiento hacia la tienda
 
 
 
