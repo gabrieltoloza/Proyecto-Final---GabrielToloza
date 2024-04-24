@@ -1,3 +1,7 @@
+
+// ESTE FICHERO CONTIENEN LA LOGICA DE DESPLAZAMIENTO GENERALES
+
+
 //variables de secciones para el desplazamiento
 const btnEnvios = document.getElementById('btn-envios')
 const btnBlog = document.querySelectorAll('.btn-blog')

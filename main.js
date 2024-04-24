@@ -1,5 +1,8 @@
 
 
+// ESTE FICHERO CONTIENE LA LOGICA DEL LISTADO PRINCIPAL Y EL CARRITO
+
+
 
 // Variables de productos
 const contenedorProductos = document.querySelector('.contenedor-productos')
@@ -9,21 +12,15 @@ const categoriaHTML = document.querySelector('.categoria')
 let btnCarrito = document.querySelectorAll('.btnCarrito')
 let conteoProductos = document.querySelector('.conteo-productos')
 
-
-
-
-// logica de productos
+// variables de productos
 let controladorCantidad = document.querySelector('.controlador-cantidad')
 let inputCantidadCard = document.querySelectorAll('.input-producto')
 let btnSumar = document.querySelectorAll('.btn-sumar')
 let btnRestar = document.querySelectorAll('.btn-restar')
 let valorInput;
-
-
 let btnSumar2 = document.querySelectorAll('.btn-sumar2')
 let btnRestar2 = document.querySelectorAll('.btn-restar2')
 let cantidadCarrito = document.querySelectorAll('.cantidad-carrito')
-
 
 
 // variables del carrito
@@ -39,13 +36,13 @@ let iconoEliminar = document.querySelector('.icono-eliminar')
 const accederReprocann = document.querySelector('#btn-descuento-reprocann')
 
 
-
-
+// base de datos
 let productosDB = "./productos.json"
 
 
 
 
+// Listando incialmente el stock
 const listandoStockMain = fetch(productosDB)
                     .then(responde => responde.json())
                         .then(data => {
@@ -65,7 +62,7 @@ const listandoStockMain = fetch(productosDB)
                         })
 
 
-// Listando stock de la tienda
+// funcion que muestra el listado segun su parametro
 function listandoStock (stock) {
     
     stock.forEach((producto) => {
@@ -106,7 +103,6 @@ function listandoStock (stock) {
     mostrarBotones()
     agregarEventosACarrito(productosEnCarrito)
     chequearInput()
-    
 }
 
 
@@ -215,12 +211,6 @@ function mostrarBotones() {
 
 
 
-
-
-
-
-
-
 // funcion que suma o resta la cantidad de productos a agregar al carrito, solo el valor del input
 function accionBotonesCantidadProducto () {
     btnSumar.forEach((boton, index) => {
@@ -248,7 +238,20 @@ const productosEnLocalStorage = JSON.parse(localStorage.getItem("productosEnCarr
 
 // condicional para tomar los datos del localStorage
 if (productosEnLocalStorage) {
-    productosEnCarrito = productosEnLocalStorage
+
+    const carritoSinDescuento = productosEnLocalStorage.map(producto => {
+        return {
+            id: producto.id,
+            marca: producto.marca,
+            detalles: producto.detalles,
+            precio: producto.precioOriginal,
+            precioOriginal: producto.precioOriginal,
+            categoria: producto.categoria,
+            imagenUrl: producto.imagenUrl,
+            cantidad: producto.cantidad
+        }
+    })
+    productosEnCarrito = carritoSinDescuento
     sumarCantidad()
 } else {
     productosEnCarrito = []
@@ -325,8 +328,11 @@ function agregarEventosACarrito(carritoLocalStorage) {
                                                     setInterval(() => {
                                                         inputCantidadCard[index].value = 0
                                                     }, 6000)
+
                                                     sumarCantidad()
                                                     cargarProductosEnCarrito(productosEnCarrito)
+
+                                                    
 
                                                 })
                                                 .catch(err => {
@@ -529,14 +535,14 @@ function accionBtnRestarEnCarrito(e) {
 
 
 
-// funcion para sumar la cantidad de productos en carrito
+// funcion para mostrar la cantidad de productos en carrito
 function sumarCantidad () {
     let numero = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0)
     conteoProductos.innerText = numero
 }
 
 
-// funcion para actualizar el total del pedido
+// funcion para actualizar el total del pedido en el modal
 function actualizarTotal () {
     const total = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0)
     totalCarrito.textContent = `$${total.toFixed(2)}`
@@ -555,7 +561,7 @@ function vaciarCarrito() {
 }
 
 
-// funcion para limpiar el storage y que no quede ningun array vacio!
+// funcion para limpiar el storage y que no quede ningun array vacio si se recarga la pagina
 function limpiarStorage() {
     if(productosEnLocalStorage && productosEnLocalStorage.length == 0) {
         localStorage.clear()

@@ -1,3 +1,7 @@
+
+// ESTE FICHERO CONTIENE LA LOGICA DE LA FACTURACION Y EL DESCUENTO REPROCANN
+
+
 //  variables del modal de facturacion
 const btnFacturacion = document.querySelector('#abrirSegundoModal')
 let inputCodigo = document.querySelector('#form-input-codigo')
@@ -94,7 +98,7 @@ btnConfirmarFactura.addEventListener("click", (event) => {
                 popup: "estilos-alerta2"
             }
         }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
+
             if (result.isConfirmed) {
                 cargarProductosEnCarrito(productosEnCarrito)
                 actualizarTotal()
@@ -121,7 +125,7 @@ btnConfirmarFactura.addEventListener("click", (event) => {
                             formularioFactura.classList.remove('was-validated')
                         })     
                         compraTerminada()   
-                        // cliente.agregarCompra(productosEnCarrito.marca)          
+        
                         Swal.fire({
                             title: "Compra Realizada",
                             html:`
@@ -197,7 +201,6 @@ function compraTerminada() {
 reprocannDescuento.addEventListener("click", handlerReprocann, true)
 
 
-
 // funcion que controla el descuento Reprocann
 function handlerReprocann (event) {
 
@@ -232,8 +235,6 @@ function handlerReprocann (event) {
     btnConfirmarReprocann.addEventListener("click", (event) => {
         
         isValid = true
-
-        //! Datos del usuario registrado
 
         let usuarioReprocann = []
         let productosMarca = []
@@ -316,46 +317,48 @@ function aplicarDescuentoReprocann () {
                     })
                     return;
 
+                } 
 
-                } else {
+                productosEnCarrito.forEach(producto => {
+                    const precioProductoCarrito = producto.precio
+                    const valorDescuento = (categoria.descuento / 100) * precioProductoCarrito
 
-                    productosEnCarrito.forEach(producto => {
-                        const precioProductoCarrito = producto.precio
-                        const valorDescuento = (categoria.descuento / 100) * precioProductoCarrito
-    
+                    if (producto.precio == producto.precioOriginal) {
                         producto.precio-= valorDescuento
+                    }
+
+                })
+
+                cargarProductosEnCarrito(productosEnCarrito)
+                
+                Swal.fire({
+                    title: "Descuentos aplicados",
+                    text: `Se ha aplicado la rebaja de precios en su carrito de compras.
+                            Segun su categoria usted tiene un ${categoria.descuento}% 
+                            de descuento en todos los productos. Por favor verifique 
+                            su nueva cotizacion en el carrito de compras`,
+                    confirmButtonText: "Confirmar",
+                    customClass: {
+                        popup: "estilos-alerta2"
+                    }
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        //
                         
-                    })
-                    cargarProductosEnCarrito(productosEnCarrito)
-                    Swal.fire({
-                        title: "Descuentos aplicados",
-                        text: `Se ha aplicado la rebaja de precios en su carrito de compras.
-                                Segun su categoria usted tiene un ${categoria.descuento}% 
-                                de descuento en todos los productos. Por favor verifique 
-                                su nueva cotizacion en el carrito de compras`,
-                        confirmButtonText: "Confirmar",
-                        customClass: {
-                            popup: "estilos-alerta2"
-                        }
-                    }).then(result => {
-                        if (result.isConfirmed) {
-                            //
-                            
-                        }
-                    })
-                    
-                    reprocannDescuento.removeEventListener("click", handlerReprocann, true)
-                    reprocannDescuento.toggleAttribute("data-bs-toggle")
-                    reprocannDescuento.textContent = "Descuento aplicado"
-                    reprocannDescuento.classList.remove("dbtn", "dropdown-toggle")
-                    reprocannDescuento.classList.add("dbtn-confirmado")
-    
-    
-                    inputsReprocann.forEach(input => {
-                        input.value = ''
-                        formularioReprocann.classList.remove('was-validated')
-                    })
-                }
+                    }
+                })
+                
+                reprocannDescuento.removeEventListener("click", handlerReprocann, true)
+                reprocannDescuento.toggleAttribute("data-bs-toggle")
+                reprocannDescuento.textContent = "Descuento aplicado"
+                reprocannDescuento.classList.remove("dbtn", "dropdown-toggle")
+                reprocannDescuento.classList.add("dbtn-confirmado")
+
+
+                inputsReprocann.forEach(input => {
+                    input.value = ''
+                    formularioReprocann.classList.remove('was-validated')
+                })
                          
             })
             .catch(err => {
