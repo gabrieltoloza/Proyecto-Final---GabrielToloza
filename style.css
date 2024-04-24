@@ -71,7 +71,7 @@ p {
     outline: none;
     border: none;
     background-color: rgb(65, 63, 63);
-    color: beige;
+    color: rgb(0, 0, 0);
     font-weight: bold;
     border-radius: 0px 20px 20px 0px;
     transition: all 0.4s;
@@ -612,7 +612,7 @@ p {
 
 
 
-/* ====seller==== */
+/* ====NUEVOS PRODUCTOS O ULTIMAS COMPRAS==== */
 
 .seller {
     background: transparent !important;
@@ -622,6 +622,7 @@ p {
 .seller h1 {
     font-size: 3rem;
     font-weight: bold;
+    font-family: 'Righteous', cursive;
 }
 
 .seller i{

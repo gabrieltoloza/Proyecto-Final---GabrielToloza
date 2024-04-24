@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primer entregable</title>
+    <title>Verde Pampa - Tienda online de productos medicinales</title>
 
     <!-- ==== Archivos Javascript ===== -->
     <script defer src="./desplazamientosDOM.js"></script>
@@ -164,8 +164,8 @@
                             <h2>Tratamientos alternativos</h2>
                             <p>
                                 ¿Te dijimos que heches un vistazo al blog?
-                                Dentro hay una seccion de tratamientos 
-                                alternativos como por ejemplo: Ansiedad.
+                                Dentro hay una seccion sobre investigacion 
+                                sobre tratamientos alternativos.
                             </p>
                         </div>
                     </div>
@@ -266,7 +266,6 @@
 
 
 
-      <!-- <button id="btn-descuento-reprocann" class="dbtn">Acceder</button> -->
 
       <!-- ====seccion store, envios==== -->
 
@@ -330,18 +329,23 @@
 
       <!-- ====NUEVOS PRODUCTOS O ULTIMAS COMPRAS==== -->
 
-      <section class="seller bg-light py-5">
-        <div class="container py-5">
+      <section class="seller bg-light p-5">
+        <div class="container row g-2 p-5">
             <hr>
             <div class="row">
                 <div class="col-lg-6">
-                    <h1 class="py-5">Nuevos productos</h1>
+                    <h1 id="historial-titulo" class="py-5">Nuevos productos</h1>
                 </div>
             </div>
-            <div class="row g-2">
+            
+            <div class="row g-2 contenedor-comprado">
+
+
+                <!-- Estos contenedores cambian dinamicamente si hay un sessionStorage guardado -->
+
                 <div class="col-lg-6">
                     <div class="card">
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-lg-6"><img src="./Productos/semillas1.jpg" class="img-fluid news-img" alt=""></div>
                         
                             <div class="col-lg-6 p-5">
@@ -356,6 +360,7 @@
                         </div>
                     </div>
                 </div>
+    
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="row">
@@ -373,13 +378,13 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row g-2 py-2">
+                
+                
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="row">
                             <div class="col-lg-6"><img src="./Productos/semillas3.jpg" class="img-fluid news-img" alt=""></div>
-                        
+                            
                             <div class="col-lg-6 p-5">
                                 <span><i class="bi bi-star-fill"></i></span>
                                 <span><i class="bi bi-star-fill"></i></span>
@@ -392,6 +397,7 @@
                         </div>
                     </div>
                 </div>
+    
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="row">
@@ -409,8 +415,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row g-2">
+            
+                
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="row">
@@ -428,6 +434,7 @@
                         </div>
                     </div>
                 </div>
+    
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="row">
@@ -445,7 +452,11 @@
                         </div>
                     </div>
                 </div>
+
             </div>
+
+            
+            
         </div>
       </section>
 
