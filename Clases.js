@@ -14,6 +14,7 @@ class Cliente {
         this.direccion = direccion
         this.historialDeCompras = []
         this.categoria = []
+        
     }
 
     agregarCompra(orden) {

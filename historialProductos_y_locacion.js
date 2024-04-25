@@ -85,7 +85,7 @@ obtenerProductosJson().then(datos => {
                                                     <span><i class="bi bi-star"></i></span>
                                                     <h5 class="head1">${producto.marca}</h5>
                                                     <p class="per1">${producto.detalles}</p>
-                                                    <h5 class="head1">$${producto.precioOriginal}</h5>
+                                                    <p class="per4">${producto.descripcion}</p>
                                                 </div>
                                             </div>
                                         </div>`

@@ -424,6 +424,8 @@ p {
     margin: 0;
 }
 
+
+
 .btnc {
     height: 50px;
     width: 50%;
@@ -670,7 +672,9 @@ p {
 }
 
 
-
+.per4 {
+    color: rgb(105, 32, 173);
+}
 
 
 

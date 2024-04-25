@@ -6,7 +6,8 @@
         "precio": 45.00,
         "precioOriginal": 45.00,
         "categoria": "aceites",
-        "imagenUrl": "./Productos/aceite6.webp"
+        "imagenUrl": "./Productos/aceite6.webp",
+        "descripcion": "Este producto contiene CBD de calidad óptima obtenido a través de extracción “supercrítica” de CO2 y disuelto en aceite de semillas de cáñamo."
     },
 
     {
@@ -16,7 +17,8 @@
         "precio": 150.00,
         "precioOriginal": 150.00,
         "categoria": "aceites",
-        "imagenUrl": "./Productos/aceite2.webp"
+        "imagenUrl": "./Productos/aceite2.webp",
+        "descripcion": "Un aceite de CBD con una concentración del 15% para uso oral. Puede administrarse bajo la lengua o en alimentos."
     },
 
     {
@@ -26,7 +28,8 @@
         "precio": 80.00,
         "precioOriginal": 80.00,
         "categoria": "aceites",
-        "imagenUrl": "./Productos/aceite3.webp"
+        "imagenUrl": "./Productos/aceite3.webp",
+        "descripcion": "El aceite de cáñamo proviene de las semillas y es rico en ácidos grasos esenciales. Útil para la piel y como suplemento."
     },
 
     {
@@ -36,7 +39,8 @@
         "precio": 69.99,
         "precioOriginal": 69.99,
         "categoria": "aceites",
-        "imagenUrl": "./Productos/aceite5.webp"
+        "imagenUrl": "./Productos/aceite5.webp",
+        "descripcion": "The Green Brand vende productos y accesorios para el cultivo y consumo de cannabis. Ofrecen asesoramiento experto y gran variedad."
     },
 
     {
@@ -46,7 +50,8 @@
         "precio": 45.37,
         "precioOriginal": 45.37,
         "categoria": "aceites",
-        "imagenUrl": "./Productos/aceite7.webp"
+        "imagenUrl": "./Productos/aceite7.webp",
+        "descripcion": "Selva es una tienda enfocada en productos de cannabis y accesorios para su uso. Ofrece semillas, aceites, y productos para cultivadores."
     },
 
     {
@@ -56,7 +61,8 @@
         "precio": 50.00,
         "precioOriginal": 50.00,
         "categoria": "aceites",
-        "imagenUrl": "./Productos/aceite8.jpg"
+        "imagenUrl": "./Productos/aceite8.jpg",
+        "descripcion": "La Sativa es una cepa de cannabis conocida por sus efectos estimulantes y energéticos. A menudo se usa durante el día para aumentar la creatividad y la actividad."
     },
 
 
@@ -71,7 +77,8 @@
         "precio": 17.00,
         "precioOriginal": 17.00,
         "categoria": "semillas",
-        "imagenUrl": "./Productos/semillas1.jpg"
+        "imagenUrl": "./Productos/semillas1.jpg",
+        "descripcion": "Amnesia Haze es una variedad de cannabis sativa con un efecto estimulante y edificante. Conocida por su sabor cítrico y aroma terroso, es ideal para consumir durante el día y fomentar la creatividad."
     },
 
     {
@@ -81,7 +88,8 @@
         "precio": 11.00,
         "precioOriginal": 11.00,
         "categoria": "semillas",
-        "imagenUrl": "./Productos/semillas2.jpg"
+        "imagenUrl": "./Productos/semillas2.jpg",
+        "descripcion": "Gorilla Haze es una cepa de cannabis híbrida con predominancia sativa, famosa por sus efectos energéticos y eufóricos. Ofrece un aroma fresco y afrutado, perfecto para quienes buscan un impulso de energía y creatividad."
     },
 
     {
@@ -91,7 +99,8 @@
         "precio": 35.00,
         "precioOriginal": 35.00,
         "categoria": "semillas",
-        "imagenUrl": "./Productos/semillas3.jpg"
+        "imagenUrl": "./Productos/semillas3.jpg",
+        "descripcion": "Amnesia Haze CL es una cepa de cannabis con predominancia sativa, que destaca por sus efectos energizantes y edificantes. Su sabor es cítrico y terroso"
     },
 
     {
@@ -101,7 +110,8 @@
         "precio": 10.00,
         "precioOriginal": 10.00,
         "categoria": "semillas",
-        "imagenUrl": "./Productos/semillas4.webp"
+        "imagenUrl": "./Productos/semillas4.webp",
+        "descripcion": "Anandamida es un endocannabinoide que regula el estado de ánimo, la felicidad y el bienestar."
     },
 
     {
@@ -111,7 +121,8 @@
         "precio": 20.00,
         "precioOriginal": 20.00,
         "categoria": "semillas",
-        "imagenUrl": "./Productos/semillas5.jpg"
+        "imagenUrl": "./Productos/semillas5.jpg",
+        "descripcion": "Serious Seeds es un banco de semillas de cannabis conocido por su calidad y consistencia."
     },
 
     {
@@ -121,7 +132,8 @@
         "precio": 24.00,
         "precioOriginal": 24.00,
         "categoria": "semillas",
-        "imagenUrl": "./Productos/semillas6.jpg"
+        "imagenUrl": "./Productos/semillas6.jpg",
+        "descripcion": "Sensi Seeds es uno de los bancos de semillas de cannabis más grandes y antiguos. Ofrece una amplia variedad de genéticas"
     }
 
 ]
