@@ -10,7 +10,8 @@
     <script defer src="./Clases.js"></script>
     <script defer src="./main.js"></script>
     <script defer src="./facturacion_y_Reprocann.js"></script>
-    <script defer src="./Historial_Productos.js"></script>
+    <script defer src="./historialProductos_y_locacion.js"></script>
+    <script defer src="./formulario_contacto.js"></script>
     <!-- ==== Archivos Javascript ===== -->
 
     <!--==== Enlace CSS Bootstrap ====-->
@@ -195,7 +196,7 @@
                 <form class="d-flex form-search">
                     <label for="form-input-name" class="form-label me-2 text-center pt-2 mx-1">Producto: </label>
                     <input name="nombre" id="form-input-name" class="form-control mb-3 input-search" type="search" placeholder="Ingresar producto...">
-                    <button class="mbtn1 mx-2 px-3" type="submit">Search</button>
+                    <button class="mbtn1 mx-2 px-3" type="submit">Buscar</button>
                 </form>
             </div>
             <div class="row py-5 text-center">
@@ -277,7 +278,7 @@
                     <h1>¿Preocupado por donde se encuentra tu compra?</h1>
                     <div class="line2 my-4"></div>
                     <p>
-                        Puedes chequear el estado de tu envio en <a href="#" >aqui</a>.
+                        Puedes chequear el estado de tu envio en <a class="enlace-envio" >aqui</a>.
                         Sin embargo debes relajarte, nuestro principal interes es que
                         tengas una grata experiencia de compra:
                     </p>
@@ -478,7 +479,8 @@
                         Si tu categoria es "paciente", tendras una orientacion profesional
                         para registrarte en Reprocann.
                     </p>
-                    <div class="row py-3">
+
+                    <div class="py-3 container-contacto">
                         <div class="col-lg-6">
                             <div class="row pt-2">
                                 <div class="col-lg-3 col-sm-3 col-2">
@@ -521,13 +523,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <input type="text" placeholder="Name...">
-                            <input type="text" placeholder="Email...">
-                            <input type="text" placeholder="Phone...">
-                            <textarea name="" id="" placeholder="Message..."></textarea>
-                            <button class="cbtn my-3">Send Now</button>
-                        </div>
+
+                        <form action="#" class="formulario-contacto">
+
+                            <div class="col-lg-10">
+                                <input type="text" name="nombre"  placeholder="Name..." required>
+                                <input type="text" name="email" placeholder="Email..." required>
+                                <input type="text" name="telefono" placeholder="Phone..." required>
+                                <textarea name="" name="mensaje" id="" placeholder="Message..." required></textarea>
+                                <button class="cbtn my-3">Send Now</button>
+                            </div>
+
+                        </form>
+                        
                     </div>
                 </div>
             </div>
@@ -582,15 +590,17 @@
               <h1 class="modal-title fs-5 titulo-principal" id="exampleModalLabel">Carrito</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body container-carrito">
+            <div class="modal-body container-carrito d-flex justify-content-between">
 
-                <p class="carrito-vacio">Tu carrito esta vacio <i class="bi bi-emoji-frown"></i></p>
+                <p class="carrito-vacio p-1">Tu carrito esta vacio </p>
 
                 <div class="carrito-productos disabled px-2">
 
                     <!-- ? Aqui va el producto inyectado con JS -->
                     
                 </div>
+
+                <button id="btn-iniciar-carrito" class="mbtn1 mx-2 px-3" type="submit" data-bs-dismiss="modal">Realizar una compra</button>
             </div>
 
             <div class="carrito-acciones mb-3 mx-2">

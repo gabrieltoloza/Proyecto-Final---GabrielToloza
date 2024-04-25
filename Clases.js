@@ -5,13 +5,15 @@
 class Cliente {
     static id = 0
 
-    constructor ( nombre, email, categoriaReprocann, dni ) {
+    constructor ( nombre, tarjeta, codigoSeguridad, email, direccion, historialDeCompras, categoria ) {
         this.id = ++Cliente.id
         this.nombre = nombre
+        this.tarjeta = tarjeta
+        this.codigoSeguridad = codigoSeguridad
         this.email = email
-        this.categoriaReprocann = categoriaReprocann
-        this.dni = dni
+        this.direccion = direccion
         this.historialDeCompras = []
+        this.categoria = []
     }
 
     agregarCompra(orden) {
@@ -20,6 +22,10 @@ class Cliente {
 
     obtenerHistorial(orden) {
         return this.historialDeCompras
+    }
+
+    agregarCategoria(categoria) {
+        this.categoria.push(categoria)
     }
 }
 

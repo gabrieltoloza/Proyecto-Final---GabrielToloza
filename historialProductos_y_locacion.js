@@ -1,5 +1,5 @@
-// ESTE FICHERO CONTIENE LA LOGICA DE REGISTRAR EL USUARIO REPROCANN Y MOSTRAR LOS PRODUCTOS QUE LE LLAMARON LA ATENCION
-//  SIMULA UNA PERSONALIZACION AL USUARIO REGISTRADO CON REPROCANN
+// ESTE FICHERO CONTIENE LA LOGICA DE REGISTRAR EL USUARIO QUE REALIZO LA COMPRA Y MOSTRAR LOS PRODUCTOS QUE COMPRO
+//  SIMULA UNA PERSONALIZACION AL USUARIO SI COMPRO ALGO.
 
 
 
@@ -7,32 +7,44 @@
 // Variable para variar el contenido en el inicio el sessionStorage
 const bienvenida = document.querySelector('.bienvenida')
 const session = JSON.parse(sessionStorage.getItem("usuarioReprocann"))
+const registroCompra = JSON.parse(sessionStorage.getItem("registroCompra"))
 
 // seccion ultimas compras (codigo en este fichero) o ultimos productos agregados (simbolicamente)
 const contenedorUsuario = document.querySelector('.contenedor-comprado')
 const historialTitulo = document.querySelector('#historial-titulo')
+
+// variable de localizacion envio
+const enlaceEnvio = document.querySelector('.enlace-envio')
 
 
 let cliente;
 
 
 // funcion que crea un cliente
-function crearCliente (session) {
-    if (!session) {
+function crearCliente (historialCompra) {
+    if (!historialCompra) {
         return
     } else {
-        const [nombre, email, categoriaReprocann, dni, historialDeCompras] = session
-        cliente = new Cliente(nombre, email, categoriaReprocann, dni, historialDeCompras)
+        const [nombre, tarjeta, codigoSeguridad, email, direccion, historialDeCompras, categoria] = registroCompra
+        cliente = new Cliente(nombre, tarjeta, codigoSeguridad, email, direccion, historialDeCompras)
         cliente.agregarCompra(historialDeCompras)
         bienvenida.innerHTML = `¡ Hola <b class="bienvenida-nombre"> ${cliente.nombre} </b>!.  Bienvenido a Verde Pampa`
         
     }
     return cliente
 }
-crearCliente(session)
+crearCliente(registroCompra)
 
-let historialCliente = cliente.obtenerHistorial()
-let historialAplanado = historialCliente.flat()
+let historialCliente;
+
+if (!registroCompra) {
+    historialCliente = "No hay session Storage"
+} else {
+    historialCliente = cliente.obtenerHistorial()
+    let historialAplanado = historialCliente.flat()
+    historialCliente = historialAplanado
+}
+
 
 // obtenemos productos del archivo json
 async function obtenerProductosJson () {
@@ -44,18 +56,15 @@ async function obtenerProductosJson () {
 
 // recuperamos esos datos y lo filtramos con los productos que el cliente aplico descuento.
 obtenerProductosJson().then(datos => {
-    let productos = []
-    datos.forEach(producto => {
-        historialAplanado.forEach(p => {
-            if (p == producto.marca) {
-                productos.push(producto)
-            }
-        })
-    })
     
-    if (!session) {
+    if (!registroCompra) {
         return
+
     } else {
+
+        let productos = datos.filter(producto => historialCliente.includes(producto.marca))
+        
+
         contenedorUsuario.innerHTML = ''
         historialTitulo.textContent = "Productos que llamaron tu atencion"
         
@@ -89,5 +98,54 @@ obtenerProductosJson().then(datos => {
                 duration: 1000,
             })
         })
+       
     }
 })
+
+
+// funcion para mostrar la supuesta localizacion del envio del producto
+function mostrarLocalizacion(registroCompra) {
+
+    enlaceEnvio.addEventListener("click", (event) => {
+        event.preventDefault()
+        if (!registroCompra) {
+            Swal.fire({
+                html: "<i>¡Hecha un vistazo a los<b> productos </b>! Cuando compres podras ver aqui por donde se encuentra tu pedido. </i>",
+                showConfirmButton: true,
+                confirmButtonText: "Entiendo",
+                customClass: {
+                    popup: "estilos-alerta-envios",
+                    confirmButton: '',
+                },
+                
+            }).then(result => {
+                if (result.isConfirmed) {
+                    
+                    const posicionSeccionEnvios = seccionTienda.getBoundingClientRect().top + window.scrollY
+                    const nuevaPosicion = posicionSeccionEnvios + 230
+
+                    setTimeout(() => {
+                        window.scrollTo({
+                            top: nuevaPosicion,
+                            behavior: "smooth"
+                        })
+                    }, 300)
+                }
+            })
+        } else {
+            Swal.fire({
+                html: "<i>¡Su producto se encuentra en <b> Usuahia, Argentina </b>! Cuando este cerca de tu domicilio, indicado en la factura, seras notificado. Muchas gracias por tu compra!</i>",
+                showConfirmButton: true,
+                confirmButtonText: "Entiendo",
+                customClass: {
+                    popup: "estilos-alerta-envios",
+                },
+                
+            })
+           
+        }
+        
+    })
+}
+mostrarLocalizacion(registroCompra)
+

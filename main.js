@@ -24,6 +24,8 @@ let cantidadCarrito = document.querySelectorAll('.cantidad-carrito')
 
 
 // variables del carrito
+let containerCarrito = document.querySelector('.container-carrito')
+
 const modalCarrito = new bootstrap.Modal(document.getElementById('exampleModal'), {})
 let carritoProductos = document.querySelector('.carrito-productos')
 let carritoVacio = document.querySelector('.carrito-vacio')
@@ -359,6 +361,8 @@ function cargarProductosEnCarrito (productos) {
     
     if (productosEnCarrito.length > 0) {
         
+        btnIniciarCompra.classList.add('d-none')
+        containerCarrito.classList.remove('d-flex', 'justify-content-between')
         carritoVacio.classList.add('d-none')
         carritoComprado.classList.add('d-none')
         carritoAcciones.classList.remove('d-none')
@@ -395,9 +399,11 @@ function cargarProductosEnCarrito (productos) {
             carritoProductos.append(contenedorCarrito)
         })
     } else {
+        btnIniciarCompra.classList.remove('d-none')
         carritoAcciones.classList.add('d-none')
         carritoComprado.classList.add('d-none')
         carritoProductos.classList.add('d-none')
+        containerCarrito.classList.add('d-flex', 'justify-content-between')
         carritoVacio.classList.remove('d-none')
     }
     

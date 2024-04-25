@@ -13,6 +13,8 @@ const seccionBlog = document.getElementById('seccion-blog')
 const seccionReprocann = document.getElementById('seccion-reprocann')
 const navBar = document.querySelector('.navbar')
 const logoHeader = document.querySelector('#logo-header')
+const btnIniciarCompra = document.querySelector('#btn-iniciar-carrito')
+const modaDelCarrito = new bootstrap.Modal(document.getElementById('exampleModal'), {})
 let llave = false
 
 
@@ -24,7 +26,7 @@ function desplazamientoNavLink(boton, pixeles, destino) {
         e.preventDefault()
         const posicionSeccionEnvios = destino.getBoundingClientRect().top + window.scrollY
         const nuevaPosicion = posicionSeccionEnvios + pixeles
-    
+        
         window.scrollTo({
             top: nuevaPosicion,
             behavior: "smooth"
@@ -55,6 +57,26 @@ desplazamientoNodoNavLink(btnBlog, 50, seccionBlog) // Desplazamiento hacia el b
 desplazamientoNodoNavLink(btnReprocann, 230, seccionReprocann) // Desplazamiento hacia la seccion Reprocann
 desplazamientoNodoNavLink(btnTienda, -230, seccionTienda) // Desplazamiento hacia la tienda
 
+
+
+function iniciarCompraCarrito (boton, pixeles, destino) {
+    btnIniciarCompra.setAttribute("data-bs-dismiss", "modal")
+    boton.addEventListener("click", (e) => {
+        e.preventDefault()
+        
+        const posicionSeccionEnvios = destino.getBoundingClientRect().top + window.scrollY
+        const nuevaPosicion = posicionSeccionEnvios + pixeles
+        
+        setTimeout(() => {
+            window.scrollTo({
+                top: nuevaPosicion,
+                behavior: "smooth"
+            })
+        }, 500)
+        btnIniciarCompra.removeAttribute("data-bs-dismiss", "modal")
+    })
+}
+iniciarCompraCarrito(btnIniciarCompra, 230, seccionTienda)
 
 
 

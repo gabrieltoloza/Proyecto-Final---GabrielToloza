@@ -77,14 +77,24 @@ inputCodigo.addEventListener("keydown", (e) => {
 
 btnConfirmarFactura.addEventListener("click", (event) => {
     
+
+    let registroCompra = []
+    let productosComprado = []
+
     isValid = true
     inputsDatosFactura.forEach(input => {
         if (!input.validity.valid) {
             isValid = false
         }else {
             formularioFactura.classList.add('was-validated')
+            registroCompra.push(input.value)
         }
     })
+
+    productosEnCarrito.forEach(producto => {
+        productosComprado.push(producto.marca)
+    })
+    registroCompra.push(productosComprado)
 
     if (isValid && formularioFactura.classList.contains('was-validated')) {
         
@@ -125,7 +135,9 @@ btnConfirmarFactura.addEventListener("click", (event) => {
                             formularioFactura.classList.remove('was-validated')
                         })     
                         compraTerminada()   
-        
+                        
+                        sessionStorage.setItem("registroCompra", JSON.stringify(registroCompra))
+
                         Swal.fire({
                             title: "Compra Realizada",
                             html:`
@@ -187,10 +199,10 @@ btnConfirmarFactura.addEventListener("click", (event) => {
 
 // funcion para borrar el localStorage y actualizar interfaz del carrito al concluir la compra
 function compraTerminada() {
+
     productosEnCarrito.length = 0
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
     
-
     sumarCantidad()
     limpiarStorage()
     cargarProductosEnCarrito(productosEnCarrito)
@@ -237,21 +249,18 @@ function handlerReprocann (event) {
         isValid = true
 
         let usuarioReprocann = []
-        let productosMarca = []
-
+        
         inputsReprocann.forEach(input => {
             if (!input.validity.valid) {
                 isValid = false
             }else {
                 formularioReprocann.classList.add('was-validated')
-                usuarioReprocann.push(input.value)
+                
             }
         })
 
-        productosEnCarrito.forEach(producto => {
-            productosMarca.push(producto.marca)
-        })
-        usuarioReprocann.push(productosMarca)
+        usuarioReprocann.push(inputsReprocann[2].value)
+        
 
         if (isValid && formularioReprocann.classList.contains('was-validated')) {
             event.preventDefault()

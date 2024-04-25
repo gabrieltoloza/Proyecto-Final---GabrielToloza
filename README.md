@@ -9,7 +9,11 @@
 
 - En la seccion de Reprocann se debe ingresar datos via formulario para cargar al "supuesto usuario registrado en Reprocann", este formulario tiene validaciones, entonces el sistema busca en un archivo .json que simula una base de datos con los descuentos disponibles segun la categoria que se registre. Para todo hay un mensaje para el cliente, si encuentra una categoria indica que se aplicaron los descuentos y su porcentaje, si no encuentra la categoria le pide al usuario que ingrese la correcta dandole opciones, si hay una falla en el uso de fetch se muestra un mensaje tipo error 404 "intente nuevamente", si sale todo bien se visualizan los cambios en el listado de productos asi como en el carrito, luego de esto no se puede volver a hacer el descuento y en el mismo boton se muestra otro msj y color. Al confirmar el usuario y sale bien se almacenan algunos datos en sessionStorage para guardar los productos que compro y con que categoria reprocann. Al reiniciar el navegador se resetea la funcion actualizando todo los productos a sus precios originales, pero se actualiza el mensaje de bienvenida con el nombre de la persona que hizo la compra con el descuento, datos traidos del sessionStorage.
 
-- En la seccion NUEVOS PRODUCTOS O ULTIMAS COMPRAS, mostramos datos random al principio simulando que son datos traidos en base a su fecha de ingreso al stock (esto deberia hacerse con un registro tipo fecha en una base de datos). Pero si hay datos en sessionStorage, esto se borra y se muestra un msj de "Productos que llamaron tu atencion" y los productos que compro con el descuento reprocann o que quiso aplicar el descuento.
+- En la seccion envios, si hay datos en sessionStorage, muestra un msj de donde se encuentra supuestamente este producto, si no hay datos en sessionStorage, invita al cliente a realizar una compra e informandole que cuando lo haga puede ver el envio ahi mismo.
+
+- En la seccion NUEVOS PRODUCTOS O ULTIMAS COMPRAS, mostramos datos random al principio simulando que son datos traidos en base a su fecha de ingreso al stock (esto deberia hacerse con un registro tipo fecha en una base de datos). Pero si hay datos en sessionStorage, esto se borra y se muestra un msj de "Productos que llamaron tu atencion" y los productos que compro. 
+
+- El formulario de contacto, simula un registro de contacto para luego comunicarse con el cliente.
 
 
 - El resto del Javascript pertence a la experiencia de usuario para que no sea tan tosco. 
@@ -21,9 +25,9 @@
 - main.js =>  Guarda la logica para mostrar los productos y la logica del carrito .
 - desplazamientosDOM.js =>  Guarda los eventos de desplazamiento del navbar y botones de la seccion main (html)
 - facturacion_y_Reprocann.js =>  Guarda la logica de la facturacion de la compra y el descuento Reprocann
-- Productos.js =>  Guarda la clase de objetos que se maneja en el archivo " main.js"
-
-
+- Clases.js =>  Guarda la clase de objetos que se maneja en el archivo " main.js"
+- historialProductos_y_locacion.js =>  Guarda la persnalizacion del cliente si hizo una compra, tambien muestra una simulacion de rastreo de la compra.
+- formulario_contacto.js =>  Guarda la simulacion de contactar con un profesional de la salud para recibir atencion personalizada.
 
 
 
@@ -37,9 +41,9 @@
 
 > El **_Blog_** lo voy a usar para crear un login/register para que el cliente pueda crear articulos sobre el mundo del cannabis medicinal. Tendra una base de datos con un patron MVC.
 
-> La seccion **_Envios_** sera para que el cliente pueda controlar el estado de su envio simulando una API de seguimiento de producto mostrandole al cliente donde se encuentra el producto. Tendra base de datos y un patron MV
+> La seccion **_Envios_** sera para que el cliente pueda controlar el estado de su envio simulando una API de seguimiento de producto mostrandole al cliente donde se encuentra el producto. Tendra base de datos y un mapa donde se actualize su hubicacion.
 
-> La seccion **_Nuevos productos_** deberia tener una base de datos con un registro que indique cuando se agrego y es mostrarse en esta seccion segundo un rango de fecha establecido.
+> La seccion **_Nuevos productos_** deberia tener una base de datos con un registro que indique cuando se agrego y  mostrarse en esta seccion segun un rango de fecha establecido.
 
 > La seccion **_Contacto_** deberia implementar una logica de envio de email cuando complete los datos, o guardarlas en una base de datos para luego "comunicarse" con el cliente.
 
