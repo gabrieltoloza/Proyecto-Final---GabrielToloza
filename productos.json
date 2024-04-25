@@ -146,6 +146,30 @@
         "imagenUrl": "./Productos/semillas6.jpg",
         "descripcion": "Sensi Seeds es uno de los bancos de semillas de cannabis más grandes y antiguos. Ofrece una amplia variedad de genéticas",
         "stock": 7
+    },
+
+    {
+        "id": 13,
+        "marca": "Cannabis flex",
+        "detalles": "100% Vegana",
+        "precio": 23.00,
+        "precioOriginal": 23.00,
+        "categoria": "cremas",
+        "imagenUrl": "./Productos/cremacannabis1.webp",
+        "descripcion": "Crema 100% vegana, extraidas de cultivos argentinos de cañamo de la zona pampeana, chequear el prospecto para sus casos de uso.",
+        "stock": 17
+    },
+
+    {
+        "id": 14,
+        "marca": "Fisiocrem",
+        "detalles": "Cannabidiol (CBD)",
+        "precio": 19.50,
+        "precioOriginal": 19.50,
+        "categoria": "cremas",
+        "imagenUrl": "./Productos/cremacannabis2.jpg",
+        "descripcion": "Fisiocrem posee la mejor calidad en cremas de cannabidiol CBD, cuenta con amplio stock y asesoramiento profesional.",
+        "stock": 12
     }
 
 ]

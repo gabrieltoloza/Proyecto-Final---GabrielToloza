@@ -775,7 +775,7 @@ p {
     background-image: url(fondos/fonto-medico.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    filter: blur(3px);
+    filter: blur(6px);
     z-index: 1;
 }
 
@@ -930,16 +930,6 @@ p {
     margin: 10px;
 }
 
-@keyframes balanceo {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
-    100% { transform: translateX(0); }
-}
-
-.animate {
-    animation: balanceo 1s ease-in-out infinite;
-}
 
 
 .icono-eliminar {
