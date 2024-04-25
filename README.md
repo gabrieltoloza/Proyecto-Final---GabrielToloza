@@ -1,7 +1,7 @@
 
 # Simulador de E-commerce 
 
-- El proyecto simula un E-Commerce de productos cannabicos, tiene una seccion tienda donde se listan productos desde una base de datos simulada, los productos de inyectan con JS. Tiene un modal hecho con Bootstrap que representa el carrito de compras donde se guardan los productos que elije el usuario, se pueden controlar las cantidades a agregar al carrito dentro de cada producto, pero el total se ve en el carrito. 
+- El proyecto simula un E-Commerce de productos cannabicos, tiene una seccion tienda donde se listan productos desde una base de datos simulada, los productos de inyectan con JS. Tiene un modal hecho con Bootstrap que representa el carrito de compras donde se guardan los productos que elije el usuario, se pueden controlar las cantidades a agregar al carrito dentro de cada producto, pero el total se ve en el carrito. Tiene un limite de stock por lo que no se pueden agregar mas cantidades de las que hay. 
 
 - Dentro del carrito se puede controlar la cantidad de objetos elegidos en el caso del que cliente se haya equivocado, puede eliminar el producto individual una vez la cantidad llegue a una unidad con el icono de eliminar remarcado en rojo. Dentro del mismo modal hay un boton para eliminar el total de los productos, tambien hay un boton "COMPRAR". Dentro de este carrito hay un subtotal, que va cambiando segundo la cantidad del producto individual, y un total que cambia segundo el subtotal de todos los productos.
 

@@ -71,7 +71,7 @@ obtenerProductosJson().then(datos => {
         productos.forEach(producto => {
 
             const nuevoContenedor = document.createElement('div')
-            nuevoContenedor.classList.add('col-lg-6')
+            nuevoContenedor.classList.add('col-lg-10', 'g-4')
             
             nuevoContenedor.innerHTML = `
                                         <div class="card">

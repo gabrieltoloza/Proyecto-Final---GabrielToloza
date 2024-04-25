@@ -83,6 +83,7 @@ function listandoStock (stock) {
                                         <img src="${producto.imagenUrl}" class="img-fluid news-img pb-3" alt="${producto.categoria}">                  
                                         <h4 class="head1">${producto.marca}</h4>
                                         <p class="per2">${producto.detalles}</p>
+                                        <p class="per4 fw-bold" >Cantidad: ${producto.stock}</p>
                                         <h4 class="head1 card-h4">$${producto.precio.toFixed(2)}</h4>
                                         <div class="controlador-cantidad d-flex">
                                             <button id="${producto.id}" class="btn btn-outline-secondary btn-restar"><i class="bi bi-dash-lg"></i></button>
@@ -192,7 +193,6 @@ input.addEventListener('input', (event) =>{
                                             }
                                         })
                                     })
-
     }
 })
 
@@ -215,11 +215,23 @@ function mostrarBotones() {
 
 // funcion que suma o resta la cantidad de productos a agregar al carrito, solo el valor del input
 function accionBotonesCantidadProducto () {
-    btnSumar.forEach((boton, index) => {
-        boton.addEventListener("click", () => {
-            inputCantidadCard[index].value++
-        })
-    })
+
+    const controlarSumaProducto = fetch(productosDB).then(response => response.json())
+                                                .then(datos => {
+                                                    btnSumar.forEach((boton, index) => {
+                                                        boton.addEventListener("click", (event) => {
+                                                            const botonId = Number(event.currentTarget.id) - 1
+                                                            inputCantidadCard[index].value++
+                                                            
+                                                            if (inputCantidadCard[index].value > datos[botonId].stock) {
+                                                                inputCantidadCard[index].value = datos[botonId].stock
+                                                                return;
+                                                            }
+
+                                                        })
+                                                    })
+                                                })
+
     btnRestar.forEach((boton, index) => {
         boton.addEventListener("click", () => {
             inputCantidadCard[index].value--
@@ -489,8 +501,32 @@ function mostrarBotonesCantidadCarrito() {
     btnRestar2 = document.querySelectorAll('.btn-restar2')
     cantidadCarrito = document.querySelectorAll('.cantidad-carrito')
 
+    // evento y funcion para sumar cantidad en carrito con limite de stock
     btnSumar2.forEach((boton) => {
-        boton.addEventListener("click", accionBtnSumarEnCarrito)
+        const controlarSumaCarrito = fetch(productosDB).then(response => response.json())
+                                                    .then(datos => {
+                                                        boton.addEventListener("click" ,(event) => {
+
+                                                            const botonId = event.currentTarget.id
+                                                            const datoStockId = event.currentTarget.id - 1
+                                                            const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
+
+                                                            productosEnCarrito[index].cantidad += 1
+                                                            // console.log(datoStockId);
+                                                            // console.log(datos[datoStockId]);
+                                                            // console.log(productosEnCarrito[index]);
+                                                            // console.log(datos[datoStockId].stock);
+
+                                                            if (productosEnCarrito[index].cantidad > datos[datoStockId].stock) {
+                                                                productosEnCarrito[index].cantidad = datos[datoStockId].stock
+                                                                return
+                                                            }
+
+                                                            localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
+                                                            cargarProductosEnCarrito(productosEnCarrito)
+                                                        })
+
+                                                    })
     })
 
     btnRestar2.forEach((boton) => {
@@ -499,19 +535,7 @@ function mostrarBotonesCantidadCarrito() {
 }
 
 
-// funciones de sumar o restar cantidad de los botones del carrito
-function accionBtnSumarEnCarrito(e) {
-    
-    const botonId = e.currentTarget.id
-    const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
-    
-    productosEnCarrito[index].cantidad += 1
-    
-    localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
-    cargarProductosEnCarrito(productosEnCarrito)
-
-}
-
+// funcion para restar cantidad de los botones del carrito
 function accionBtnRestarEnCarrito(e) {
 
     const botonId = e.currentTarget.id
