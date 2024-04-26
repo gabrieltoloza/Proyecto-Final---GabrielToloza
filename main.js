@@ -313,12 +313,12 @@ function agregarEventosACarrito(carritoLocalStorage) {
                                                     if (carritoLocalStorage.some(producto => producto.id == eventoID)) {
                                                         const indexCarrito = carritoLocalStorage.findIndex(producto => producto.id == eventoID)
                                                         carritoLocalStorage[indexCarrito].cantidad += cantidadSeleccionada
-
+                                                        
                                                         if (carritoLocalStorage[indexCarrito].cantidad > datos[eventoID - 1].stock) {
                                                             carritoLocalStorage[indexCarrito].cantidad = datos[eventoID - 1].stock
                                                             Toastify({
-                                                                text: "No puedes agregar una cantidad mas grande que el stock.",
-                                                                duration: 1500,
+                                                                text: "No puedes agregar una cantidad mas grande que el stock. Hemos reajustado la cantidad, por favor verifica tu carrito de compras",
+                                                                duration: 4000,
                                                                 gravity: "top", 
                                                                 position: "center", 
                                                                 stopOnFocus: true, 
@@ -332,24 +332,26 @@ function agregarEventosACarrito(carritoLocalStorage) {
                                                                 },
                                                                 onClick: function(){} 
                                                             }).showToast();
-                                                            return
+                                                                                                            
+                                                        } else {
+                                                            Toastify({
+                                                                text: "Producto agregado!",
+                                                                duration: 1500,
+                                                                gravity: "top", 
+                                                                position: "center", 
+                                                                stopOnFocus: false, 
+                                                                style: {
+                                                                    background: "linear-gradient(to right, #440480, #7D15DF)",
+                                                                    borderRadius: "2rem",
+                                                                },
+                                                                offset: {
+                                                                    x: '1.5rem',
+                                                                    y: '1.5rem' 
+                                                                },
+                                                                onClick: function(){} 
+                                                            }).showToast();
                                                         }
-                                                        Toastify({
-                                                            text: "Producto agregado!",
-                                                            duration: 1500,
-                                                            gravity: "top", 
-                                                            position: "center", 
-                                                            stopOnFocus: false, 
-                                                            style: {
-                                                                background: "linear-gradient(to right, #440480, #7D15DF)",
-                                                                borderRadius: "2rem",
-                                                            },
-                                                            offset: {
-                                                                x: '1.5rem',
-                                                                y: '1.5rem' 
-                                                            },
-                                                            onClick: function(){} 
-                                                        }).showToast();
+                                                        
 
                                                     } else {
                                                         productoFiltrado.cantidad = cantidadSeleccionada
