@@ -60,10 +60,10 @@ desplazamientoNodoNavLink(btnTienda, -230, seccionTienda) // Desplazamiento haci
 
 
 function iniciarCompraCarrito (boton, pixeles, destino) {
-    btnIniciarCompra.setAttribute("data-bs-dismiss", "modal")
+    
     boton.addEventListener("click", (e) => {
         e.preventDefault()
-        
+        btnIniciarCompra.toggleAttribute("data-bs-dismiss", "modal")
         const posicionSeccionEnvios = destino.getBoundingClientRect().top + window.scrollY
         const nuevaPosicion = posicionSeccionEnvios + pixeles
         
@@ -73,7 +73,7 @@ function iniciarCompraCarrito (boton, pixeles, destino) {
                 behavior: "smooth"
             })
         }, 500)
-        btnIniciarCompra.removeAttribute("data-bs-dismiss", "modal")
+        btnIniciarCompra.toggleAttribute("data-bs-dismiss", "modal")
     })
 }
 iniciarCompraCarrito(btnIniciarCompra, 230, seccionTienda)

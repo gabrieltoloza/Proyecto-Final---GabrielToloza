@@ -84,7 +84,7 @@ function listandoStock (stock) {
                                         <h4 class="head1">${producto.marca}</h4>
                                         <p class="per2">${producto.detalles}</p>
                                         <p class="per4 fw-bold" >Cantidad: ${producto.stock}</p>
-                                        <h4 class="head1 card-h4">$${producto.precio.toFixed(2)}</h4>
+                                        <h4 class="head1 card-h4">$${producto.precio}</h4>
                                         <div class="controlador-cantidad d-flex">
                                             <button id="${producto.id}" class="btn btn-outline-secondary btn-restar"><i class="bi bi-dash-lg"></i></button>
                                             <input id="${producto.id}" class="form-control input-producto" type="number" placeholder="${valorInput}">
@@ -282,7 +282,7 @@ function agregarEventosACarrito(carritoLocalStorage) {
 
             let cantidadSeleccionada = Number(inputCantidadCard[index].value)
             
-            const eventoID = event.currentTarget.id
+            const eventoID = Number(event.currentTarget.id)
 
             if (cantidadSeleccionada === 0) {
                 Toastify({
@@ -309,33 +309,69 @@ function agregarEventosACarrito(carritoLocalStorage) {
                                                 .then(datos => {
                                                     
                                                     const productoFiltrado = datos.find(producto => producto.id === Number(eventoID))
-
                                                     
                                                     if (carritoLocalStorage.some(producto => producto.id == eventoID)) {
-                                                        const index = carritoLocalStorage.findIndex(producto => producto.id == eventoID)
-                                                        carritoLocalStorage[index].cantidad += cantidadSeleccionada
+                                                        const indexCarrito = carritoLocalStorage.findIndex(producto => producto.id == eventoID)
+                                                        carritoLocalStorage[indexCarrito].cantidad += cantidadSeleccionada
+
+                                                        if (carritoLocalStorage[indexCarrito].cantidad > datos[eventoID - 1].stock) {
+                                                            carritoLocalStorage[indexCarrito].cantidad = datos[eventoID - 1].stock
+                                                            Toastify({
+                                                                text: "No puedes agregar una cantidad mas grande que el stock.",
+                                                                duration: 1500,
+                                                                gravity: "top", 
+                                                                position: "center", 
+                                                                stopOnFocus: true, 
+                                                                style: {
+                                                                    background: "linear-gradient(to right, #006400, #00FF00)",
+                                                                    borderRadius: "2rem",
+                                                                },
+                                                                offset: {
+                                                                    x: '1.5rem',
+                                                                    y: '1.5rem' 
+                                                                },
+                                                                onClick: function(){} 
+                                                            }).showToast();
+                                                            return
+                                                        }
+                                                        Toastify({
+                                                            text: "Producto agregado!",
+                                                            duration: 1500,
+                                                            gravity: "top", 
+                                                            position: "center", 
+                                                            stopOnFocus: false, 
+                                                            style: {
+                                                                background: "linear-gradient(to right, #440480, #7D15DF)",
+                                                                borderRadius: "2rem",
+                                                            },
+                                                            offset: {
+                                                                x: '1.5rem',
+                                                                y: '1.5rem' 
+                                                            },
+                                                            onClick: function(){} 
+                                                        }).showToast();
+
                                                     } else {
                                                         productoFiltrado.cantidad = cantidadSeleccionada
                                                         carritoLocalStorage.push(productoFiltrado)
+                                                        Toastify({
+                                                            text: "Producto agregado!",
+                                                            duration: 1500,
+                                                            gravity: "top", 
+                                                            position: "center", 
+                                                            stopOnFocus: false, 
+                                                            style: {
+                                                                background: "linear-gradient(to right, #440480, #7D15DF)",
+                                                                borderRadius: "2rem",
+                                                            },
+                                                            offset: {
+                                                                x: '1.5rem',
+                                                                y: '1.5rem' 
+                                                            },
+                                                            onClick: function(){} 
+                                                        }).showToast();
                                                     }
-                                                    
-                                                    // script que maneja el mensaje del producto agregado al carrito hecho con Toastify JS
-                                                    Toastify({
-                                                        text: "Producto agregado!",
-                                                        duration: 1500,
-                                                        gravity: "top", 
-                                                        position: "center", 
-                                                        stopOnFocus: false, 
-                                                        style: {
-                                                            background: "linear-gradient(to right, #440480, #7D15DF)",
-                                                            borderRadius: "2rem",
-                                                        },
-                                                        offset: {
-                                                            x: '1.5rem',
-                                                            y: '1.5rem' 
-                                                        },
-                                                        onClick: function(){} 
-                                                    }).showToast();
+                                                    console.log('llega');
 
                                                     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito))
 
@@ -512,10 +548,6 @@ function mostrarBotonesCantidadCarrito() {
                                                             const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
 
                                                             productosEnCarrito[index].cantidad += 1
-                                                            // console.log(datoStockId);
-                                                            // console.log(datos[datoStockId]);
-                                                            // console.log(productosEnCarrito[index]);
-                                                            // console.log(datos[datoStockId].stock);
 
                                                             if (productosEnCarrito[index].cantidad > datos[datoStockId].stock) {
                                                                 productosEnCarrito[index].cantidad = datos[datoStockId].stock
