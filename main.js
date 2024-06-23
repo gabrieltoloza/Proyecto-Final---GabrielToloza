@@ -41,7 +41,7 @@ const accederReprocann = document.querySelector('#btn-descuento-reprocann')
 // base de datos .json
 let productosDB = "./productos.json"
 // base de datos MySQL
-let mysqlDB = "http://localhost:3000/products"
+// let mysqlDB = "http://localhost:3000/products"
 
 
 
