@@ -23,13 +23,49 @@ p {
 
 .navbar {
     background: transparent;
-    height: 4rem;
+    height: 4.5rem;
     transition: .7s ease-in-out;
     border-radius:0 0 .75rem .75rem;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
     justify-content: space-between;
+    margin: 0;
+    padding: 0;
 }
 
+.navbar-collapse {
+    background: rgb(171, 97, 240);
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.navbar-collapse ul li a {
+    color: white;
+}
+
+.bienvenida {
+    display: none;
+}
+
+.container-carrito-fixed-1 {
+    display: none;
+}
+
+.container-carrito-fixed-2 {
+    border-radius: 50px;
+    background-color: rgb(171, 97, 240);
+    width: 4.5rem;
+    height: 3rem;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+
+}
+
+.container-carrito-fixed-2:nth-child(1) {
+    color: white;
+}
 
 
 .nav-item a {
@@ -117,6 +153,35 @@ p {
 }
 
 
+@media (min-width: 768px) {
+
+    .container-carrito-fixed-1 {
+        display: flex;
+    }
+
+    .navbar-collapse {
+        background: transparent;
+    }
+
+    .bienvenida {
+        display: block;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    .container-carrito-fixed-1 {
+        display: flex;
+    }
+
+    .navbar-collapse {
+        background: transparent;
+    }
+
+    .bienvenida {
+        display: block;
+    }
+}
 
 
 
@@ -127,15 +192,22 @@ p {
 
 
 .main {
+
     background: transparent;
-    /* background-size: cover; */
-    height: 100vh;
-    width: 100%;
     color: rgb(7, 7, 7);
+    height: auto;
+    width: 100%;
+    text-align: center;
+    margin-top: 7rem;
 }
 
+.main .container {
+    min-height: 40rem;
+}
+
+
 .main h1 {
-    font-size: 5rem;
+    font-size: 3rem;
     font-family: 'Righteous', cursive;
 }
 
@@ -146,13 +218,13 @@ p {
 }
 
 .main p:nth-of-type(2){
-    font-size: 20px;
+    font-size: 17px;
     color: rgb(7, 7, 7);
 }
 
 .mbtn1 {
     height: 50px;
-    width: 25%;
+    width: 35%;
     outline: none;
     border: none;
     color: white;
@@ -167,7 +239,7 @@ p {
 
 .mbtn2 {
     height: 50px;
-    width: 25%;
+    width: 35%;
     outline: none;
     background-color: transparent;
     font-weight: bolder;
@@ -189,20 +261,6 @@ p {
 
 
 
-/*? ====Configuracion en dispositivos mobiles==== */
-
-@media (max-width: 600px) {
-    .main {
-        background-position: center;
-    }
-    .main h1 {
-        font-size: 3rem;
-    }
-    .main p:nth-child(1){
-        padding-top: 0;
-    }
-    
-}
 
 .line {
     height: 6px;
@@ -240,13 +298,14 @@ p {
 .about {
     background: transparent;
     background-size: cover;
-    height: 90vh;
+    height: 50rem;
     width: 100%;
     color: black;
+    text-align: center;
 }
 
 .about h1 {
-    font-size: 3rem;
+    font-size: 2.1rem;
     font-weight: bold;
     font-family: 'Righteous', cursive;
 }
@@ -344,7 +403,7 @@ p {
 
 
 .product h1 {
-    font-size: 3rem;
+    font-size: 2.1rem;
     font-weight: bold;
     font-family: 'Righteous', cursive;
 }
@@ -403,19 +462,32 @@ p {
 .product .card-body {
     border: 2px dashed rgb(93, 5, 175);
     border-radius: 0.5rem;
+    height: 20em;
 }
 
 .head1 {
-    font-weight: 400;
+    font-size: 1em;
     margin: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .per1 {
     color: rgb(168, 162, 162);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0;
 }
 
 .per2 {
     color: rgb(193, 5, 175);
+    margin: 0;
+    font-size: 0.7em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .per3 {
@@ -427,7 +499,7 @@ p {
 
 
 .btnc {
-    height: 50px;
+    height: 30px;
     width: 50%;
     outline: none;
     border: none;
@@ -437,6 +509,7 @@ p {
     margin: 0 auto;
     display: block;
     transition: all 0.4s;
+    font-size: 0.6em;
 }
 
 .btnc:hover {
@@ -462,14 +535,15 @@ p {
     transform: scale(1.2)
 }
 
-
-
 .controlador-cantidad {
+    margin-inline: 1;
+    height: 2em;   
     justify-content: center;
 }
 
+
 .controlador-cantidad input {
-    height: 40px;
+    
     margin: 10px;
     border: solid 1.6px rgb(93, 5, 175);
     color: rgb(93, 5, 175);
@@ -481,6 +555,8 @@ p {
     text-align: center;
     border: solid 1.6px rgb(93, 5, 175);
     color: rgb(93, 5, 175);
+    font-size: 0.85em;
+    padding: 1em;
 }
 
 .input-producto::-webkit-inner-spin-button,
@@ -568,7 +644,7 @@ p {
 }
 
 .store h1 {
-    font-size: 3rem;
+    font-size: 2.1rem;
     font-weight: bold;
     font-family: 'Righteous', cursive;
 }
@@ -656,25 +732,28 @@ p {
 }
 
 .seller .card {
-    border-radius: 0;
+    border-radius: 1em;
     border: none;
 }
 
 .news-img {
-    height: 300px;
+    height: 8em;
     object-fit: cover;
 }
 
 .news-img2 {
     height: 80%;
     width: 80%;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
 }
 
 
 .per4 {
     color: rgb(105, 32, 173);
+    margin: 0;
 }
+
+
 
 
 
@@ -737,9 +816,9 @@ p {
     border: none;
     color: white;
     background: rgb(105, 32, 173);
-    border-radius: 50px;
-    font-weight: bold;
+    border-radius: 15px;
     transition: all 1s;
+    font-family: 'Righteous', cursive;
 }
 
 .cbtn:hover {
@@ -749,7 +828,7 @@ p {
 
 .container-contacto {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .estilos-alerta4 {
@@ -779,6 +858,13 @@ p {
     z-index: 1;
 }
 
+.formulario-contacto div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
 
 
 /* ====footer==== */
@@ -809,6 +895,11 @@ p {
 
 .footer p {
     color: white;
+}
+
+.parrafo-contacto-icono {
+    font-size: 12px;
+    font-weight: bold;
 }
 
 

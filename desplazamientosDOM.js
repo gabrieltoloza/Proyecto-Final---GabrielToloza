@@ -12,6 +12,7 @@ const seccionTienda = document.getElementById('seccion-tienda')
 const seccionBlog = document.getElementById('seccion-blog')
 const seccionReprocann = document.getElementById('seccion-reprocann')
 const navBar = document.querySelector('.navbar')
+const navBarCollapse = document.querySelector('.navbar-collapse')
 const logoHeader = document.querySelector('#logo-header')
 const btnIniciarCompra = document.querySelector('#btn-iniciar-carrito')
 const modaDelCarrito = new bootstrap.Modal(document.getElementById('exampleModal'), {})
@@ -84,10 +85,12 @@ iniciarCompraCarrito(btnIniciarCompra, 230, seccionTienda)
 // evento que maneja el efecto del navbar
 window.addEventListener("scroll", () => {
     if (scrollY > 90 && llave === false){
-        navBar.classList.add("bg-light")
+        
+        navBar.style.backgroundColor = "rgb(171, 97, 240)"
         llave = true;
     }else if (scrollY <= 70 && llave === true){
-        navBar.classList.remove("bg-light")
+        navBar.style.backgroundColor = "transparent"
+        
         llave = false;
     }
 });
@@ -100,3 +103,10 @@ logoHeader.addEventListener("click", (event) => {
     event.preventDefault();
     window.scrollTo({top: 0, behavior: "smooth"});
 })
+
+
+
+// funcion para convertir el primer indica de un stirng a mayuscula
+function toCapital (str) {
+    return str[0].toUpperCase() + str.slice(1)
+}
