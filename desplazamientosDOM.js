@@ -86,7 +86,7 @@ iniciarCompraCarrito(btnIniciarCompra, 230, seccionTienda)
 window.addEventListener("scroll", () => {
     if (scrollY > 90 && llave === false){
         
-        navBar.style.backgroundColor = "rgb(171, 97, 240)"
+        navBar.style.backgroundColor = "rgb(171, 97, 241)"
         llave = true;
     }else if (scrollY <= 70 && llave === true){
         navBar.style.backgroundColor = "transparent"

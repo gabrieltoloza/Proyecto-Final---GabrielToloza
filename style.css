@@ -816,7 +816,7 @@ p {
     border: none;
     color: white;
     background: rgb(105, 32, 173);
-    border-radius: 15px;
+    border-radius: 16px;
     transition: all 1s;
     font-family: 'Righteous', cursive;
 }
