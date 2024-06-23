@@ -10,7 +10,7 @@ const formularioProductos = document.querySelector('.form-search')
 const input = document.querySelector('.input-search')
 const categoriaHTML = document.querySelector('.categoria')
 let btnCarrito = document.querySelectorAll('.btnCarrito')
-let conteoProductos = document.querySelector('.conteo-productos')
+let conteoProductos = document.querySelectorAll('.conteo-productos')
 
 // variables de productos
 let controladorCantidad = document.querySelector('.controlador-cantidad')
@@ -38,14 +38,15 @@ let iconoEliminar = document.querySelector('.icono-eliminar')
 const accederReprocann = document.querySelector('#btn-descuento-reprocann')
 
 
-// base de datos
+// base de datos .json
 let productosDB = "./productos.json"
-
+// base de datos MySQL
+let mysqlDB = "http://localhost:3000/products"
 
 
 
 // Listando incialmente el stock
-const listandoStockMain = fetch(productosDB)
+const listandoStockMain = fetch(mysqlDB)
                     .then(responde => responde.json())
                         .then(data => {
                             listandoStock(data)
@@ -69,26 +70,27 @@ function listandoStock (stock) {
     
     stock.forEach((producto) => {
         const nuevoContenedor = document.createElement('div')
-        nuevoContenedor.classList.add('col-lg-3')
+        
+        nuevoContenedor.classList.add('col-6', 'col-lg-3')
 
         nuevoContenedor.innerHTML = `
-                                <div class="card p-2 text-center">
-                                    <div class="card-body">
+                                <div class="card p-1 text-center">
+                                    <div class="card-body p-1">
                                         <div class="star">
                                             <span><i class="bi bi-star-fill"></i></span>
                                             <span><i class="bi bi-star-fill"></i></span>
                                             <span><i class="bi bi-star"></i></span>
                                             <span><i class="bi bi-star"></i></span>
                                         </div>
-                                        <img src="${producto.imagenUrl}" class="img-fluid news-img pb-3" alt="${producto.categoria}">                  
-                                        <h4 class="head1">${producto.marca}</h4>
-                                        <p class="per2">${producto.detalles}</p>
-                                        <p class="per4 fw-bold" >Cantidad: ${producto.stock}</p>
+                                        <img src="${producto.imagenUrl}" class="img-fluid news-img" alt="${producto.categoria}">                  
+                                        <h4 class="head1">${toCapital(producto.marca)}</h4>
+                                        <p class="per2">${toCapital(producto.detalles)}</p>
+                                        <p class="per4 fs-6 fw-bold" >Cantidad: ${producto.stock}</p>
                                         <h4 class="head1 card-h4">$${producto.precio}</h4>
                                         <div class="controlador-cantidad d-flex">
-                                            <button id="${producto.id}" class="btn btn-outline-secondary btn-restar"><i class="bi bi-dash-lg"></i></button>
-                                            <input id="${producto.id}" class="form-control input-producto" type="number" placeholder="${valorInput}">
-                                            <button id="${producto.id}" class="btn btn-outline-secondary btn-sumar"><i class="bi bi-plus-lg"></i></button>
+                                            <button id="${producto.id}" class="btn btn-outline-secondary btn-restar w-90 p-0 m-1"><i class="bi bi-dash-lg"></i></button>
+                                            <input id="${producto.id}" class="form-control input-producto w-70 h-90 p-0 m-1 text-center" type="number" placeholder="${valorInput}">
+                                            <button id="${producto.id}" class="btn btn-outline-secondary btn-sumar w-90 p-0 m-1"><i class="bi bi-plus-lg"></i></button>
                                         </div>
                                         <button class="btnCarrito btnc my-2 " id="${producto.id}">Agregar carrito</button>
                                     </div>
@@ -131,7 +133,7 @@ function chequearInput() {
 formularioProductos.addEventListener('submit', (event) =>{
 
     event.preventDefault()
-    const filtrandoStock = fetch(productosDB)
+    const filtrandoStock = fetch(mysqlDB)
                             .then(response => response.json())
                                 .then(datos => {
 
@@ -176,7 +178,7 @@ input.addEventListener('input', (event) =>{
     if (valorInput === '') {
         contenedorProductos.innerHTML = ''
         categoriaHTML.innerText = 'Todos los productos'
-        const escucharInput = fetch(productosDB)
+        const escucharInput = fetch(mysqlDB)
                                 .then(response => response.json())
                                     .then(datos => {
                                         listandoStock(datos)
@@ -216,15 +218,18 @@ function mostrarBotones() {
 // funcion que suma o resta la cantidad de productos a agregar al carrito, solo el valor del input
 function accionBotonesCantidadProducto () {
 
-    const controlarSumaProducto = fetch(productosDB).then(response => response.json())
+    const controlarSumaProducto = fetch(mysqlDB).then(response => response.json())
                                                 .then(datos => {
+                                                    
                                                     btnSumar.forEach((boton, index) => {
                                                         boton.addEventListener("click", (event) => {
-                                                            const botonId = Number(event.currentTarget.id) - 1
-                                                            inputCantidadCard[index].value++
                                                             
-                                                            if (inputCantidadCard[index].value > datos[botonId].stock) {
-                                                                inputCantidadCard[index].value = datos[botonId].stock
+                                                            const id = event.currentTarget.id
+                                                            inputCantidadCard[index].value++
+                                                            const producto = datos.find(dato => dato.id === id)
+                                                            
+                                                            if (inputCantidadCard[index].value >  producto.stock) {
+                                                                inputCantidadCard[index].value = producto.stock
                                                                 return;
                                                             }
 
@@ -283,6 +288,7 @@ function agregarEventosACarrito(carritoLocalStorage) {
             let cantidadSeleccionada = Number(inputCantidadCard[index].value)
             
             const eventoID = Number(event.currentTarget.id)
+            const id = event.currentTarget.id
 
             if (cantidadSeleccionada === 0) {
                 Toastify({
@@ -304,18 +310,18 @@ function agregarEventosACarrito(carritoLocalStorage) {
                 return;
             }
 
-            const stockenEventos = fetch(productosDB)
+            const stockenEventos = fetch(mysqlDB)
                                             .then(response => response.json())
                                                 .then(datos => {
                                                     
-                                                    const productoFiltrado = datos.find(producto => producto.id === Number(eventoID))
+                                                    const producto = datos.find(dato => dato.id === id)
                                                     
-                                                    if (carritoLocalStorage.some(producto => producto.id == eventoID)) {
-                                                        const indexCarrito = carritoLocalStorage.findIndex(producto => producto.id == eventoID)
+                                                    if (carritoLocalStorage.some(producto => producto.id == id)) {
+                                                        const indexCarrito = carritoLocalStorage.findIndex(producto => producto.id == id)
                                                         carritoLocalStorage[indexCarrito].cantidad += cantidadSeleccionada
                                                         
-                                                        if (carritoLocalStorage[indexCarrito].cantidad > datos[eventoID - 1].stock) {
-                                                            carritoLocalStorage[indexCarrito].cantidad = datos[eventoID - 1].stock
+                                                        if (carritoLocalStorage[indexCarrito].cantidad > producto.stock) {
+                                                            carritoLocalStorage[indexCarrito].cantidad = producto.stock
                                                             Toastify({
                                                                 text: "No puedes agregar una cantidad mas grande que el stock. Hemos reajustado la cantidad, por favor verifica tu carrito de compras",
                                                                 duration: 4000,
@@ -354,8 +360,8 @@ function agregarEventosACarrito(carritoLocalStorage) {
                                                         
 
                                                     } else {
-                                                        productoFiltrado.cantidad = cantidadSeleccionada
-                                                        carritoLocalStorage.push(productoFiltrado)
+                                                        producto.cantidad = cantidadSeleccionada
+                                                        carritoLocalStorage.push(producto)
                                                         Toastify({
                                                             text: "Producto agregado!",
                                                             duration: 1500,
@@ -388,7 +394,7 @@ function agregarEventosACarrito(carritoLocalStorage) {
 
                                                 })
                                                 .catch(err => {
-                                                    console.log(err.name)
+                                                    console.log(err)
                                                     Swal.fire({
                                                         title: "Error 404",
                                                         text: `Ocurrio un error inesperado, vuelva a intentarlo`,
@@ -439,11 +445,11 @@ function cargarProductosEnCarrito (productos) {
                                         </div>
                                         <div class="carrito-producto-precio">
                                             <small>Precio</small>
-                                            <p>$${producto.precio.toFixed(2)}</p>
+                                            <p>$${Number(producto.precio).toFixed(2)}</p>
                                         </div>
                                         <div class="carrito-producto-subtotal">
                                             <small>Subtotal</small>
-                                            <p>$${(producto.precio * producto.cantidad).toFixed(2)}</p>
+                                            <p>$${(Number(producto.precio) * producto.cantidad).toFixed(2)}</p>
                                         </div>
                                         <button class="carrito-producto-eliminar" id="${producto.id}"><i class="icono-eliminar bi bi-trash"></i></button>`
             carritoProductos.append(contenedorCarrito)
@@ -541,18 +547,22 @@ function mostrarBotonesCantidadCarrito() {
 
     // evento y funcion para sumar cantidad en carrito con limite de stock
     btnSumar2.forEach((boton) => {
-        const controlarSumaCarrito = fetch(productosDB).then(response => response.json())
+        const controlarSumaCarrito = fetch(mysqlDB).then(response => response.json())
                                                     .then(datos => {
+                                                        
                                                         boton.addEventListener("click" ,(event) => {
 
+                                                            console.log(datos)
                                                             const botonId = event.currentTarget.id
+                                                            const producto = datos.find(dato => dato.id === botonId)
+                                                            
                                                             const datoStockId = event.currentTarget.id - 1
                                                             const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
 
                                                             productosEnCarrito[index].cantidad += 1
 
-                                                            if (productosEnCarrito[index].cantidad > datos[datoStockId].stock) {
-                                                                productosEnCarrito[index].cantidad = datos[datoStockId].stock
+                                                            if (productosEnCarrito[index].cantidad > producto.stock) {
+                                                                productosEnCarrito[index].cantidad = producto.stock
                                                                 return
                                                             }
 
@@ -602,7 +612,10 @@ function accionBtnRestarEnCarrito(e) {
 // funcion para mostrar la cantidad de productos en carrito
 function sumarCantidad () {
     let numero = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0)
-    conteoProductos.innerText = numero
+    // conteoProductos.innerText = numero
+    conteoProductos.forEach(node => {
+        node.innerText = numero
+    })
 }
 
 
@@ -632,3 +645,5 @@ function limpiarStorage() {
     } 
 }
 limpiarStorage()
+
+
