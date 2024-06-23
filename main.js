@@ -46,7 +46,7 @@ let mysqlDB = "http://localhost:3000/products"
 
 
 // Listando incialmente el stock
-const listandoStockMain = fetch(mysqlDB)
+const listandoStockMain = fetch(productosDB)
                     .then(responde => responde.json())
                         .then(data => {
                             listandoStock(data)
@@ -133,7 +133,7 @@ function chequearInput() {
 formularioProductos.addEventListener('submit', (event) =>{
 
     event.preventDefault()
-    const filtrandoStock = fetch(mysqlDB)
+    const filtrandoStock = fetch(productosDB)
                             .then(response => response.json())
                                 .then(datos => {
 
@@ -178,7 +178,7 @@ input.addEventListener('input', (event) =>{
     if (valorInput === '') {
         contenedorProductos.innerHTML = ''
         categoriaHTML.innerText = 'Todos los productos'
-        const escucharInput = fetch(mysqlDB)
+        const escucharInput = fetch(productosDB)
                                 .then(response => response.json())
                                     .then(datos => {
                                         listandoStock(datos)
@@ -218,7 +218,7 @@ function mostrarBotones() {
 // funcion que suma o resta la cantidad de productos a agregar al carrito, solo el valor del input
 function accionBotonesCantidadProducto () {
 
-    const controlarSumaProducto = fetch(mysqlDB).then(response => response.json())
+    const controlarSumaProducto = fetch(productosDB).then(response => response.json())
                                                 .then(datos => {
                                                     
                                                     btnSumar.forEach((boton, index) => {
@@ -310,7 +310,7 @@ function agregarEventosACarrito(carritoLocalStorage) {
                 return;
             }
 
-            const stockenEventos = fetch(mysqlDB)
+            const stockenEventos = fetch(productosDB)
                                             .then(response => response.json())
                                                 .then(datos => {
                                                     
@@ -547,7 +547,7 @@ function mostrarBotonesCantidadCarrito() {
 
     // evento y funcion para sumar cantidad en carrito con limite de stock
     btnSumar2.forEach((boton) => {
-        const controlarSumaCarrito = fetch(mysqlDB).then(response => response.json())
+        const controlarSumaCarrito = fetch(productosDB).then(response => response.json())
                                                     .then(datos => {
                                                         
                                                         boton.addEventListener("click" ,(event) => {
