@@ -8,6 +8,7 @@
 body {
     background: url(fondos/fondoPrincipal.jpg) fixed;
     background-repeat: no-repeat;
+    background-size: cover;
 }
 
 hr {
@@ -30,6 +31,7 @@ p {
     justify-content: space-between;
     margin: 0;
     padding: 0;
+    min-width: 100%;
 }
 
 .navbar-collapse {
@@ -633,6 +635,10 @@ p {
     border: solid 1px rgb(45, 45, 45);
     margin: 8px 5px 5px 0px;
     width: 100%;
+}
+
+.h1-reprocann .head1 {
+    text-wrap: balance;
 }
 
 
