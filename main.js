@@ -224,10 +224,12 @@ function accionBotonesCantidadProducto () {
                                                     btnSumar.forEach((boton, index) => {
                                                         boton.addEventListener("click", (event) => {
                                                             
-                                                            const id = event.currentTarget.id
-                                                            inputCantidadCard[index].value++
-                                                            const producto = datos.find(dato => dato.id === id)
+                                                            const id = Number(event.currentTarget.id)
                                                             
+                                                            inputCantidadCard[index].value++
+                                                            
+                                                            const producto = datos.find(dato => dato.id === id)
+                                                            console.log(producto)
                                                             if (inputCantidadCard[index].value >  producto.stock) {
                                                                 inputCantidadCard[index].value = producto.stock
                                                                 return;
@@ -288,7 +290,7 @@ function agregarEventosACarrito(carritoLocalStorage) {
             let cantidadSeleccionada = Number(inputCantidadCard[index].value)
             
             const eventoID = Number(event.currentTarget.id)
-            const id = event.currentTarget.id
+            const id = Number(event.currentTarget.id)
 
             if (cantidadSeleccionada === 0) {
                 Toastify({
@@ -315,7 +317,7 @@ function agregarEventosACarrito(carritoLocalStorage) {
                                                 .then(datos => {
                                                     
                                                     const producto = datos.find(dato => dato.id === id)
-                                                    
+                                                    console.log(producto)
                                                     if (carritoLocalStorage.some(producto => producto.id == id)) {
                                                         const indexCarrito = carritoLocalStorage.findIndex(producto => producto.id == id)
                                                         carritoLocalStorage[indexCarrito].cantidad += cantidadSeleccionada
@@ -438,9 +440,9 @@ function cargarProductosEnCarrito (productos) {
                                         <div class="carrito-producto-cantidad">
                                             <small>Cantidad</small>
                                             <div class="container-cantidad-carrito">
-                                                <button id="${producto.id}" class="btn-restar2 pb-1">-</button>
-                                                <p class="cantidad-carrito py-2 m-0">${producto.cantidad}</p>
-                                                <button id="${producto.id}" class="btn-sumar2 pb-1">+</button>
+                                                <button id="${producto.id}" class="btn-restar2 ">-</button>
+                                                <p class="cantidad-carrito pb-3 pt-1 m-0">${producto.cantidad}</p>
+                                                <button id="${producto.id}" class="btn-sumar2 ">+</button>
                                             </div>
                                         </div>
                                         <div class="carrito-producto-precio">

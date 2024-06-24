@@ -921,7 +921,9 @@ p {
 /* ====modal==== */
 
 
-
+.modal-content {
+    height: 40em;
+}
 
 
 .carrito-vacio,
@@ -941,7 +943,7 @@ p {
     justify-content: space-between;
     background-color: rgb(248, 243, 243);
     color: rgb(93, 5, 175);
-    padding: 1rem;
+    padding: 0.2em;
     border-radius: 0.5rem;
     align-items: center;
 }
@@ -954,8 +956,39 @@ p {
 
 
 .carrito-producto small {
-    font-size: 0.75rem;
+    font-size: 0.5em;
 }
+
+.carrito-producto h6 {
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
+.carrito-producto-titulo {
+    width: 4em;
+    text-align: center;
+}
+
+.carrito-producto-cantidad {
+    text-align: center;
+}
+
+.carrito-producto-precio {
+    text-align: center;
+}
+
+.carrito-producto-precio p {
+    font-size: 0.7em;
+}
+
+.carrito-producto-subtotal {
+    text-align: center;
+}
+
+.carrito-producto-subtotal p {
+    font-size: 0.7em;
+}
+
 
 .carrito-producto-eliminar {
     border: 0;
@@ -974,7 +1007,7 @@ p {
 .carrito-acciones-vaciar {
     border: 0;
     background-color: rgb(248, 243, 243);
-    padding: 1rem;
+    
     border-radius: 1rem;
     color: rgb(93, 5, 175);
     text-transform: uppercase;
@@ -986,31 +1019,44 @@ p {
 .carrito-acciones-comprar {
     border: 0;
     background-color: rgb(93, 5, 175);
-    padding: 1rem;
+    margin-left: 0.5em;
+    margin-right: 0.4em;
     color: rgb(248, 243, 243);
     text-transform: uppercase;
     cursor: pointer;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    border-radius: 0.8em;
+    width: 7em;
+    font-size: 0.52em;
+    text-wrap: balance;
 }
 
 
 .carrito-acciones-izquierda {
-    display: flex;
+    font-size: 13px;
+    font-weight: bold;
+    width: 7em;
 }
 
 .carrito-acciones-derecha {
     display: flex;
+    left: 1;
+    width: 10em;
 }
 
 .carrito-acciones-total {
     display: flex;
+    align-content: center;
     background-color: rgb(248, 243, 243);
-    padding: 1rem;
+    padding: 0.6em;
+    margin-right: 0.5em;
+    width: 7em;
     color: rgb(93, 5, 175);
     text-transform: uppercase;
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
+    border-radius: 0.8em;
+}
+
+.carrito-acciones-total p {
+    font-size: 0.7em;
 }
 
 
@@ -1021,10 +1067,11 @@ p {
 
 .container-cantidad-carrito button {
     font-size: 1rem;
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 1.5em;
+    height: 1.7em;
     border-radius: .35rem;
-    margin: 10px;
+    margin: 0.3em;
+    
 }
 
 
