@@ -12,13 +12,24 @@ const seccionTienda = document.getElementById('seccion-tienda')
 const seccionBlog = document.getElementById('seccion-blog')
 const seccionReprocann = document.getElementById('seccion-reprocann')
 const navBar = document.querySelector('.navbar')
-const navBarCollapse = document.querySelector('.navbar-collapse')
+const navBarCollapse = document.querySelector('.navbar-collapse');
+const navBarItems = document.querySelectorAll('.nav-item')
+console.log(navBarItems)
 const logoHeader = document.querySelector('#logo-header')
 const btnIniciarCompra = document.querySelector('#btn-iniciar-carrito')
 const modaDelCarrito = new bootstrap.Modal(document.getElementById('exampleModal'), {})
 let llave = false
 
 
+// funcion para cerrar el navbar en dispositivos mobiles
+function cerrarNavbarMobile () {
+    navBarItems.forEach(item => {
+        item.addEventListener("click", () => {
+            navBarCollapse.classList.remove('show')
+        })
+    })
+}
+cerrarNavbarMobile();
 
 
 // desplazamiento para botones individuales

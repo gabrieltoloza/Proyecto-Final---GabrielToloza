@@ -19,7 +19,7 @@ hr {
 }
 
 p {
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 }
 
 .navbar {
@@ -77,11 +77,11 @@ p {
     padding: 1rem;
     text-transform: uppercase;
     transition: all 0.4s;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 }
 
 .nav-item a:hover {
-    color: rgb(6, 171, 23);
+    color: rgb(125, 21, 223);
 }
 
 .navbar-brand {
@@ -210,7 +210,7 @@ p {
 
 .main h1 {
     font-size: 3rem;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 }
 
 .main p:nth-child(1){
@@ -230,7 +230,7 @@ p {
     outline: none;
     border: none;
     color: white;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
     background: rgb(171, 97, 240);
     border-radius: 50px;
     transition: all 0.4s;
@@ -248,7 +248,7 @@ p {
     color: rgb(93, 5, 175);
     border: 3px solid rgb(93, 5, 175);
     border-radius: 50px;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
     transition: all 0.4s;
 }
 .mbtn2:hover {
@@ -309,7 +309,7 @@ p {
 .about h1 {
     font-size: 2.1rem;
     font-weight: bold;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 }
 
 .about p:nth-child(1){
@@ -407,12 +407,12 @@ p {
 .product h1 {
     font-size: 2.1rem;
     font-weight: bold;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 }
 
 .product h4,
 .product h3 {
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 }
 
 .card {
@@ -432,7 +432,7 @@ p {
 
 .product form {
     font-weight: bold;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 }
 
 
@@ -498,6 +498,10 @@ p {
     margin: 0;
 }
 
+.per-envios {
+    color: rgb(168, 162, 162);
+    margin: 0;
+}
 
 
 .btnc {
@@ -577,7 +581,7 @@ p {
 
 .categoria {
     font-weight: bold;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 }
 
 
@@ -603,7 +607,7 @@ p {
     display: block;
     font-weight: bold;
     transition: all 0.4s;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 
 }
 .dbtn:hover {
@@ -622,7 +626,7 @@ p {
     display: block;
     font-weight: bold;
     transition: all 0.4s;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 }
 
 .dbtn-confirmado:hover {
@@ -652,7 +656,7 @@ p {
 .store h1 {
     font-size: 2.1rem;
     font-weight: bold;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 }
 
 .store p:nth-child(1){
@@ -730,7 +734,7 @@ p {
 .seller h1 {
     font-size: 3rem;
     font-weight: bold;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 }
 
 .seller i{
@@ -824,7 +828,7 @@ p {
     background: rgb(105, 32, 173);
     border-radius: 16px;
     transition: all 1s;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 }
 
 .cbtn:hover {
@@ -847,7 +851,7 @@ p {
     display: block;
     align-items: center;
     overflow: hidden;
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
 }
 
 .estilos-alerta4::before {
@@ -1122,7 +1126,7 @@ p {
 
 
 .container-facturacion {
-    font-family: 'Righteous';
+    font-family: "Kanit", sans-serif;
     color: rgb(93, 5, 175);
    
 }
