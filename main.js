@@ -555,9 +555,10 @@ function mostrarBotonesCantidadCarrito() {
                                                         boton.addEventListener("click" ,(event) => {
 
                                                             console.log(datos)
-                                                            const botonId = event.currentTarget.id
+                                                            const botonId = Number(event.currentTarget.id)
+                                                            console.log(typeof botonId)
                                                             const producto = datos.find(dato => dato.id === botonId)
-                                                            
+                                                            console.log(producto)
                                                             const datoStockId = event.currentTarget.id - 1
                                                             const index = productosEnCarrito.findIndex(producto => producto.id == botonId)
 
